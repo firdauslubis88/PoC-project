@@ -1,0 +1,54 @@
+﻿  BinInfo.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+  Database.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+src\Database.cpp(302): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+src\Database.cpp(310): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+src\Database.cpp(310): warning C4267: 'initializing': conversion from 'size_t' to 'const unsigned int', possible loss of data
+src\Database.cpp(342): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+src\Database.cpp(413): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+src\Database.cpp(429): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+src\Database.cpp(559): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+src\Database.cpp(568): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+src\Database.cpp(568): warning C4267: 'initializing': conversion from 'size_t' to 'const unsigned int', possible loss of data
+src\Database.cpp(606): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+src\Database.cpp(627): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+src\Database.cpp(705): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+src\Database.cpp(706): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+src\Database.cpp(778): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+src\Database.cpp(779): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+  Descriptor.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+src\Descriptor.cpp(244): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+src\Descriptor.cpp(244): warning C4267: 'initializing': conversion from 'size_t' to 'const unsigned int', possible loss of data
+  FAST9.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+src\FAST9.cpp(15): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+src\FAST9.cpp(17): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+src\FAST9.cpp(27): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+src\FAST9.cpp(28): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+src\FAST9.cpp(44): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+src\FAST9.cpp(65): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+  Feature.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+  GeneralDataType.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+  HIP.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+src\HIP.cpp(73): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+src\HIP.cpp(73): warning C4267: 'initializing': conversion from 'size_t' to 'const unsigned int', possible loss of data
+src\HIP.cpp(153): warning C4267: 'return': conversion from 'size_t' to 'unsigned int', possible loss of data
+src\HIP.cpp(158): warning C4267: 'return': conversion from 'size_t' to 'const unsigned int', possible loss of data
+  Image.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+  ImageUtility.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+src\ImageUtility.cpp(524): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+  IndexTable.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+src\IndexTable.cpp(90): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+src\IndexTable.cpp(90): warning C4267: 'initializing': conversion from 'size_t' to 'const unsigned int', possible loss of data
+  Patch.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+  StdAfx.cpp
+  GeneralFunction.vcxproj -> D:\Visual_Studio_Projects\FastRobust\x64\Release\GeneralFunction.lib

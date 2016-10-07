@@ -1,0 +1,7 @@
+﻿  Generating code
+  0 of 735 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    45 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  TrainingTest.vcxproj -> D:\Visual_Studio_Projects\FastRobust\Release\TrainingTest.exe
+  TrainingTest.vcxproj -> D:\Visual_Studio_Projects\FastRobust\Release\TrainingTest.pdb (Full PDB)
