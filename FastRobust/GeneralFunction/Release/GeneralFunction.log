@@ -1,0 +1,25 @@
+﻿  BinInfo.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+  Database.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+  Descriptor.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+  FAST9.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+  Feature.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+  GeneralDataType.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+  HIP.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+  Image.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+  ImageUtility.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+src\ImageUtility.cpp(524): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+  IndexTable.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+  Patch.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+  StdAfx.cpp
+  GeneralFunction.vcxproj -> D:\Visual_Studio_Projects\FastRobust\Release\GeneralFunction.lib

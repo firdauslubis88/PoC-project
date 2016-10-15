@@ -1,0 +1,39 @@
+﻿  Bin.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+src\Bin.cpp(224): warning C4244: 'initializing': conversion from 'double' to 'unsigned int', possible loss of data
+src\Bin.cpp(225): warning C4244: 'initializing': conversion from 'double' to 'unsigned int', possible loss of data
+src\Bin.cpp(353): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+src\Bin.cpp(355): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+src\Bin.cpp(356): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+src\Bin.cpp(358): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+src\Bin.cpp(359): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+src\Bin.cpp(361): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+src\Bin.cpp(362): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+src\Bin.cpp(362): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+src\Bin.cpp(671): warning C4018: '>=': signed/unsigned mismatch
+src\Bin.cpp(672): warning C4018: '>=': signed/unsigned mismatch
+src\Bin.cpp(690): warning C4018: '>=': signed/unsigned mismatch
+src\Bin.cpp(691): warning C4018: '>=': signed/unsigned mismatch
+src\Bin.cpp(795): warning C4018: '<': signed/unsigned mismatch
+src\Bin.cpp(796): warning C4018: '<': signed/unsigned mismatch
+src\Bin.cpp(944): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+src\Bin.cpp(945): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  DebugFunc.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+  FastRobustTraining.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+src\FastRobustTraining.cpp(18): warning C4129: '/': unrecognized character escape sequence
+  ImageUtility_TrainingEngine.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+  IndexMap.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+  Options.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+  Parser.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+  stdafx.cpp
+  Training.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+  TrainingDescriptor.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+  TrainingEngine.vcxproj -> D:\Visual_Studio_Projects\FastRobust\Release\TrainingEngine.lib

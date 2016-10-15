@@ -1,0 +1,10 @@
+﻿  Match.cpp
+d:\include\opencv\cvcompat.h(803): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+src\Match.cpp(108): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+src\Match.cpp(144): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+src\Match.cpp(242): warning C4477: 'printf' : format string '%3d' requires an argument of type 'int', but variadic argument 2 has type 'unsigned __int64'
+  src\Match.cpp(242): note: consider using '%zd' in the format string
+src\Match.cpp(88): warning C4101: 'time': unreferenced local variable
+src\Match.cpp(397): warning C4267: 'return': conversion from 'size_t' to 'unsigned int', possible loss of data
+src\Match.cpp(409): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+src\Match.cpp(640): warning C4244: 'return': conversion from 'unsigned __int64' to 'int', possible loss of data

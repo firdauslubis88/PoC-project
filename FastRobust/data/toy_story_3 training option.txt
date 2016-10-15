@@ -1,0 +1,18 @@
+data\toy_story_3.jpgimage file training options
+
+Image Size : 640 x 480
+
+Bin Create Information
+rotation angle : 0 ~ 360 +(10)
+scale factor : 0.8 x 10times
+
+Training Infromation
+rotation angle : -5 ~ 5 +(1)
+scale factor : 0.9 x 3times
+random blur : 0 ~ 9
+noise not apply
+perspective not use
+affine not apply
+
+
+Descriptors size : 26891
