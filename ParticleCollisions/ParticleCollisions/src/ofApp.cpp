@@ -1,4 +1,7 @@
 #include "ofApp.h"
+#include "MSACoreMath.h"
+
+using namespace msa;
 
 void ofApp::initScene() {
 	width = ofGetWidth();
@@ -90,6 +93,23 @@ void ofApp::addRandomParticle() {
 }
 
 //--------------------------------------------------------------
+void ofApp::addParticle(float posX, float posY, float posZ, float mass, float bounce, float radius) {
+	// world->makeParticle returns a partiUNITS cle pointer so you can customize it
+	Particle3D_ptr p = world->makeParticle(ofVec3f(posX, posY, posZ));
+
+	// set a bunch of properties (you don't have to set all of them, there are defaults)
+	p->setMass(mass)->setBounce(bounce)->setRadius(radius);
+
+	p->setVelocity(ofVec3f(0.0f, 0.0f, 0.0f));
+
+	// you don't have to daisy chain all methods, you can break the chain whereever you want to
+	p->enableCollision()->makeFree();
+
+	// add an attraction to the mouseNode
+//	if (mouseAttract) world->makeAttraction(mouseNode, p, ofRandom(MIN_ATTRACTION, MAX_ATTRACTION));
+}
+
+//--------------------------------------------------------------
 void ofApp::addRandomSpring() {
 	// get random particles
 	Particle3D_ptr a = world->getParticle(ofRandom(0, world->numberOfParticles()));
@@ -167,6 +187,7 @@ void ofApp::update() {
 	width = ofGetWidth();
 	height = ofGetHeight();
 
+	movingMouseNode();
 	// update the world!
 	world->update();
 }
@@ -340,7 +361,28 @@ void ofApp::keyPressed(int key) {
 	case '[': rotSpeed -= 0.01f; break;
 	case '+': mouseNode->setMass(mouseNode->getMass() + 0.1); break;
 	case '-': mouseNode->setMass(mouseNode->getMass() - 0.1); break;
-	case 'm': mouseNode->hasCollision() ? mouseNode->disableCollision() : mouseNode->enableCollision();
+	case 'm': mouseNode->hasCollision() ? mouseNode->disableCollision() : mouseNode->enableCollision(); break;
+	case 'n': addParticle(0.0f, 0.0f, 0.0f, 1.0f, 0.5f, 10.0f); break;
+	case 'b': addParticle(0.0f, height, 0.0f, 1.0f, 0.5f, NODE_MAX_RADIUS); break;
+	case 'v': mouseNode->moveTo(ofVec3f(-width/2, height, 0.0f)); break;
+	case 'N': addParticle(0.0f, height/2, 0.0f, 1.0f, 0.5f, NODE_MAX_RADIUS); break;
+	case OF_KEY_RIGHT: mouseNode->moveBy(ofVec3f(10.0f, 0.0f, 0.0f)); break;
+	case OF_KEY_LEFT: mouseNode->moveBy(ofVec3f(-10.0f, 0.0f, 0.0f)); break;
+	case OF_KEY_UP: mouseNode->moveBy(ofVec3f(0.0f, 0.0f, -10.0f)); break;
+	case OF_KEY_DOWN: mouseNode->moveBy(ofVec3f(0.0f, 0.0f, 10.0f)); break;
+	case OF_KEY_END: mouseNodeMove = true; break;
+	}
+}
+
+void ofApp::movingMouseNode() {
+	if(mouseNodeMove) {
+//		Particle3D_ptr tempOldNode = mouseNode;
+		mouseNode->addVelocity(ofVec3f(0.0001f, 0.0f, 0.0f));
+//		Vector3f curPos(mouseNode->getPosition());
+//		Vector3f vel(mouseNode->getVelocity());
+		mouseNode->moveBy(mouseNode->getVelocity());// + timeStep2;
+//		mouseNode->setOldPosition(tempOldNode->getPosition());
+//		printVect(mouseNode->getVelocity()); 	
 	}
 }
 

@@ -39,6 +39,7 @@ class ofApp : public ofBaseApp{
 
 	public:
 
+		bool				mouseNodeMove = false;
 		bool				mouseAttract = false;
 		bool				doMouseXY = false;		// pressing left mmouse button moves mouse in XY plane
 		bool				doMouseYZ = false;		// pressing right mouse button moves mouse in YZ plane
@@ -54,11 +55,13 @@ class ofApp : public ofBaseApp{
 		ofImage				ballImage;
 		World3D_ptr         world;
 		Particle3D_ptr      mouseNode;
+		Particle3D_ptr      customMouseNode;
 
 		void setupLighting();
 
 		void setup();
 		void addRandomParticle();
+		void addParticle(float posX, float posY, float posZ, float mass, float bounce, float radius);
 		void addRandomSpring();
 		void killRandomParticle();
 		void killRandomSpring();
@@ -83,5 +86,6 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 
 		void initScene();
+		void movingMouseNode();
 		
 };
