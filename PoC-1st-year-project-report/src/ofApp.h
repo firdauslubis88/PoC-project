@@ -32,6 +32,10 @@ public:
 	std::ostringstream _strHelp;
 
 	ofImage image;
+	vector<ofVideoDevice> listVideoDevice;
+	ofVideoGrabber ldVideoGrabber;
+	bool isldCameraConnected;
+
 	ofShader shader;
 	ofSpherePrimitive sphere;
 };

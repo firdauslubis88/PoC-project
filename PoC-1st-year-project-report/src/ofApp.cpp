@@ -11,7 +11,24 @@ void ofApp::setup() {
 	// We need to pass the method we want ofxOpenVR to call when rending the scene
 	openVR.setup(std::bind(&ofApp::render, this, std::placeholders::_1));
 
-	image.load("DSCN0143.JPG");
+	image.allocate(1280, 720, OF_IMAGE_COLOR);
+	listVideoDevice = ldVideoGrabber.listDevices();
+	isldCameraConnected = false;
+	for (int i = 0; i < listVideoDevice.size(); i++) {
+		ofLog(OF_LOG_VERBOSE, listVideoDevice[i].deviceName);
+		if (listVideoDevice[i].deviceName == "THETA UVC Blender") {
+			ldVideoGrabber.setDeviceID(listVideoDevice[i].id);
+			isldCameraConnected = true;
+		}
+	}
+	if (isldCameraConnected) {
+		ldVideoGrabber.initGrabber(1280, 720);
+	}
+	else
+	{
+		ofLog(OF_LOG_ERROR, "RICOH THETA S is not found.");
+	}
+
 	shader.load("sphericalProjection");
 
 	sphere.set(10, 10);
@@ -27,6 +44,11 @@ void ofApp::exit() {
 
 //--------------------------------------------------------------
 void ofApp::update() {
+	ldVideoGrabber.update();
+	if (ldVideoGrabber.isFrameNew())
+	{
+		image.setFromPixels(ldVideoGrabber.getPixelsRef());
+	}
 	openVR.update();
 }
 
