@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxGui.h"
 #include "ofxOpenVR.h"
 
 class ofApp : public ofBaseApp {
@@ -26,16 +27,35 @@ public:
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
 
+	void onToggle(const void* sender);
+
 	ofxOpenVR openVR;
 
 	bool bShowHelp;
 	std::ostringstream _strHelp;
 
+	ofFbo ldFbo;
+	ofFbo hdFbo;
+	ofVboMesh sphereVboMesh;
+	ofEasyCam _easyCam;
 	ofImage image;
 	vector<ofVideoDevice> listVideoDevice;
+	ofShader _shader;
 	ofVideoGrabber ldVideoGrabber;
+	ofVideoGrabber hdVideoGrabber;
 	bool isldCameraConnected;
+	bool isHdCameraConnected;
 
 	ofShader shader;
 	ofSpherePrimitive sphere;
+
+	ofxPanel _panel;
+	ofParameter<ofVec4f> offsetParameter;
+	ofParameter<float> radiusParameter;
+	ofParameterGroup ldParameterGroup;
+	ofxButton ldToggle;
+	ofxButton hdToggle;
+
+	int VIDEO_WIDTH, VIDEO_HEIGHT;
+	string cameraSelected;
 };
