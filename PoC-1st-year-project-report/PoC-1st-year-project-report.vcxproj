@@ -95,16 +95,14 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>
-C:\Users\chemf\Documents\Visual Studio 2015\Projects\of_v0.9.8_vs_release\addons\ofxOpenVR\src;
-C:\Users\chemf\Documents\Visual Studio 2015\Projects\of_v0.9.8_vs_release\addons\ofxOpenVR\libs\OpenVR\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\chemf\Documents\Visual Studio 2015\Projects\of_v0.9.8_vs_release\addons\ofxOpenVR\src;C:\Users\chemf\Documents\Visual Studio 2015\Projects\of_v0.9.8_vs_release\addons\ofxOpenVR\libs\OpenVR\include;
+C:\Users\chemf\documents\visual studio 2015\Projects\of_v0.9.8_vs_release\addons\ofxGui\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
@@ -117,9 +115,8 @@ C:\Users\chemf\Documents\Visual Studio 2015\Projects\of_v0.9.8_vs_release\addons
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>
-C:\Users\chemf\Documents\Visual Studio 2015\Projects\of_v0.9.8_vs_release\addons\ofxOpenVR\src;
-C:\Users\chemf\Documents\Visual Studio 2015\Projects\of_v0.9.8_vs_release\addons\ofxOpenVR\libs\OpenVR\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\chemf\Documents\Visual Studio 2015\Projects\of_v0.9.8_vs_release\addons\ofxOpenVR\src;C:\Users\chemf\Documents\Visual Studio 2015\Projects\of_v0.9.8_vs_release\addons\ofxOpenVR\libs\OpenVR\include;
+C:\Users\chemf\documents\visual studio 2015\Projects\of_v0.9.8_vs_release\addons\ofxGui\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -127,7 +124,6 @@ C:\Users\chemf\Documents\Visual Studio 2015\Projects\of_v0.9.8_vs_release\addons
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
@@ -139,9 +135,8 @@ C:\Users\chemf\Documents\Visual Studio 2015\Projects\of_v0.9.8_vs_release\addons
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>
-C:\Users\chemf\Documents\Visual Studio 2015\Projects\of_v0.9.8_vs_release\addons\ofxOpenVR\src;
-C:\Users\chemf\Documents\Visual Studio 2015\Projects\of_v0.9.8_vs_release\addons\ofxOpenVR\libs\OpenVR\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\chemf\Documents\Visual Studio 2015\Projects\of_v0.9.8_vs_release\addons\ofxOpenVR\src;C:\Users\chemf\Documents\Visual Studio 2015\Projects\of_v0.9.8_vs_release\addons\ofxOpenVR\libs\OpenVR\include;
+C:\Users\chemf\documents\visual studio 2015\Projects\of_v0.9.8_vs_release\addons\ofxGui\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -152,7 +147,6 @@ C:\Users\chemf\Documents\Visual Studio 2015\Projects\of_v0.9.8_vs_release\addons
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
@@ -164,9 +158,8 @@ C:\Users\chemf\Documents\Visual Studio 2015\Projects\of_v0.9.8_vs_release\addons
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>
-C:\Users\chemf\Documents\Visual Studio 2015\Projects\of_v0.9.8_vs_release\addons\ofxOpenVR\src;
-C:\Users\chemf\Documents\Visual Studio 2015\Projects\of_v0.9.8_vs_release\addons\ofxOpenVR\libs\OpenVR\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\chemf\Documents\Visual Studio 2015\Projects\of_v0.9.8_vs_release\addons\ofxOpenVR\src;C:\Users\chemf\Documents\Visual Studio 2015\Projects\of_v0.9.8_vs_release\addons\ofxOpenVR\libs\OpenVR\include;
+C:\Users\chemf\documents\visual studio 2015\Projects\of_v0.9.8_vs_release\addons\ofxGui\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
@@ -183,6 +176,14 @@ C:\Users\chemf\Documents\Visual Studio 2015\Projects\of_v0.9.8_vs_release\addons
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\of_v0.9.8_vs_release\addons\ofxGui\src\ofxBaseGui.cpp" />
+    <ClCompile Include="..\..\of_v0.9.8_vs_release\addons\ofxGui\src\ofxButton.cpp" />
+    <ClCompile Include="..\..\of_v0.9.8_vs_release\addons\ofxGui\src\ofxGuiGroup.cpp" />
+    <ClCompile Include="..\..\of_v0.9.8_vs_release\addons\ofxGui\src\ofxLabel.cpp" />
+    <ClCompile Include="..\..\of_v0.9.8_vs_release\addons\ofxGui\src\ofxPanel.cpp" />
+    <ClCompile Include="..\..\of_v0.9.8_vs_release\addons\ofxGui\src\ofxSlider.cpp" />
+    <ClCompile Include="..\..\of_v0.9.8_vs_release\addons\ofxGui\src\ofxSliderGroup.cpp" />
+    <ClCompile Include="..\..\of_v0.9.8_vs_release\addons\ofxGui\src\ofxToggle.cpp" />
     <ClCompile Include="..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src\CGLRenderModel.cpp" />
     <ClCompile Include="..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src\Matrices.cpp" />
     <ClCompile Include="..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src\ofxOpenVR.cpp" />
@@ -190,6 +191,15 @@ C:\Users\chemf\Documents\Visual Studio 2015\Projects\of_v0.9.8_vs_release\addons
     <ClCompile Include="src\ofApp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxGui\src\ofxBaseGui.h" />
+    <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxGui\src\ofxButton.h" />
+    <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxGui\src\ofxGui.h" />
+    <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxGui\src\ofxGuiGroup.h" />
+    <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxGui\src\ofxLabel.h" />
+    <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxGui\src\ofxPanel.h" />
+    <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxGui\src\ofxSlider.h" />
+    <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxGui\src\ofxSliderGroup.h" />
+    <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxGui\src\ofxToggle.h" />
     <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\libs\OpenVR\include\openvr.h" />
     <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\libs\OpenVR\include\openvr_capi.h" />
     <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\libs\OpenVR\include\openvr_driver.h" />
