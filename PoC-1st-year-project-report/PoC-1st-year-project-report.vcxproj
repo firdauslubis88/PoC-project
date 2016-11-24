@@ -189,6 +189,7 @@ C:\Users\chemf\documents\visual studio 2015\Projects\of_v0.9.8_vs_release\addons
     <ClCompile Include="..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src\ofxOpenVR.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
+    <ClCompile Include="src\ofAppVR.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxGui\src\ofxBaseGui.h" />
@@ -208,6 +209,7 @@ C:\Users\chemf\documents\visual studio 2015\Projects\of_v0.9.8_vs_release\addons
     <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src\ofxOpenVR.h" />
     <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src\Vectors.h" />
     <ClInclude Include="src\ofApp.h" />
+    <ClInclude Include="src\ofAppVR.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">

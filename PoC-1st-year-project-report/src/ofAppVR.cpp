@@ -1,17 +1,18 @@
 // Thanks to @num3ric for sharing this:
 // http://discourse.libcinder.org/t/360-vr-video-player-for-ios-in-cinder/294/6
 
-#include "ofApp.h"
+#include "ofAppVR.h"
 
 //--------------------------------------------------------------
-void ofApp::setup() {
+void ofAppVR::setup() {
 	ofSetVerticalSync(false);
 	ofDisableArbTex();
 
 	// We need to pass the method we want ofxOpenVR to call when rending the scene
-	openVR.setup(std::bind(&ofApp::render, this, std::placeholders::_1));
+	openVR.setup(std::bind(&ofAppVR::render, this, std::placeholders::_1));
 
 	image.allocate(1280, 720, OF_IMAGE_COLOR);
+	/*
 	listVideoDevice = ldVideoGrabber.listDevices();
 	isldCameraConnected = false;
 	for (int i = 0; i < listVideoDevice.size(); i++) {
@@ -28,7 +29,7 @@ void ofApp::setup() {
 	{
 		ofLog(OF_LOG_ERROR, "RICOH THETA S is not found.");
 	}
-
+	*/
 	shader.load("sphericalProjection");
 
 	sphere.set(10, 10);
@@ -38,22 +39,21 @@ void ofApp::setup() {
 }
 
 //--------------------------------------------------------------
-void ofApp::exit() {
+void ofAppVR::exit() {
 	openVR.exit();
 }
 
 //--------------------------------------------------------------
-void ofApp::update() {
-	ldVideoGrabber.update();
-	if (ldVideoGrabber.isFrameNew())
+void ofAppVR::update() {
+	if (mainApp->isldCameraConnected)
 	{
-		image.setFromPixels(ldVideoGrabber.getPixelsRef());
+		image.setFromPixels(mainApp->ldVideoGrabber.getPixels());
 	}
 	openVR.update();
 }
 
 //--------------------------------------------------------------
-void ofApp::draw() {
+void ofAppVR::draw() {
 	openVR.render();
 	openVR.renderDistortion();
 
@@ -71,7 +71,7 @@ void ofApp::draw() {
 }
 
 //--------------------------------------------------------------
-void  ofApp::render(vr::Hmd_Eye nEye) {
+void  ofAppVR::render(vr::Hmd_Eye nEye) {
 
 	ofPushView();
 	ofSetMatrixMode(OF_MATRIX_PROJECTION);
@@ -93,7 +93,7 @@ void  ofApp::render(vr::Hmd_Eye nEye) {
 }
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key) {
+void ofAppVR::keyPressed(int key) {
 	switch (key) {
 	case 'h':
 		bShowHelp = !bShowHelp;
@@ -109,52 +109,52 @@ void ofApp::keyPressed(int key) {
 }
 
 //--------------------------------------------------------------
-void ofApp::keyReleased(int key) {
+void ofAppVR::keyReleased(int key) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y) {
+void ofAppVR::mouseMoved(int x, int y) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button) {
+void ofAppVR::mouseDragged(int x, int y, int button) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button) {
+void ofAppVR::mousePressed(int x, int y, int button) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button) {
+void ofAppVR::mouseReleased(int x, int y, int button) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseEntered(int x, int y) {
+void ofAppVR::mouseEntered(int x, int y) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseExited(int x, int y) {
+void ofAppVR::mouseExited(int x, int y) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::windowResized(int w, int h) {
+void ofAppVR::windowResized(int w, int h) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg) {
+void ofAppVR::gotMessage(ofMessage msg) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo) {
+void ofAppVR::dragEvent(ofDragInfo dragInfo) {
 	//TODO: Why do we need to parse the path to replace the \ by / in order to work?
 	std::string path = dragInfo.files[0];
 	std::replace(path.begin(), path.end(), '\\', '/');

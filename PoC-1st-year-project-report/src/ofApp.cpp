@@ -1,4 +1,4 @@
-// Thanks to @num3ric for sharing this:
+// Thanks to @num3ric for sharing Athis:
 // http://discourse.libcinder.org/t/360-vr-video-player-for-ios-in-cinder/294/6
 
 #include "ofApp.h"
@@ -17,7 +17,7 @@ void ofApp::setup() {
 	_panel.setup();
 	for (int i = 0; i < listVideoDevice.size(); i++) {
 		ofLog(OF_LOG_VERBOSE, listVideoDevice[i].deviceName);
-		if (listVideoDevice[i].deviceName == "RICOH THETA S") {
+		if (listVideoDevice[i].deviceName == "THETA UVC Blender") {
 			ldVideoGrabber.setDeviceID(listVideoDevice[i].id);
 			isldCameraConnected = true;
 		}
@@ -29,7 +29,7 @@ void ofApp::setup() {
 	if (isldCameraConnected) {
 		ldVideoGrabber.initGrabber(VIDEO_WIDTH, VIDEO_HEIGHT);
 		ldFbo.allocate(VIDEO_WIDTH, VIDEO_HEIGHT);
-		_shader.load("shaders/equirectanguler");
+	//	_shader.load("shaders/equirectanguler");
 		sphereVboMesh = ofSpherePrimitive(2000, 24).getMesh();
 		for (int i = 0; i<sphereVboMesh.getNumTexCoords(); i++) {
 			sphereVboMesh.setTexCoord(i, ofVec2f(1.0) - sphereVboMesh.getTexCoord(i));
@@ -91,11 +91,13 @@ void ofApp::draw() {
 		ldFbo.begin();
 		_easyCam.begin();
 		ofClear(0);
-		_shader.begin();
-		_shader.setUniformTexture("mainTex", ldVideoGrabber.getTexture(), 0);
-		_shader.setUniforms(ldParameterGroup);
+//		_shader.begin();
+//		_shader.setUniformTexture("mainTex", ldVideoGrabber.getTexture(), 0);
+//		_shader.setUniforms(ldParameterGroup);
+		ldVideoGrabber.getTextureReference().bind();
 		sphereVboMesh.draw();
-		_shader.end();
+		ldVideoGrabber.getTextureReference().unbind();
+//		_shader.end();
 		_easyCam.end();
 		ldFbo.end();
 	}

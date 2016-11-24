@@ -2,8 +2,10 @@
 
 #include "ofMain.h"
 #include "ofxOpenVR.h"
+#include "ofApp.h"
 
-class ofApp : public ofBaseApp {
+
+class ofAppVR : public ofBaseApp {
 
 public:
 	void setup();
@@ -27,6 +29,8 @@ public:
 	void gotMessage(ofMessage msg);
 
 	ofxOpenVR openVR;
+
+	shared_ptr<ofApp> mainApp;
 
 	bool bShowHelp;
 	std::ostringstream _strHelp;
