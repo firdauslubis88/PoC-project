@@ -91,13 +91,9 @@ void ofApp::draw() {
 		ldFbo.begin();
 		_easyCam.begin();
 		ofClear(0);
-//		_shader.begin();
-//		_shader.setUniformTexture("mainTex", ldVideoGrabber.getTexture(), 0);
-//		_shader.setUniforms(ldParameterGroup);
 		ldVideoGrabber.getTextureReference().bind();
 		sphereVboMesh.draw();
 		ldVideoGrabber.getTextureReference().unbind();
-//		_shader.end();
 		_easyCam.end();
 		ldFbo.end();
 	}

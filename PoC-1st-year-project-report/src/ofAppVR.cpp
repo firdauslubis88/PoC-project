@@ -11,7 +11,7 @@ void ofAppVR::setup() {
 	// We need to pass the method we want ofxOpenVR to call when rending the scene
 	openVR.setup(std::bind(&ofAppVR::render, this, std::placeholders::_1));
 
-	image.allocate(1280, 720, OF_IMAGE_COLOR);
+	image.allocate(mainApp->VIDEO_WIDTH, mainApp->VIDEO_HEIGHT, OF_IMAGE_COLOR);
 	/*
 	listVideoDevice = ldVideoGrabber.listDevices();
 	isldCameraConnected = false;
@@ -35,6 +35,7 @@ void ofAppVR::setup() {
 	sphere.set(10, 10);
 	sphere.setPosition(ofVec3f(.0f, .0f, .0f));
 
+	hmdFbo.allocate(mainApp->VIDEO_WIDTH, mainApp->VIDEO_HEIGHT);
 	bShowHelp = true;
 }
 
@@ -54,6 +55,8 @@ void ofAppVR::update() {
 
 //--------------------------------------------------------------
 void ofAppVR::draw() {
+	prerender(vr::Eye_Left);
+	prerender(vr::Eye_Right);
 	openVR.render();
 	openVR.renderDistortion();
 
@@ -72,24 +75,54 @@ void ofAppVR::draw() {
 
 //--------------------------------------------------------------
 void  ofAppVR::render(vr::Hmd_Eye nEye) {
+	if (mainApp->isldCameraConnected)
+	{
+		if (nEye == vr::Eye_Left)
+		{
+			leftImage.draw(0, 0);
+		}
+		else
+		{
+			rightImage.draw(0, 0);
+		}
+	}
+}
 
-	ofPushView();
-	ofSetMatrixMode(OF_MATRIX_PROJECTION);
-	ofLoadMatrix(openVR.getCurrentProjectionMatrix(nEye));
-	ofSetMatrixMode(OF_MATRIX_MODELVIEW);
-	ofMatrix4x4 currentViewMatrixInvertY = openVR.getCurrentViewMatrix(nEye);
-	currentViewMatrixInvertY.scale(1.0f, -1.0f, 1.0f);
-	ofLoadMatrix(currentViewMatrixInvertY);
+//--------------------------------------------------------------
+void  ofAppVR::prerender(vr::Hmd_Eye nEye) {
+	if (mainApp->isldCameraConnected)
+	{
+		hmdFbo.begin();
 
-	ofSetColor(ofColor::white);
+		ofSetMatrixMode(OF_MATRIX_PROJECTION);
+		ofLoadMatrix(openVR.getCurrentProjectionMatrix(nEye));
+		ofSetMatrixMode(OF_MATRIX_MODELVIEW);
+		ofMatrix4x4 currentViewMatrixInvertY = openVR.getCurrentViewMatrix(nEye);
+		currentViewMatrixInvertY.scale(1.0f, -1.0f, 1.0f);
+		ofLoadMatrix(currentViewMatrixInvertY);
 
-	shader.begin();
-	shader.setUniformTexture("tex0", image, 1);
-	sphere.draw();
-	shader.end();
+		ofSetColor(ofColor::white);
 
-	ofPopView();
+		shader.begin();
+		shader.setUniformTexture("tex0", image, 1);
+		sphere.draw();
+		shader.end();
 
+		hmdFbo.end();
+
+		ofPixels pixel;
+		hmdFbo.readToPixels(pixel);
+		if (nEye == vr::Eye_Left)
+		{
+			leftImage.setFromPixels(pixel);
+			leftImage.setImageType(OF_IMAGE_COLOR);
+		}
+		else
+		{
+			rightImage.setFromPixels(pixel);
+			rightImage.setImageType(OF_IMAGE_COLOR);
+		}
+	}
 }
 
 //--------------------------------------------------------------
