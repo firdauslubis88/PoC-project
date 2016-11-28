@@ -13,6 +13,7 @@ void ofAppVR::setup() {
 
 	ldImage.allocate(mainApp->VIDEO_WIDTH, mainApp->VIDEO_HEIGHT, OF_IMAGE_COLOR);
 	hdImage.allocate(mainApp->VIDEO_WIDTH, mainApp->VIDEO_HEIGHT, OF_IMAGE_COLOR);
+	ldPassImage.allocate(mainApp->VIDEO_WIDTH, mainApp->VIDEO_HEIGHT, OF_IMAGE_COLOR);
 	/*
 	listVideoDevice = ldVideoGrabber.listDevices();
 	isldCameraConnected = false;
@@ -112,20 +113,23 @@ void  ofAppVR::prerender(vr::Hmd_Eye nEye) {
 
 		hmdFbo.end();
 
-		ofPixels ldPixel, hdPixel;
+		ofImage combinedImage;
+		ofPixels ldPixel;
+		ldPixel.allocate(mainApp->VIDEO_WIDTH, mainApp->VIDEO_HEIGHT, OF_IMAGE_COLOR);
 		hmdFbo.readToPixels(ldPixel);
-		hdPixel = hdImage.getPixels();
+		ldPassImage.setFromPixels(ldPixel);
 
-		
+		CombinedCamera combinedCamera = CombinedCamera();
+		combinedImage.setFromPixels(combinedCamera.combine(ldPixel, hdImage, mainApp->VIDEO_WIDTH, mainApp->VIDEO_HEIGHT, mainApp->VIDEO_WIDTH/3, mainApp->VIDEO_HEIGHT/3, 256, 128));
 
 		if (nEye == vr::Eye_Left)
 		{
-			leftImage.setFromPixels(ldPixel);
+			leftImage = combinedImage;
 			leftImage.setImageType(OF_IMAGE_COLOR);
 		}
 		else
 		{
-			rightImage.setFromPixels(ldPixel);
+			rightImage = combinedImage;
 			rightImage.setImageType(OF_IMAGE_COLOR);
 		}
 	}
@@ -198,6 +202,6 @@ void ofAppVR::dragEvent(ofDragInfo dragInfo) {
 	std::string path = dragInfo.files[0];
 	std::replace(path.begin(), path.end(), '\\', '/');
 
-	image.load(path);
-	image.update();
+	ldImage.load(path);
+	ldImage.update();
 }

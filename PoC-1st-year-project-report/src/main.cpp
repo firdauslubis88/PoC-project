@@ -7,14 +7,14 @@
 int main() {
 	ofGLFWWindowSettings settings;
 	settings.setGLVersion(4, 1);
-	settings.width = 1280;
-	settings.height = 720;
+	settings.width = 640;
+	settings.height = 360;
 	settings.setPosition(ofVec2f(50, 50));
 	shared_ptr<ofAppBaseWindow> dualCameraWindow = ofCreateWindow(settings);
 
 	settings.setGLVersion(4, 1);
-	settings.width = 1280;
-	settings.height = 720;
+	settings.width = 640;
+	settings.height = 360;
 	settings.setPosition(ofVec2f(50, 450));
 	settings.shareContextWith = dualCameraWindow;
 	shared_ptr<ofAppBaseWindow> vrWindow = ofCreateWindow(settings);

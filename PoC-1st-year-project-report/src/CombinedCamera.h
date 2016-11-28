@@ -9,7 +9,7 @@ public:
 	CombinedCamera();
 	~CombinedCamera();
 
-	ofPixels combine(ofImage ldPixels, ofImage hdPixels, int x, int y, int width, int height);
+	ofPixels combine(ofPixels ldPixels, ofImage hdImage, int image_width, int image_height, int x, int y, int width, int height);
 
 private:
 	std::shared_ptr<ofxCvImage> combinedImage;

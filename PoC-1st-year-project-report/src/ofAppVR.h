@@ -38,7 +38,7 @@ public:
 	bool bShowHelp;
 	std::ostringstream _strHelp;
 
-	ofImage ldImage, hdImage;
+	ofImage ldImage, hdImage, ldPassImage;
 	vector<ofVideoDevice> listVideoDevice;
 	ofVideoGrabber ldVideoGrabber;
 	bool isldCameraConnected;

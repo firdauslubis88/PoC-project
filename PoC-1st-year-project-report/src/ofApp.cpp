@@ -8,8 +8,8 @@ void ofApp::setup() {
 	//	ofSetVerticalSync(false);
 	ofDisableArbTex();
 
-	VIDEO_WIDTH = 1280;
-	VIDEO_HEIGHT = 720;
+	VIDEO_WIDTH = 640;
+	VIDEO_HEIGHT = 360;
 
 	listVideoDevice = ldVideoGrabber.listDevices();
 	isldCameraConnected = false;
