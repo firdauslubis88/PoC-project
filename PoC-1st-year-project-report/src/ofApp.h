@@ -1,9 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxGui.h"
 #include "ofxOpenVR.h"
-
-#include "CombinedCamera.h"
 
 class ofApp : public ofBaseApp {
 
@@ -28,6 +27,8 @@ public:
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
 
+	void onToggle(const void* sender);
+
 	ofxOpenVR openVR;
 
 	bool bShowHelp;
@@ -35,12 +36,15 @@ public:
 
 	ofFbo ldFbo;
 	ofFbo hdFbo;
-	CombinedCamera combinedCamera;
 	ofVboMesh sphereVboMesh;
 	ofEasyCam _easyCam;
+	ofImage image;
 	vector<ofVideoDevice> listVideoDevice;
+	ofShader _shader;
 	ofVideoGrabber ldVideoGrabber;
+	ofVideoGrabber hdVideoGrabber;
 	bool isldCameraConnected;
+	bool isHdCameraConnected;
 
 	ofShader shader;
 	ofSpherePrimitive sphere;
@@ -51,10 +55,7 @@ public:
 	ofParameterGroup ldParameterGroup;
 	ofxButton ldToggle;
 	ofxButton hdToggle;
-	ofxButton combinedToggle;
 
 	int VIDEO_WIDTH, VIDEO_HEIGHT;
 	string cameraSelected;
-
-	ofPixels ldPixels, hdPixels, combinedPixels;
 };
