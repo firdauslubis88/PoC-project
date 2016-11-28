@@ -28,6 +28,14 @@ void ofApp::setup() {
 	{
 		ofLog(OF_LOG_ERROR, "RICOH THETA S is not found.");
 	}
+	if (isldCameraConnected && isHdCameraConnected)
+	{
+		ldPixels.allocate(VIDEO_WIDTH, VIDEO_HEIGHT, OF_IMAGE_COLOR);
+		hdPixels.allocate(VIDEO_WIDTH, VIDEO_HEIGHT, OF_IMAGE_COLOR);
+		combinedToggle.setup("Combined Camera", false);
+		combinedToggle.addListener(this, &ofApp::onToggle);
+		_panel.add(&combinedToggle);
+	}
 
 	shader.load("sphericalProjection");
 
@@ -68,6 +76,41 @@ void ofApp::draw() {
 		_strHelp << "Toggle OpenVR mirror window (press: m)." << endl;
 		ofDrawBitmapStringHighlight(_strHelp.str(), ofPoint(10.0f, 20.0f), ofColor(ofColor::black, 100.0f));
 	}
+	if (isHdCameraConnected)
+	{
+		hdFbo.begin();
+//		hdVideoGrabber.draw(VIDEO_WIDTH, VIDEO_HEIGHT, -VIDEO_WIDTH, -VIDEO_HEIGHT);
+		hdVideoGrabber.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
+		hdFbo.end();
+	}
+	/*
+	if (cameraSelected == "Combined Camera")
+	{
+		ofImage combinedImage;
+		combinedImage.allocate(VIDEO_WIDTH, VIDEO_HEIGHT, OF_IMAGE_COLOR);
+		this->ldFbo.readToPixels(ldPixels);
+		this->hdFbo.readToPixels(hdPixels);
+		//		ldImage.setFromPixels(ldPixels);
+		//		hdImage.setFromPixels(hdPixels);
+		//		ldImage.setImageType(OF_IMAGE_COLOR);
+		//		hdImage.setImageType(OF_IMAGE_COLOR);
+		//		combinedImage.setFromPixels(this->combinedCamera.combine(ldPixels, hdPixels, 0, 0, VIDEO_WIDTH, VIDEO_HEIGHT));
+		//		combinedImage.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
+		combinedImage.setFromPixels(ldPixels);
+		//		this->combinedCamera.combine(ldPixels, hdPixels, 0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
+		combinedImage.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
+	}
+	else if (cameraSelected == "PTZ Camera")
+	{
+//		hdFbo.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
+	}
+	else if (cameraSelected == "Combined Camera")
+	{
+	//		ldFbo.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
+	}
+	*/
+	ofDisableDepthTest();
+	_panel.draw();
 }
 
 //--------------------------------------------------------------

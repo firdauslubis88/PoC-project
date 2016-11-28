@@ -3,6 +3,8 @@
 #include "ofMain.h"
 #include "ofxOpenVR.h"
 
+#include "CombinedCamera.h"
+
 class ofApp : public ofBaseApp {
 
 public:
@@ -31,11 +33,28 @@ public:
 	bool bShowHelp;
 	std::ostringstream _strHelp;
 
-	ofImage image;
+	ofFbo ldFbo;
+	ofFbo hdFbo;
+	CombinedCamera combinedCamera;
+	ofVboMesh sphereVboMesh;
+	ofEasyCam _easyCam;
 	vector<ofVideoDevice> listVideoDevice;
 	ofVideoGrabber ldVideoGrabber;
 	bool isldCameraConnected;
 
 	ofShader shader;
 	ofSpherePrimitive sphere;
+
+	ofxPanel _panel;
+	ofParameter<ofVec4f> offsetParameter;
+	ofParameter<float> radiusParameter;
+	ofParameterGroup ldParameterGroup;
+	ofxButton ldToggle;
+	ofxButton hdToggle;
+	ofxButton combinedToggle;
+
+	int VIDEO_WIDTH, VIDEO_HEIGHT;
+	string cameraSelected;
+
+	ofPixels ldPixels, hdPixels, combinedPixels;
 };
