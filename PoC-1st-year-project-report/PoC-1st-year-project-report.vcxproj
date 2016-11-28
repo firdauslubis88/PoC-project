@@ -282,6 +282,7 @@ C:\Users\chemf\Documents\Visual Studio 2015\Projects\of_v0.9.8_vs_release\addons
     <ClCompile Include="..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src\CGLRenderModel.cpp" />
     <ClCompile Include="..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src\Matrices.cpp" />
     <ClCompile Include="..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src\ofxOpenVR.cpp" />
+    <ClCompile Include="src\Cloning.cpp" />
     <ClCompile Include="src\CombinedCamera.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
@@ -473,6 +474,7 @@ C:\Users\chemf\Documents\Visual Studio 2015\Projects\of_v0.9.8_vs_release\addons
     <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src\Matrices.h" />
     <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src\ofxOpenVR.h" />
     <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src\Vectors.h" />
+    <ClInclude Include="src\Cloning.h" />
     <ClInclude Include="src\CombinedCamera.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\ofAppVR.h" />

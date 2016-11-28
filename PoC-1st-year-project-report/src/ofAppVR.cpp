@@ -119,7 +119,7 @@ void  ofAppVR::prerender(vr::Hmd_Eye nEye) {
 		hmdFbo.readToPixels(ldPixel);
 		ldPassImage.setFromPixels(ldPixel);
 
-		CombinedCamera combinedCamera = CombinedCamera();
+		CombinedCamera combinedCamera = CombinedCamera(mainApp->VIDEO_WIDTH, mainApp->VIDEO_HEIGHT);
 		combinedImage.setFromPixels(combinedCamera.combine(ldPixel, hdImage, mainApp->VIDEO_WIDTH, mainApp->VIDEO_HEIGHT, mainApp->VIDEO_WIDTH/3, mainApp->VIDEO_HEIGHT/3, 256, 128));
 
 		if (nEye == vr::Eye_Left)
