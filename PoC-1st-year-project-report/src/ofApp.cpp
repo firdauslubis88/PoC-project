@@ -102,7 +102,7 @@ void ofApp::draw() {
 	if (isHdCameraConnected)
 	{
 		hdFbo.begin();
-		hdVideoGrabber.draw(VIDEO_WIDTH, VIDEO_HEIGHT, -VIDEO_WIDTH, -VIDEO_HEIGHT);
+		hdVideoGrabber.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
 		hdFbo.end();
 	}
 	if (cameraSelected == "360 Camera")
