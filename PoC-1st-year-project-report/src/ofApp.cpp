@@ -104,10 +104,6 @@ void ofApp::draw() {
 		hdVideoGrabber.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
 		hdFbo.end();
 	}
-	if (isldCameraConnected && isHdCameraConnected)
-	{
-
-	}
 
 	ofDisableDepthTest();
 	_panel.draw();

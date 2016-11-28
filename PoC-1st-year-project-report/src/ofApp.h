@@ -38,7 +38,6 @@ public:
 	ofFbo hdFbo;
 	ofVboMesh sphereVboMesh;
 	ofEasyCam _easyCam;
-	ofImage image;
 	vector<ofVideoDevice> listVideoDevice;
 	ofShader _shader;
 	ofVideoGrabber ldVideoGrabber;

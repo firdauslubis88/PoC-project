@@ -11,7 +11,8 @@ void ofAppVR::setup() {
 	// We need to pass the method we want ofxOpenVR to call when rending the scene
 	openVR.setup(std::bind(&ofAppVR::render, this, std::placeholders::_1));
 
-	image.allocate(mainApp->VIDEO_WIDTH, mainApp->VIDEO_HEIGHT, OF_IMAGE_COLOR);
+	ldImage.allocate(mainApp->VIDEO_WIDTH, mainApp->VIDEO_HEIGHT, OF_IMAGE_COLOR);
+	hdImage.allocate(mainApp->VIDEO_WIDTH, mainApp->VIDEO_HEIGHT, OF_IMAGE_COLOR);
 	/*
 	listVideoDevice = ldVideoGrabber.listDevices();
 	isldCameraConnected = false;
@@ -48,7 +49,8 @@ void ofAppVR::exit() {
 void ofAppVR::update() {
 	if (mainApp->isldCameraConnected)
 	{
-		image.setFromPixels(mainApp->ldVideoGrabber.getPixels());
+		ldImage.setFromPixels(mainApp->ldVideoGrabber.getPixels());
+		hdImage.setFromPixels(mainApp->hdVideoGrabber.getPixels());
 	}
 	openVR.update();
 }
@@ -104,22 +106,26 @@ void  ofAppVR::prerender(vr::Hmd_Eye nEye) {
 		ofSetColor(ofColor::white);
 
 		shader.begin();
-		shader.setUniformTexture("tex0", image, 1);
+		shader.setUniformTexture("tex0", ldImage, 1);
 		sphere.draw();
 		shader.end();
 
 		hmdFbo.end();
 
-		ofPixels pixel;
-		hmdFbo.readToPixels(pixel);
+		ofPixels ldPixel, hdPixel;
+		hmdFbo.readToPixels(ldPixel);
+		hdPixel = hdImage.getPixels();
+
+		
+
 		if (nEye == vr::Eye_Left)
 		{
-			leftImage.setFromPixels(pixel);
+			leftImage.setFromPixels(ldPixel);
 			leftImage.setImageType(OF_IMAGE_COLOR);
 		}
 		else
 		{
-			rightImage.setFromPixels(pixel);
+			rightImage.setFromPixels(ldPixel);
 			rightImage.setImageType(OF_IMAGE_COLOR);
 		}
 	}

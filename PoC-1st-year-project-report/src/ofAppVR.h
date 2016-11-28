@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxOpenVR.h"
 #include "ofApp.h"
+#include "CombinedCamera.h"
 
 
 class ofAppVR : public ofBaseApp {
@@ -37,7 +38,7 @@ public:
 	bool bShowHelp;
 	std::ostringstream _strHelp;
 
-	ofImage image;
+	ofImage ldImage, hdImage;
 	vector<ofVideoDevice> listVideoDevice;
 	ofVideoGrabber ldVideoGrabber;
 	bool isldCameraConnected;
