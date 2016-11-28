@@ -104,14 +104,11 @@ void ofApp::draw() {
 		hdVideoGrabber.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
 		hdFbo.end();
 	}
-	if (cameraSelected == "360 Camera")
+	if (isldCameraConnected && isHdCameraConnected)
 	{
-		ldFbo.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
+
 	}
-	else if (cameraSelected == "PTZ Camera")
-	{
-		hdFbo.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
-	}
+
 	ofDisableDepthTest();
 	_panel.draw();
 }
