@@ -14,7 +14,7 @@ CombinedCamera::CombinedCamera(int image_width,int image_height)
 CombinedCamera::~CombinedCamera()
 {
 }
-
+/*
 void CombinedCamera::seamlessClone(InputArray _src, InputArray _dst, InputArray _mask, Point p, OutputArray _blend, int flags)
 {
 	const Mat src = _src.getMat();
@@ -81,7 +81,7 @@ void CombinedCamera::seamlessClone(InputArray _src, InputArray _dst, InputArray 
 	obj.normalClone(dest, cd_mask, dst_mask, blend, flags);
 
 }
-
+*/
 ofPixels CombinedCamera::combine(ofPixels ldPixel, ofImage hdImage, int image_width, int image_height, int x, int y, int width, int height)
 {
 	ofImage ldImage;
