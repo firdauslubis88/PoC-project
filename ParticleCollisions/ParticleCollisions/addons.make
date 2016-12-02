@@ -1,2 +1,0 @@
-ofxMSACore-master
-ofxMSAPhysics-master
