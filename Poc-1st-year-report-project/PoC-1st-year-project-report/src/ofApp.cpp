@@ -8,9 +8,6 @@ void ofApp::setup() {
 //	ofSetVerticalSync(false);
 	ofDisableArbTex();
 
-	VIDEO_WIDTH = 1280;
-	VIDEO_HEIGHT = 720;
-
 	listVideoDevice = ldVideoGrabber.listDevices();
 	isldCameraConnected = false;
 	isHdCameraConnected = false;
@@ -57,10 +54,20 @@ void ofApp::setup() {
 		hdToggle.setup("PTZ Camera", false);
 		hdToggle.addListener(this, &ofApp::onToggle);
 		_panel.add(&hdToggle);
+		hdImage.allocate(VIDEO_WIDTH, VIDEO_HEIGHT, OF_IMAGE_COLOR);
 	}
 	else
 	{
 		ofLog(OF_LOG_ERROR, "PTZ Pro Camera is not found.");
+	}
+	if (isldCameraConnected && isHdCameraConnected) {
+		isCombined = true;
+		combinedImage.allocate(VIDEO_WIDTH, VIDEO_HEIGHT, OF_IMAGE_COLOR);
+		combinedToggle.setup("Combined Camera", false);
+		combinedToggle.addListener(this, &ofApp::onToggle);
+		ldPixels.allocate(VIDEO_WIDTH, VIDEO_HEIGHT, OF_IMAGE_COLOR);
+		ldPassImage.allocate(VIDEO_WIDTH, VIDEO_HEIGHT, OF_IMAGE_COLOR);
+		_panel.add(&combinedToggle);
 	}
 
 	_easyCam.setAutoDistance(false);
@@ -110,6 +117,15 @@ void ofApp::draw() {
 	else if (cameraSelected == "PTZ Camera")
 	{
 		hdFbo.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
+	}
+	else if (cameraSelected == "Combined Camera")
+	{
+		ldFbo.readToPixels(ldPixels);
+		ldPassImage.setFromPixels(ldPixels);
+		hdImage.setFromPixels(hdVideoGrabber.getPixels());
+		combinedCamera.setSkipCloning(false);
+		combinedImage.setFromPixels(combinedCamera.combine(ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 2*VIDEO_WIDTH / 5, 2*VIDEO_HEIGHT / 5, VIDEO_WIDTH / 5, VIDEO_HEIGHT / 5));
+		combinedImage.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
 	}
 	ofDisableDepthTest();
 	_panel.draw();
