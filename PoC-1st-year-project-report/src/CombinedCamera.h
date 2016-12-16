@@ -19,6 +19,8 @@ public:
 
 	void setSkipAligning(bool value);
 
+	void MVCSeamlessClone(Mat source, Mat target, Mat mask, Point center, Mat & clone);
+
 private:
 	std::shared_ptr<ofxCvImage> combinedImage;
 	ofxCvColorImage ldCvImage, hdCvImage, combinedCvImage, sourceCvImage;

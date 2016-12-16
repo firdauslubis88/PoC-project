@@ -70,6 +70,9 @@
     <ClCompile Include="src\Alignment.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\PTZControl.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -1323,6 +1326,9 @@
       <Filter>addons\ofxOpenCv\libs\opencv\include\opencv_2.4.9</Filter>
     </ClInclude>
     <ClInclude Include="src\Alignment.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PTZControl.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
