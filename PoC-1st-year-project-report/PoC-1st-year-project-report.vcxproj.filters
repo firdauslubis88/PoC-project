@@ -43,6 +43,9 @@
     <ClCompile Include="src\ofAppVR.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\PTZControl.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -126,6 +129,9 @@
       <Filter>addons\ofxGui\src</Filter>
     </ClInclude>
     <ClInclude Include="src\ofAppVR.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PTZControl.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

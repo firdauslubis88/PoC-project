@@ -4,6 +4,8 @@
 #include "ofxGui.h"
 #include "ofxOpenVR.h"
 
+#include "PTZControl.h"
+
 class ofApp : public ofBaseApp {
 
 public:
@@ -21,6 +23,7 @@ public:
 	void mouseDragged(int x, int y, int button);
 	void mousePressed(int x, int y, int button);
 	void mouseReleased(int x, int y, int button);
+	void mouseScrolled(int x, int y, float scrollX, float scrollY);
 	void mouseEntered(int x, int y);
 	void mouseExited(int x, int y);
 	void windowResized(int w, int h);
@@ -28,7 +31,9 @@ public:
 	void gotMessage(ofMessage msg);
 
 	void onToggle(const void* sender);
-
+	void restart();
+	void onProperty();
+	ofVec3f getPTZEuler() const;
 	ofxOpenVR openVR;
 
 	bool bShowHelp;
@@ -42,7 +47,7 @@ public:
 	vector<ofVideoDevice> listVideoDevice;
 	ofShader _shader;
 	ofVideoGrabber ldVideoGrabber;
-	ofVideoGrabber hdVideoGrabber;
+	PTZControl hdVideoGrabber;
 	bool isldCameraConnected;
 	bool isHdCameraConnected;
 
@@ -56,6 +61,13 @@ public:
 	ofxButton ldToggle;
 	ofxButton hdToggle;
 
-	int VIDEO_WIDTH, VIDEO_HEIGHT;
+	int VIDEO_WIDTH = 1280, VIDEO_HEIGHT = 640;
 	string cameraSelected;
+
+	int panAngle = 0, tiltAngle = 0, prevPanAngle = 0, prevTiltAngle = 0;
+	int prevXDrag;
+	int prevYDrag;
+	int ptzPanOffset = 0, ptzTiltOffset = 0;
+	bool followingMode = false;
+	bool singularMode = false;
 };
