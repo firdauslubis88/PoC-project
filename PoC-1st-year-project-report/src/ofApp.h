@@ -5,6 +5,8 @@
 #include "ofxOpenVR.h"
 
 #include "PTZControl.h"
+#include "CombinedCamera.h"
+#include "Cloning.h"
 
 class ofApp : public ofBaseApp {
 
@@ -43,13 +45,14 @@ public:
 	ofFbo hdFbo;
 	ofVboMesh sphereVboMesh;
 	ofEasyCam _easyCam;
-	ofImage image;
+	ofImage ldImage, hdImage, combinedImage, ldPassImage;
 	vector<ofVideoDevice> listVideoDevice;
 	ofShader _shader;
 	ofVideoGrabber ldVideoGrabber;
 	PTZControl hdVideoGrabber;
 	bool isldCameraConnected;
 	bool isHdCameraConnected;
+	bool isCombined;
 
 	ofShader shader;
 	ofSpherePrimitive sphere;
@@ -60,9 +63,13 @@ public:
 	ofParameterGroup ldParameterGroup;
 	ofxButton ldToggle;
 	ofxButton hdToggle;
+	ofxButton combinedToggle;
 
 	int VIDEO_WIDTH = 1280, VIDEO_HEIGHT = 640;
 	string cameraSelected;
+
+	CombinedCamera combinedCamera = CombinedCamera(VIDEO_WIDTH, VIDEO_HEIGHT);
+	ofPixels ldPixels;
 
 	int panAngle = 0, tiltAngle = 0, prevPanAngle = 0, prevTiltAngle = 0;
 	int prevXDrag;

@@ -1,4 +1,5 @@
 #include "Cloning.h"
+#include <iostream>
 
 float*** Cloning::source_MVC_0 = nullptr, *** Cloning::source_MVC_1 = nullptr, ***Cloning::source_MVC_2 = nullptr;
 int Cloning::num_MVC_dim = 0, Cloning::prev_num_MVC_dim = 0;
@@ -39,7 +40,7 @@ void Cloning::MVCSeamlessClone(Mat source, Mat target, Mat mask, Point center, M
 			mvc_indicator++;
 		}
 
-		for (size_t indicator = 0; indicator <= num_MVC_dim; indicator += 15)
+		for (size_t indicator = 0; indicator <= num_MVC_dim; indicator += 10)
 		{
 			Cloning::vPart_MVC.push_back(indicator);
 		}
@@ -133,9 +134,12 @@ void Cloning::MVCSeamlessClone(Mat source, Mat target, Mat mask, Point center, M
 	source.convertTo(source, CV_32F, 1.0 / 255);
 	target.convertTo(target, CV_32F, 1.0 / 255);
 	split(source, source_per_channel);
+//	std::cout << source.size() << endl;
+//	std::cout << target.size() << endl;
+//	std::cout << (center.x - source.cols / 2) << endl;
+//	std::cout << (center.y - source.rows / 2) << endl;
 	target(Rect(center.x - source.cols / 2, center.y - source.rows / 2, source.cols, source.rows)).copyTo(target_ROI);
 	split(target_ROI, target_per_channel);
-
 
 	for (int c = 0; c < 3; c++)
 	{
@@ -168,6 +172,7 @@ void Cloning::MVCSeamlessClone(Mat source, Mat target, Mat mask, Point center, M
 	cv::merge(&source_per_channel[0], 3, source);
 	source(Rect(1, 1, source.cols - 2, source.rows - 2)).copyTo(target(Rect(center.x - source.cols / 2, center.y - source.rows / 2, source.cols - 2, source.rows - 2)));
 	target.copyTo(clone);
+	clone.convertTo(clone, CV_8U, 255 / 1);
 }
 
 /*
