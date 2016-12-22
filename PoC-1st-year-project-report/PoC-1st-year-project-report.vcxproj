@@ -95,69 +95,10 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src;..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\libs\OpenVR\include;..\..\of_v0.9.8_vs_release\addons\ofxGui\src;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\src;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\ippicv\include;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\aruco;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\bioinspired;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\calib3d;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ccalib;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\cuda;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\cuda\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\hal;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudalegacy;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\block;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\block\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\expr;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\functional;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\functional\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\grid;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\grid\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\ptr2d;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\ptr2d\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\util;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\util\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\warp;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\warp\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\datasets;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\dnn;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\face;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\features2d;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\flann;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\fuzzy;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\highgui;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgcodecs;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc\hal;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\line_descriptor;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ml;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\objdetect;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\optflow;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\photo;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\reg;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\rgbd;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\saliency;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\shape;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stereo;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stitching;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stitching\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\structured_light;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\superres;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\surface_matching;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\text;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\tracking;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\video;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\videoio;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\videostab;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\xfeatures2d;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ximgproc;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\xphoto;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src;..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\libs\OpenVR\include;..\..\of_v0.9.8_vs_release\addons\ofxGui\src;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\src;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\ippicv\include;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\aruco;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\bioinspired;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\calib3d;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ccalib;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\cuda;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\cuda\detail;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\hal;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudalegacy;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\block;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\block\detail;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\expr;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\functional;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\functional\detail;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\grid;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\grid\detail;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\ptr2d;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\ptr2d\detail;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\util;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\util\detail;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\warp;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\warp\detail;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\datasets;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\dnn;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\face;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\features2d;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\flann;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\fuzzy;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\highgui;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgcodecs;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc\detail;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc\hal;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\line_descriptor;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ml;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\objdetect;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\optflow;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\photo;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\reg;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\rgbd;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\saliency;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\shape;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stereo;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stitching;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stitching\detail;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\structured_light;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\superres;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\surface_matching;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\text;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\tracking;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\video;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\videoio;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\videostab;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\xfeatures2d;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ximgproc;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\xphoto;
+D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxTaskQueue\src;
+D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxTaskQueue\libs\ofxTaskQueue\include;
+D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxTaskQueue\libs\ofxTaskQueue\include\ofx;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
@@ -196,69 +137,10 @@ D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src;..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\libs\OpenVR\include;..\..\of_v0.9.8_vs_release\addons\ofxGui\src;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\src;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\ippicv\include;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\aruco;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\bioinspired;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\calib3d;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ccalib;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\cuda;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\cuda\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\hal;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudalegacy;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\block;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\block\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\expr;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\functional;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\functional\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\grid;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\grid\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\ptr2d;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\ptr2d\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\util;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\util\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\warp;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\warp\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\datasets;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\dnn;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\face;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\features2d;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\flann;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\fuzzy;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\highgui;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgcodecs;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc\hal;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\line_descriptor;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ml;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\objdetect;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\optflow;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\photo;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\reg;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\rgbd;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\saliency;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\shape;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stereo;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stitching;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stitching\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\structured_light;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\superres;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\surface_matching;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\text;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\tracking;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\video;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\videoio;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\videostab;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\xfeatures2d;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ximgproc;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\xphoto;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src;..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\libs\OpenVR\include;..\..\of_v0.9.8_vs_release\addons\ofxGui\src;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\src;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\ippicv\include;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\aruco;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\bioinspired;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\calib3d;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ccalib;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\cuda;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\cuda\detail;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\hal;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudalegacy;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\block;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\block\detail;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\expr;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\functional;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\functional\detail;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\grid;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\grid\detail;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\ptr2d;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\ptr2d\detail;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\util;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\util\detail;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\warp;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\warp\detail;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\datasets;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\dnn;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\face;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\features2d;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\flann;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\fuzzy;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\highgui;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgcodecs;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc\detail;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc\hal;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\line_descriptor;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ml;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\objdetect;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\optflow;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\photo;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\reg;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\rgbd;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\saliency;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\shape;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stereo;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stitching;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stitching\detail;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\structured_light;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\superres;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\surface_matching;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\text;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\tracking;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\video;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\videoio;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\videostab;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\xfeatures2d;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ximgproc;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\xphoto;
+D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxTaskQueue\src;
+D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxTaskQueue\libs\ofxTaskQueue\include;
+D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxTaskQueue\libs\ofxTaskQueue\include\ofx;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -298,69 +180,10 @@ D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src;..\..\Projects\of_v0.9.8_vs_release\addons\ofxOpenVR\libs\OpenVR\include;..\..\of_v0.9.8_vs_release\addons\ofxGui\src;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\src;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\ippicv\include;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\aruco;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\bioinspired;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\calib3d;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ccalib;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\cuda;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\cuda\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\hal;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudalegacy;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\block;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\block\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\expr;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\functional;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\functional\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\grid;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\grid\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\ptr2d;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\ptr2d\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\util;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\util\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\warp;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\warp\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\datasets;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\dnn;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\face;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\features2d;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\flann;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\fuzzy;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\highgui;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgcodecs;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc\hal;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\line_descriptor;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ml;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\objdetect;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\optflow;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\photo;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\reg;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\rgbd;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\saliency;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\shape;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stereo;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stitching;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stitching\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\structured_light;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\superres;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\surface_matching;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\text;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\tracking;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\video;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\videoio;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\videostab;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\xfeatures2d;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ximgproc;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\xphoto;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src;..\..\Projects\of_v0.9.8_vs_release\addons\ofxOpenVR\libs\OpenVR\include;..\..\of_v0.9.8_vs_release\addons\ofxGui\src;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\src;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\ippicv\include;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\aruco;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\bioinspired;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\calib3d;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ccalib;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\cuda;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\cuda\detail;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\hal;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudalegacy;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\block;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\block\detail;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\expr;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\functional;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\functional\detail;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\grid;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\grid\detail;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\ptr2d;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\ptr2d\detail;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\util;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\util\detail;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\warp;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\warp\detail;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\datasets;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\dnn;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\face;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\features2d;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\flann;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\fuzzy;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\highgui;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgcodecs;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc\detail;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc\hal;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\line_descriptor;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ml;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\objdetect;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\optflow;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\photo;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\reg;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\rgbd;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\saliency;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\shape;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stereo;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stitching;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stitching\detail;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\structured_light;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\superres;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\surface_matching;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\text;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\tracking;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\video;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\videoio;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\videostab;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\xfeatures2d;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ximgproc;D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\xphoto;
+D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxTaskQueue\src;
+D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxTaskQueue\libs\ofxTaskQueue\include;
+D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxTaskQueue\libs\ofxTaskQueue\include\ofx;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -402,69 +225,7 @@ D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src;..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\libs\OpenVR\include;..\..\of_v0.9.8_vs_release\addons\ofxGui\src;src\Header_Library\include;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\src;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\ippicv\include;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\aruco;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\bioinspired;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\calib3d;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ccalib;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\cuda;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\cuda\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\hal;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudalegacy;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\block;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\block\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\expr;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\functional;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\functional\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\grid;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\grid\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\ptr2d;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\ptr2d\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\util;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\util\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\warp;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\warp\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\datasets;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\dnn;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\face;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\features2d;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\flann;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\fuzzy;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\highgui;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgcodecs;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc\hal;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\line_descriptor;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ml;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\objdetect;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\optflow;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\photo;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\reg;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\rgbd;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\saliency;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\shape;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stereo;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stitching;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stitching\detail;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\structured_light;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\superres;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\surface_matching;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\text;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\tracking;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\video;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\videoio;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\videostab;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\xfeatures2d;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ximgproc;
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\xphoto;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src;..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\libs\OpenVR\include;..\..\of_v0.9.8_vs_release\addons\ofxGui\src;src\Header_Library\include;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\src;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\ippicv\include;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\aruco;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\bioinspired;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\calib3d;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ccalib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\cuda;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\cuda\detail;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\hal;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudalegacy;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\block;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\block\detail;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\expr;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\functional;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\functional\detail;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\grid;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\grid\detail;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\ptr2d;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\ptr2d\detail;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\util;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\util\detail;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\warp;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\warp\detail;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\datasets;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\dnn;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\face;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\features2d;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\flann;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\fuzzy;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\highgui;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgcodecs;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc\detail;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc\hal;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\line_descriptor;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ml;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\objdetect;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\optflow;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\photo;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\reg;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\rgbd;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\saliency;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\shape;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stereo;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stitching;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stitching\detail;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\structured_light;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\superres;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\surface_matching;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\text;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\tracking;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\video;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\videoio;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\videostab;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\xfeatures2d;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ximgproc;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\xphoto;..\..\of_v0.9.8_vs_release\addons\ofxTaskQueue\src;..\..\of_v0.9.8_vs_release\addons\ofxTaskQueue\libs\ofxTaskQueue\include;..\..\of_v0.9.8_vs_release\addons\ofxTaskQueue\libs\ofxTaskQueue\include\ofx;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
@@ -474,8 +235,7 @@ D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\incl
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <AdditionalDependencies>openvr_api.lib;src\Header_Library\build\win64\output\dxl_x64_cpp.lib;
-..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\ippicv\lib\vs\x64\ippicvmt.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\libwebp.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_calib3d310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_core310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_features2d310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_flann310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_highgui310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_imgcodecs310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_imgproc310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_ml310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_objdetect310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_photo310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_shape310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_stitching310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_superres310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_video310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_videoio310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_videostab310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_xfeatures2d310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>openvr_api.lib;src\Header_Library\build\win64\output\dxl_x64_cpp.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\ippicv\lib\vs\x64\ippicvmt.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\libwebp.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_calib3d310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_core310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_features2d310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_flann310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_highgui310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_imgcodecs310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_imgproc310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_ml310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_objdetect310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_photo310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_shape310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_stitching310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_superres310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_video310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_videoio310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_videostab310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\opencv_xfeatures2d310.lib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Release\zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(OF_ROOT)\addons\ofxOpenVR\libs\OpenVR\lib\win64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
@@ -507,6 +267,7 @@ D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\incl
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\ofAppVR.cpp" />
     <ClCompile Include="src\PTZControl.cpp" />
+    <ClCompile Include="src\PTZMotorControl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxGui\src\ofxBaseGui.h" />
@@ -956,12 +717,16 @@ D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\incl
     <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src\Matrices.h" />
     <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src\ofxOpenVR.h" />
     <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src\Vectors.h" />
+    <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxTaskQueue\libs\ofxTaskQueue\include\ofx\TaskQueue.h" />
+    <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxTaskQueue\libs\ofxTaskQueue\include\ofx\TaskQueueEvents.h" />
+    <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxTaskQueue\src\ofxTaskQueue.h" />
     <ClInclude Include="src\Alignment.h" />
     <ClInclude Include="src\Cloning.h" />
     <ClInclude Include="src\CombinedCamera.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\ofAppVR.h" />
     <ClInclude Include="src\PTZControl.h" />
+    <ClInclude Include="src\PTZMotorControl.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">

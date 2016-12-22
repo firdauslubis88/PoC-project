@@ -86,6 +86,11 @@ void ofApp::setup() {
 
 	ptzPanOffset = 90;
 	ptzTiltOffset = 0;
+
+	// Limit the maximum number of tasks for shared thread pools.
+	queue.setMaximumTasks(10);
+	// Register to receive task queue events.
+	queue.registerTaskProgressEvents(this);
 }
 
 //--------------------------------------------------------------
@@ -124,8 +129,7 @@ void ofApp::setup() {
 	 }
 //	 cout << "Tilt sent:\t" << tiltSend << endl;
 //	 tiltSend = 0;
-//	 hdVideoGrabber.SetPanning(panSend);
-//	 hdVideoGrabber.SetTilting(tiltSend);
+	 queue.start(new PTZMotorControl("UPDATE PT", panSend, tiltSend));
  }
 //--------------------------------------------------------------
 void ofApp::draw() {
@@ -383,6 +387,30 @@ ofVec3f ofApp::getPTZEuler() const {
 	float heading = theta3;
 	float bank = theta2;
 	return ofVec3f(ofRadToDeg(bank), ofRadToDeg(heading), ofRadToDeg(attitude));
+}
+
+void ofApp::onTaskQueued(const ofx::TaskQueueEventArgs & args)
+{
+}
+
+void ofApp::onTaskStarted(const ofx::TaskQueueEventArgs & args)
+{
+}
+
+void ofApp::onTaskCancelled(const ofx::TaskQueueEventArgs & args)
+{
+}
+
+void ofApp::onTaskFinished(const ofx::TaskQueueEventArgs & args)
+{
+}
+
+void ofApp::onTaskFailed(const ofx::TaskFailedEventArgs & args)
+{
+}
+
+void ofApp::onTaskProgress(const ofx::TaskProgressEventArgs & args)
+{
 }
 
 void ofApp::onProperty()

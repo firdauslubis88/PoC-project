@@ -76,6 +76,9 @@
     <ClCompile Include="src\Alignment.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\PTZMotorControl.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -302,6 +305,24 @@
     </Filter>
     <Filter Include="addons\ofxOpenCv\libs\opencv\include\opencv2\xphoto">
       <UniqueIdentifier>{455ad546-c56b-43f9-b373-f758a7ac822d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxTaskQueue">
+      <UniqueIdentifier>{96ae2089-a55c-4f36-a06a-d8eb7eebeabf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxTaskQueue\src">
+      <UniqueIdentifier>{831555e6-3d68-4d3e-aeb5-a4c0419214c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxTaskQueue\libs">
+      <UniqueIdentifier>{0d7cdd44-a927-43fd-b598-270f6b2db8b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxTaskQueue\libs\ofxTaskQueue">
+      <UniqueIdentifier>{2af1549b-4767-40d6-a07d-e2a4c5832657}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxTaskQueue\libs\ofxTaskQueue\include">
+      <UniqueIdentifier>{c508adee-af7b-4b00-81be-69896930e263}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxTaskQueue\libs\ofxTaskQueue\include\ofx">
+      <UniqueIdentifier>{10d7562a-14fb-4113-872f-d12d7dd666f2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1662,6 +1683,18 @@
       <Filter>addons\ofxOpenCv\libs\opencv\include\opencv2\xphoto</Filter>
     </ClInclude>
     <ClInclude Include="src\Alignment.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxTaskQueue\src\ofxTaskQueue.h">
+      <Filter>addons\ofxTaskQueue\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxTaskQueue\libs\ofxTaskQueue\include\ofx\TaskQueue.h">
+      <Filter>addons\ofxTaskQueue\libs\ofxTaskQueue\include\ofx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxTaskQueue\libs\ofxTaskQueue\include\ofx\TaskQueueEvents.h">
+      <Filter>addons\ofxTaskQueue\libs\ofxTaskQueue\include\ofx</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PTZMotorControl.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

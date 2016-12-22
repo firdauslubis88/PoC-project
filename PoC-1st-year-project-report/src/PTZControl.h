@@ -36,8 +36,9 @@ public:
 	PTZControl();
 	~PTZControl();
 
-	dynamixel::PortHandler *portHandler;
-	dynamixel::PacketHandler *packetHandler;
+	static dynamixel::PortHandler *portHandler;
+	static dynamixel::PacketHandler *packetHandler;
+	static bool alreadyUsed;
 
 	int index;
 	int dxl_comm_result;
@@ -52,9 +53,9 @@ public:
 	int32_t dxl_present_position_pan;
 	int32_t dxl_present_position_tilt;
 
-	int PTZControl::SetPanning(int input);
+	static int PTZControl::SetPanning(int input);
 	int PTZControl::GetPanning();
-	int PTZControl::SetTilting(int input);
+	static int PTZControl::SetTilting(int input);
 	int PTZControl::GetTilting();
 	int PTZControl::SetZooming(int zoom);
 	long PTZControl::GetZooming();

@@ -1,3 +1,4 @@
 ofxGui
 ofxOpenCv
 ofxOpenVR
+ofxTaskQueue

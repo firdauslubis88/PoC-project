@@ -3,10 +3,13 @@
 #include "ofMain.h"
 #include "ofxGui.h"
 #include "ofxOpenVR.h"
+#include "ofxTaskQueue.h"
 
 #include "PTZControl.h"
 #include "CombinedCamera.h"
 #include "Cloning.h"
+
+#include "PTZMotorControl.h"
 
 class ofApp : public ofBaseApp {
 
@@ -36,6 +39,15 @@ public:
 	void restart();
 	void onProperty();
 	ofVec3f getPTZEuler() const;
+	void setPTZEuler(int pan, int tilt);
+
+	void onTaskQueued(const ofx::TaskQueueEventArgs & args);
+	void onTaskStarted(const ofx::TaskQueueEventArgs & args);
+	void onTaskCancelled(const ofx::TaskQueueEventArgs & args);
+	void onTaskFinished(const ofx::TaskQueueEventArgs & args);
+	void onTaskFailed(const ofx::TaskFailedEventArgs & args);
+	void onTaskProgress(const ofx::TaskProgressEventArgs & args);
+
 	ofxOpenVR openVR;
 
 	bool bShowHelp;
@@ -77,4 +89,6 @@ public:
 	int ptzPanOffset = 0, ptzTiltOffset = 0;
 	bool followingMode = false;
 	bool singularMode = false;
+
+	ofx::TaskQueue queue;
 };
