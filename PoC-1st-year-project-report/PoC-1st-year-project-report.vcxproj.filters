@@ -79,6 +79,9 @@
     <ClCompile Include="src\PTZMotorControl.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\of_v0.9.8_vs_release\addons\ofxVideoRecorder\src\ofxVideoRecorder.cpp">
+      <Filter>addons\ofxVideoRecorder\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -323,6 +326,12 @@
     </Filter>
     <Filter Include="addons\ofxTaskQueue\libs\ofxTaskQueue\include\ofx">
       <UniqueIdentifier>{10d7562a-14fb-4113-872f-d12d7dd666f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxVideoRecorder">
+      <UniqueIdentifier>{7fa94e68-0808-4203-a87b-79e062bbbe97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxVideoRecorder\src">
+      <UniqueIdentifier>{dcc22953-1c7e-4301-8429-c862d2fc2151}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1696,6 +1705,9 @@
     </ClInclude>
     <ClInclude Include="src\PTZMotorControl.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxVideoRecorder\src\ofxVideoRecorder.h">
+      <Filter>addons\ofxVideoRecorder\src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

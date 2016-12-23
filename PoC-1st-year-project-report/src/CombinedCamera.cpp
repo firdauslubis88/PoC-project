@@ -130,8 +130,6 @@ ofPixels CombinedCamera::combine(ofPixels ldPixel, ofImage hdImage, int image_wi
 		cloneCenter = Point(x + width / 2, y + height / 2);
 //		seamlessClone(source, target, clone_mask, cloneCenter, clone, 1);
 		Cloning::MVCSeamlessClone(source(Rect(x,y,width,height)), target, clone_mask, cloneCenter, clone);
-//		cout << clone.depth() << endl;
-//		cout << combinedImage. << endl;
 		IplImage temp = clone;
 		IplImage* pTemp = &temp;
 		combinedCvImage = pTemp;

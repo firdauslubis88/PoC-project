@@ -8,8 +8,8 @@ void ofApp::setup() {
 //	ofSetVerticalSync(false);
 	ofDisableArbTex();
 
-	VIDEO_WIDTH = 1280;
-	VIDEO_HEIGHT = 640;
+	VIDEO_WIDTH = 2560;
+	VIDEO_HEIGHT = 1280;
 
 	listVideoDevice = ldVideoGrabber.listDevices();
 	isldCameraConnected = false;
@@ -91,25 +91,64 @@ void ofApp::setup() {
 	queue.setMaximumTasks(10);
 	// Register to receive task queue events.
 	queue.registerTaskProgressEvents(this);
+
+#ifdef USE_VIDEO_RECORDER
+#ifdef TARGET_WIN32
+	vidRecorder.setFfmpegLocation("D:\\ffmpeg\\bin\\ffmpeg.exe"); // use this is you have ffmpeg installed in your data folder
+#endif
+	fileName = "testMovie";
+	fileExt = ".mp4"; // ffmpeg uses the extension to determine the container type. run 'ffmpeg -formats' to see supported formats
+
+					  // override the default codecs if you like
+					  // run 'ffmpeg -codecs' to find out what your implementation supports (or -formats on some older versions)
+	vidRecorder.setVideoCodec("mpeg4");
+	vidRecorder.setVideoBitrate("800k");
+	vidRecorder.setAudioCodec("mp3");
+	vidRecorder.setAudioBitrate("192k");
+	bRecording = false;
+	sampleRate = 44100;
+	channels = 2;
+
+	soundStream.setup(this, 0, channels, sampleRate, 256, 4);
+
+	ofEnableAlphaBlending();
+#endif // USE_VIDEO_RECORDER
 }
 
 //--------------------------------------------------------------
  void ofApp::exit() {
-
-}
+#ifdef USE_VIDEO_RECORDER
+	 vidRecorder.close();
+#endif // USE_VIDEO_RECORDER
+ }
 
 //--------------------------------------------------------------
  void ofApp::update() {
 	 if (isldCameraConnected)
 	 {
 		 ldVideoGrabber.update();
+#ifdef USE_VIDEO_RECORDER
+		 if (ldVideoGrabber.isFrameNew() && bRecording)
+		 {
+			 vidRecorder.addFrame(ldVideoGrabber.getPixelsRef());
+			 //			 ofLogWarning("This frame was not added!");
+		 }
+		 // Check if the video recorder encountered any error while writing video frame or audio smaples.
+		 if (vidRecorder.hasVideoError()) {
+			 ofLogWarning("The video recorder failed to write some frames!");
+		 }
+
+		 if (vidRecorder.hasAudioError()) {
+			 ofLogWarning("The video recorder failed to write some audio samples!");
+		 }
+#endif
 	 }
 	 if (isHdCameraConnected)
 	 {
 		 hdVideoGrabber.update();
 	 }
 
-	 int panSend = -(panAngle + ptzPanOffset);
+	 panSend = -(panAngle + ptzPanOffset);
 	 if (panSend > 180)
 	 {
 		 panSend -= 360;
@@ -118,7 +157,7 @@ void ofApp::setup() {
 	 {
 		 panSend += 360;
 	 }
-	 int tiltSend = -(tiltAngle + ptzTiltOffset);
+	 tiltSend = -(tiltAngle + ptzTiltOffset);
 	 if (tiltSend > 180)
 	 {
 		 tiltSend -= 360;
@@ -127,9 +166,12 @@ void ofApp::setup() {
 	 {
 		 tiltSend += 360;
 	 }
+	 if (cameraSelected == "PTZ Camera")
+	 {
+		 queue.start(new PTZMotorControl("UPDATE PT", panSend, tiltSend));
+	 }
 //	 cout << "Tilt sent:\t" << tiltSend << endl;
 //	 tiltSend = 0;
-	 queue.start(new PTZMotorControl("UPDATE PT", panSend, tiltSend));
  }
 //--------------------------------------------------------------
 void ofApp::draw() {
@@ -164,16 +206,16 @@ void ofApp::draw() {
 		ldFbo.readToPixels(ldPixels);
 		ldPassImage.setFromPixels(ldPixels);
 		hdImage.setFromPixels(hdVideoGrabber.getPixels());
-		combinedImage.setFromPixels(combinedCamera.combine(ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, 432, 224));
+		combinedImage.setFromPixels(combinedCamera.combine(ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, 432*2, 224*2));
 		combinedImage.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
 	}
 
 	ofDisableDepthTest();
 	_panel.draw();
 
-//	ofDrawBitmapStringHighlight("PAN ANGLE: " + ofToString(-hdVideoGrabber.GetPanning()-ptzPanOffset), 10, 230);
-//	ofDrawBitmapStringHighlight("TILT ANGLE: " + ofToString(-hdVideoGrabber.GetTilting()), 10, 250);
-//	ofDrawBitmapStringHighlight("Click 'p' to open PTZ camera control settings", 10, 270);
+	ofDrawBitmapStringHighlight("PAN ANGLE: " + ofToString(PTZControl::GetPanning()), 10, 230);
+	ofDrawBitmapStringHighlight("TILT ANGLE: " + ofToString(PTZControl::GetTilting()), 10, 250);
+	ofDrawBitmapStringHighlight("Click 'p' to open PTZ camera control settings", 10, 270);
 }
 
 //--------------------------------------------------------------
@@ -199,13 +241,18 @@ void ofApp::keyPressed(int key) {
 	case 'p':
 		onProperty();
 		break;
-	case 'c':
-		cout << "origin\t" << _easyCam.getGlobalOrientation().getEuler() << endl;
-		cout << "change\t" << getPTZEuler() << endl;
-		break;
 	case 'r':
 		restart();
 		break;
+#ifdef USE_VIDEO_RECORDER
+	case 'l':
+		start_record();
+		break;
+	case 'k':
+		stop_record();
+		break;
+#endif // USE_VIDEO_RECORDER
+
 	default:
 		break;
 	}
@@ -231,11 +278,11 @@ void ofApp::mouseDragged(int x, int y, int button) {
 	{
 		if (y > (prevYDrag + 50))
 		{
-			tiltAngle--;
+			tiltAngle++;
 		}
 		else if (y < (prevYDrag - 50))
 		{
-			tiltAngle++;
+			tiltAngle--;
 		}
 		if (x >(prevXDrag + 50))
 		{
@@ -263,32 +310,6 @@ void ofApp::mouseDragged(int x, int y, int button) {
 		{
 			tiltAngle = -(ricohX) + 180;
 		}
-
-		cout << "360 PAN:\t" << getPTZEuler() << endl;
-		cout << "PTZ PAN:\t" << panAngle << "\tTILT:\t" << tiltAngle << endl;
-		/*
-		if (followingMode)
-		{
-//			int currentPan = (int)getPTZEuler().x;
-			ofVec3f ldCameraEulerOrientation = getPTZEuler();
-			if ((x < prevXDrag) && (prevPanAngle < currentPan))
-			{
-				panAngle = -(ldCameraEulerOrientation.x);
-			}
-			else if ((x < prevXDrag) && (prevPanAngle > currentPan))
-			{
-				panAngle = 180 + (ldCameraEulerOrientation.x);
-			}
-			else if ((x > prevXDrag) && (prevPanAngle > currentPan))
-			{
-				panAngle = -(ldCameraEulerOrientation.x);
-			}
-			else if ((x > prevXDrag) && (prevPanAngle < currentPan))
-			{
-				panAngle = 180 + (ldCameraEulerOrientation.x);
-			}
-		}
-		*/
 	}
 }
 
@@ -355,6 +376,12 @@ void ofApp::onToggle(const void * sender)
 {
 	ofxButton * p = (ofxButton *)sender;
 	cameraSelected = p->getName();
+	if (cameraSelected == "PTZ Camera" || cameraSelected == "Combined Camera")
+	{
+		queue.start(new PTZMotorControl("UPDATE PT", panSend, tiltSend));
+//		hdVideoGrabber.SetPanning(panSend);
+//		hdVideoGrabber.SetTilting(tiltSend);
+	}
 }
 
 // ref at http://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToEuler/index.htm
@@ -388,6 +415,35 @@ ofVec3f ofApp::getPTZEuler() const {
 	float bank = theta2;
 	return ofVec3f(ofRadToDeg(bank), ofRadToDeg(heading), ofRadToDeg(attitude));
 }
+
+#ifdef USE_VIDEO_RECORDER
+void ofApp::start_record()
+{
+	bRecording = true;
+	if (bRecording && !vidRecorder.isInitialized()) {
+		vidRecorder.setup(fileName + ofGetTimestampString() + fileExt, ldVideoGrabber.getWidth(), ldVideoGrabber.getHeight(), 30, sampleRate, channels);
+		//          vidRecorder.setup(fileName+ofGetTimestampString()+fileExt, vidGrabber.getWidth(), vidGrabber.getHeight(), 30); // no audio
+		//            vidRecorder.setup(fileName+ofGetTimestampString()+fileExt, 0,0,0, sampleRate, channels); // no video
+		//          vidRecorder.setupCustomOutput(vidGrabber.getWidth(), vidGrabber.getHeight(), 30, sampleRate, channels, "-vcodec mpeg4 -b 1600k -acodec mp2 -ab 128k -f mpegts udp://localhost:1234"); // for custom ffmpeg output string (streaming, etc)
+
+		// Start recording
+		vidRecorder.start();
+	}
+	else if (!bRecording && vidRecorder.isInitialized()) {
+		vidRecorder.setPaused(true);
+	}
+	else if (bRecording && vidRecorder.isInitialized()) {
+		vidRecorder.setPaused(false);
+	}
+}
+
+void ofApp::stop_record()
+{
+	bRecording = false;
+	vidRecorder.close();
+}
+
+#endif // USE_VIDEO_RECORDER
 
 void ofApp::onTaskQueued(const ofx::TaskQueueEventArgs & args)
 {
@@ -429,3 +485,12 @@ void ofApp::restart()
 	tiltAngle = 0;
 	panAngle = 0;
 }
+
+#ifdef USE_VIDEO_RECORDER
+void ofApp::audioIn(float *input, int bufferSize, int nChannels) {
+	if (bRecording)
+		vidRecorder.addAudioSamples(input, bufferSize, nChannels);
+}
+#endif // USE_VIDEO_RECORDER
+
+

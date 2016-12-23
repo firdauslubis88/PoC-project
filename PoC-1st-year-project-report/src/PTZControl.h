@@ -54,9 +54,9 @@ public:
 	int32_t dxl_present_position_tilt;
 
 	static int PTZControl::SetPanning(int input);
-	int PTZControl::GetPanning();
+	static int PTZControl::GetPanning();
 	static int PTZControl::SetTilting(int input);
-	int PTZControl::GetTilting();
+	static int PTZControl::GetTilting();
 	int PTZControl::SetZooming(int zoom);
 	long PTZControl::GetZooming();
 

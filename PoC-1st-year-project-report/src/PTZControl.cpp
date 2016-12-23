@@ -84,18 +84,20 @@ int PTZControl::SetPanning(int input) {
 
 	if (dxl_comm_result != COMM_SUCCESS)
 	{
-//		PTZControl::packetHandler->printTxRxResult(dxl_comm_result);
+		PTZControl::packetHandler->printTxRxResult(dxl_comm_result);
 	}
 	else if (dxl_error != 0)
 	{
-//		PTZControl::packetHandler->printRxPacketError(dxl_error);
+		PTZControl::packetHandler->printRxPacketError(dxl_error);
 	}
 
 	return 0;
 }
 
 int PTZControl::GetPanning() {
-	dxl_comm_result = PTZControl::packetHandler->read4ByteTxRx(PTZControl::portHandler, DXL_ID1, ADDR_PRO_PRESENT_POSITION, (uint32_t*)&dxl_present_position_pan, &dxl_error);
+	uint8_t dxl_error;
+	int dxl_present_position_pan;
+	int dxl_comm_result = PTZControl::packetHandler->read4ByteTxRx(PTZControl::portHandler, DXL_ID1, ADDR_PRO_PRESENT_POSITION, (uint32_t*)&dxl_present_position_pan, &dxl_error);
 	
 	if (dxl_comm_result != COMM_SUCCESS)
 	{
@@ -136,11 +138,11 @@ int PTZControl::SetTilting(int input) {
 
 	if (dxl_comm_result != COMM_SUCCESS)
 	{
-//		PTZControl::packetHandler->printTxRxResult(dxl_comm_result);
+		PTZControl::packetHandler->printTxRxResult(dxl_comm_result);
 	}
 	else if (dxl_error != 0)
 	{
-//		PTZControl::packetHandler->printRxPacketError(dxl_error);
+		PTZControl::packetHandler->printRxPacketError(dxl_error);
 	}
 
 	return 0;
@@ -149,7 +151,9 @@ int PTZControl::SetTilting(int input) {
 
 int PTZControl::GetTilting() {
 	// Read present position
-	dxl_comm_result = PTZControl::packetHandler->read4ByteTxRx(PTZControl::portHandler, DXL_ID2, ADDR_PRO_PRESENT_POSITION, (uint32_t*)&dxl_present_position_tilt, &dxl_error);
+	uint8_t dxl_error;
+	int dxl_present_position_tilt;
+	int dxl_comm_result = PTZControl::packetHandler->read4ByteTxRx(PTZControl::portHandler, DXL_ID2, ADDR_PRO_PRESENT_POSITION, (uint32_t*)&dxl_present_position_tilt, &dxl_error);
 
 	if (dxl_comm_result != COMM_SUCCESS)
 	{

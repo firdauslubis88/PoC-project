@@ -7,8 +7,8 @@
 int main( ){
 	ofGLFWWindowSettings settings;
 	settings.setGLVersion(4, 1);
-	settings.width = 1280;
-	settings.height = 640;
+	settings.width = 2560;
+	settings.height = 1280;
 	settings.setPosition(ofVec2f(50, 50));
 	shared_ptr<ofAppBaseWindow> dualCameraWindow = ofCreateWindow(settings);
 
