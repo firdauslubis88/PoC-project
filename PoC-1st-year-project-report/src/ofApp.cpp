@@ -101,7 +101,8 @@ void ofApp::setup() {
 
 #ifdef USE_VIDEO_RECORDER
 #ifdef TARGET_WIN32
-	vidRecorder.setFfmpegLocation("D:\\ffmpeg\\bin\\ffmpeg.exe"); // use this is you have ffmpeg installed in your data folder
+	string appPath = ofFilePath::getAbsolutePath(ofFilePath::getCurrentExePath());
+	vidRecorder.setFfmpegLocation(appPath + "\\ffmpeg.exe"); // use this is you have ffmpeg installed in your data folder
 #endif
 	fileName = "testMovie";
 	fileExt = ".mp4"; // ffmpeg uses the extension to determine the container type. run 'ffmpeg -formats' to see supported formats
