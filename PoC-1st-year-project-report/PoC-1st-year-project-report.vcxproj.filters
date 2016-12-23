@@ -82,6 +82,12 @@
     <ClCompile Include="..\..\of_v0.9.8_vs_release\addons\ofxVideoRecorder\src\ofxVideoRecorder.cpp">
       <Filter>addons\ofxVideoRecorder\src</Filter>
     </ClCompile>
+    <ClCompile Include="src\CombinedCameraTask.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SimpleTaskProgress.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -1708,6 +1714,12 @@
     </ClInclude>
     <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxVideoRecorder\src\ofxVideoRecorder.h">
       <Filter>addons\ofxVideoRecorder\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CombinedCameraTask.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SimpleTaskProgress.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

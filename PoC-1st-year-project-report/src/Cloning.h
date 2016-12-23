@@ -18,6 +18,7 @@ typedef struct boundary_coords {
 class Cloning
 {
 public:
+	Cloning() = default;
 	void normalClone(const cv::Mat& destination, const cv::Mat &mask, const cv::Mat &wmask, cv::Mat &cloned, int flag);
 	static void MVCSeamlessClone(Mat source, Mat target, Mat mask, Point center, Mat & clone);
 	static bool alreadyPrecalculated;

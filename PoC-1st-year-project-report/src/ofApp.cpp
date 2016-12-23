@@ -70,7 +70,12 @@ void ofApp::setup() {
 		combinedToggle.addListener(this, &ofApp::onToggle);
 		ldPixels.allocate(VIDEO_WIDTH, VIDEO_HEIGHT, OF_IMAGE_COLOR);
 		ldPassImage.allocate(VIDEO_WIDTH, VIDEO_HEIGHT, OF_IMAGE_COLOR);
+		tempCombinedCameraPixels.allocate(VIDEO_WIDTH, VIDEO_HEIGHT, OF_IMAGE_COLOR);
 		_panel.add(&combinedToggle);
+		combinedCameraQueue.setMaximumTasks(1);
+		combinedCameraQueue.registerTaskProgressEvents(this);
+		combinedCamera = CombinedCamera(VIDEO_WIDTH, VIDEO_HEIGHT);
+		combinedCameraExist = false;
 	}
 	else
 	{
@@ -92,6 +97,7 @@ void ofApp::setup() {
 	queue.setMaximumTasks(1);
 	// Register to receive task queue events.
 	queue.registerTaskProgressEvents(this);
+
 
 #ifdef USE_VIDEO_RECORDER
 #ifdef TARGET_WIN32
@@ -208,9 +214,19 @@ void ofApp::draw() {
 		ldFbo.readToPixels(ldPixels);
 		ldPassImage.setFromPixels(ldPixels);
 		hdImage.setFromPixels(hdVideoGrabber.getPixels());
-		combinedImage.setFromPixels(combinedCamera.combine(ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, 432*2, 224*2));
-		Alignment::alreadyChanged = true;
-		combinedImage.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
+//		combinedCameraExist = true;
+		combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, 432 * 2, 224 * 2, tempCombinedCameraPixels));
+		if (combinedCameraExist)
+		{
+//			combinedImage.setFromPixels(CombinedCamera::combine(ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, 432*2, 224*2));
+			combinedImage.setFromPixels(tempCombinedCameraPixels);
+			combinedImage.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
+			Alignment::alreadyChanged = true;
+		}
+		else
+		{
+			ldFbo.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
+		}
 	}
 
 	ofDisableDepthTest();
@@ -218,7 +234,6 @@ void ofApp::draw() {
 
 	ofDrawBitmapStringHighlight("PAN ANGLE: " + ofToString(PTZControl::GetPanning()), 10, 230);
 	ofDrawBitmapStringHighlight("TILT ANGLE: " + ofToString(PTZControl::GetTilting()), 10, 250);
-	ofDrawBitmapStringHighlight("ALIGNING: " + ofToString(Alignment::alreadyChanged), 10, 270);
 	ofDrawBitmapStringHighlight("Click 'p' to open PTZ camera control settings", 10, 270);
 }
 
@@ -349,12 +364,9 @@ void ofApp::mouseReleased(int x, int y, int button) {
 
 void ofApp::mouseScrolled(int x, int y, float scrollX, float scrollY)
 {
-	if (cameraSelected == "PTZ Camera")
+	if (cameraSelected == "Combined Camera")
 	{
-		long min, max, SteppingDelta, currentValue, flags, defaultValue;
-		currentValue = hdVideoGrabber.GetZooming();
-		long nextZoom = scrollY * 10 + currentValue;
-		hdVideoGrabber.SetZooming(nextZoom);
+		combinedCameraExist = true;
 	}
 }
 //--------------------------------------------------------------
@@ -469,6 +481,11 @@ void ofApp::onTaskCancelled(const ofx::TaskQueueEventArgs & args)
 
 void ofApp::onTaskFinished(const ofx::TaskQueueEventArgs & args)
 {
+	taskProgress[args.getTaskId()].update(args);
+	if (args.getTaskName() == "Combined Camera")
+	{
+		combinedCameraExist = true;
+	}
 }
 
 void ofApp::onTaskFailed(const ofx::TaskFailedEventArgs & args)

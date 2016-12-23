@@ -1,12 +1,18 @@
 #include "CombinedCamera.h"
 
+ofxCvColorImage CombinedCamera::ldCvImage, CombinedCamera::hdCvImage, CombinedCamera::combinedCvImage;
+bool CombinedCamera::skipCloning = false, CombinedCamera::skipAligning = false, CombinedCamera::alreadyInitialized = false;
+
 
 CombinedCamera::CombinedCamera(int image_width,int image_height)
 {
-	ldCvImage.allocate(image_width, image_height);
-	hdCvImage.allocate(image_width, image_height);
-	combinedCvImage.allocate(image_width, image_height);
-	sourceCvImage.allocate(image_width, image_height);
+	if (!CombinedCamera::alreadyInitialized)
+	{
+		ldCvImage.allocate(image_width, image_height);
+		hdCvImage.allocate(image_width, image_height);
+		combinedCvImage.allocate(image_width, image_height);
+		CombinedCamera::alreadyInitialized = true;
+	}
 }
 
 
@@ -83,6 +89,13 @@ void CombinedCamera::seamlessClone(InputArray _src, InputArray _dst, InputArray 
 */
 ofPixels CombinedCamera::combine(ofPixels ldPixel, ofImage hdImage, int image_width, int image_height, int x, int y, int width, int height)
 {
+	if (!CombinedCamera::alreadyInitialized)
+	{
+		ldCvImage.allocate(image_width, image_height);
+		hdCvImage.allocate(image_width, image_height);
+		combinedCvImage.allocate(image_width, image_height);
+		CombinedCamera::alreadyInitialized = true;
+	}
 	ofImage ldImage;
 
 	ldImage.setFromPixels(ldPixel);
@@ -108,7 +121,68 @@ ofPixels CombinedCamera::combine(ofPixels ldPixel, ofImage hdImage, int image_wi
 		Mat aligned = Alignment::align(tempMatLdCvImage, tempMatHdCvImage, x, y, width, height);
 		aligned.copyTo(source);
 	}
-//		tempMatHdCvImage(Rect(x, y, width, height)).copyTo(source); //Use this instead above if you want to skip alignment process
+	//		tempMatHdCvImage(Rect(x, y, width, height)).copyTo(source); //Use this instead above if you want to skip alignment process
+
+	if (skipCloning)
+	{
+		source(Rect(x, y, width, height)).copyTo(target(Rect(x, y, width, height)));
+		IplImage temp = target;
+		IplImage* pTemp = &temp;
+		combinedCvImage = pTemp;
+	}
+	else
+	{
+		//Stitching/blending the images
+		Mat clone_mask, clone;
+		clone_mask = Mat(tempMatLdCvImage.rows, tempMatLdCvImage.cols, CV_8UC1);
+		clone_mask.setTo(Scalar(0));
+		Rect clone_mask_ROI = Rect(x, y, width, height);
+		clone_mask(clone_mask_ROI).setTo(Scalar(255));
+		cloneCenter = Point(x + width / 2, y + height / 2);
+		//		seamlessClone(source, target, clone_mask, cloneCenter, clone, 1);
+		Cloning::MVCSeamlessClone(source(Rect(x, y, width, height)), target, clone_mask, cloneCenter, clone);
+		IplImage temp = clone;
+		IplImage* pTemp = &temp;
+		combinedCvImage = pTemp;
+	}
+
+	return combinedCvImage.getPixels();
+}
+
+void CombinedCamera::combine(ofPixels ldPixel, ofImage hdImage, int image_width, int image_height, int x, int y, int width, int height, ofPixels* outputPixels)
+{
+	if (!CombinedCamera::alreadyInitialized)
+	{
+		ldCvImage.allocate(image_width, image_height);
+		hdCvImage.allocate(image_width, image_height);
+		combinedCvImage.allocate(image_width, image_height);
+		CombinedCamera::alreadyInitialized = true;
+	}
+	ofImage ldImage;
+
+	ldImage.setFromPixels(ldPixel);
+	ldImage.setImageType(OF_IMAGE_COLOR);
+
+	ldCvImage.setFromPixels(ldImage.getPixels());
+	hdCvImage.setFromPixels(hdImage.getPixels());
+
+	//Preparing (transfering) ofImage data type into ofxOpenCV image data type
+	Mat tempMatHdCvImage = cvarrToMat(hdCvImage.getCvImage());
+	Mat tempMatLdCvImage = cvarrToMat(ldCvImage.getCvImage());
+	Mat source, target;
+	Point cloneCenter;
+	target = tempMatLdCvImage;
+
+	if (skipAligning)
+	{
+		tempMatHdCvImage.copyTo(source);
+	}
+	else
+	{
+		//Aligning the images
+		Mat aligned = Alignment::align(tempMatLdCvImage, tempMatHdCvImage, x, y, width, height);
+		aligned.copyTo(source);
+	}
 
 	if (skipCloning)
 	{
@@ -133,7 +207,7 @@ ofPixels CombinedCamera::combine(ofPixels ldPixel, ofImage hdImage, int image_wi
 		combinedCvImage = pTemp;
 	}
 
-	return combinedCvImage.getPixels();
+	*outputPixels = combinedCvImage.getPixels();
 }
 
 void CombinedCamera::setSkipCloning(bool value)

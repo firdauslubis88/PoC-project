@@ -259,11 +259,13 @@ D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxVideoRecorder\src;%(Add
     <ClCompile Include="src\Alignment.cpp" />
     <ClCompile Include="src\Cloning.cpp" />
     <ClCompile Include="src\CombinedCamera.cpp" />
+    <ClCompile Include="src\CombinedCameraTask.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\ofAppVR.cpp" />
     <ClCompile Include="src\PTZControl.cpp" />
     <ClCompile Include="src\PTZMotorControl.cpp" />
+    <ClCompile Include="src\SimpleTaskProgress.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxGui\src\ofxBaseGui.h" />
@@ -720,10 +722,12 @@ D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxVideoRecorder\src;%(Add
     <ClInclude Include="src\Alignment.h" />
     <ClInclude Include="src\Cloning.h" />
     <ClInclude Include="src\CombinedCamera.h" />
+    <ClInclude Include="src\CombinedCameraTask.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\ofAppVR.h" />
     <ClInclude Include="src\PTZControl.h" />
     <ClInclude Include="src\PTZMotorControl.h" />
+    <ClInclude Include="src\SimpleTaskProgress.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">

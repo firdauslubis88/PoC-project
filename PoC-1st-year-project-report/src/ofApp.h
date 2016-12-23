@@ -11,6 +11,8 @@
 #include "Cloning.h"
 
 #include "PTZMotorControl.h"
+#include "CombinedCameraTask.h"
+#include "SimpleTaskProgress.h"
 
 //#define USE_VIDEO_RECORDER
 
@@ -88,7 +90,8 @@ public:
 	int VIDEO_WIDTH = 2560, VIDEO_HEIGHT = 1280;
 	string cameraSelected;
 
-	CombinedCamera combinedCamera = CombinedCamera(VIDEO_WIDTH, VIDEO_HEIGHT);
+	CombinedCamera combinedCamera;
+	ofPixels tempCombinedCameraPixels;
 	ofPixels ldPixels;
 
 	int panAngle = 0, tiltAngle = 0, prevPanAngle = 0, prevTiltAngle = 0;
@@ -98,7 +101,10 @@ public:
 	bool followingMode = false;
 	bool singularMode = false;
 
-	ofx::TaskQueue queue;
+	ofx::TaskQueue queue, combinedCameraQueue;
+	typedef std::map<std::string, SimpleTaskProgress> TaskProgress;
+	// We keep a simple task progress queue.
+	TaskProgress taskProgress;
 #ifdef USE_VIDEO_RECORDER
 	ofxVideoRecorder    vidRecorder;
 	bool bRecording;
@@ -110,4 +116,5 @@ public:
 #endif // USE_VIDEO_RECORDER
 
 	int panSend, tiltSend;
+	bool combinedCameraExist;
 };
