@@ -105,9 +105,7 @@ ofPixels CombinedCamera::combine(ofPixels ldPixel, ofImage hdImage, int image_wi
 	else
 	{
 		//Aligning the images
-		Mat aligned;
-		Alignment alignment = Alignment(400);
-		aligned = alignment.align(tempMatLdCvImage, tempMatHdCvImage, x, y, width, height);
+		Mat aligned = Alignment::align(tempMatLdCvImage, tempMatHdCvImage, x, y, width, height);
 		aligned.copyTo(source);
 	}
 //		tempMatHdCvImage(Rect(x, y, width, height)).copyTo(source); //Use this instead above if you want to skip alignment process

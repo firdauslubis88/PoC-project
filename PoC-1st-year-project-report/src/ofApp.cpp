@@ -80,15 +80,16 @@ void ofApp::setup() {
 	_easyCam.setAutoDistance(false);
 	_easyCam.setDistance(0);
 	_easyCam.rotate(-90, 0, 0, 1);
+	_easyCam.setFov(40.0);
 
-	combinedCamera.setSkipAligning(true);
+	combinedCamera.setSkipAligning(false);
 	combinedCamera.setSkipCloning(false);
 
 	ptzPanOffset = 90;
 	ptzTiltOffset = 0;
 
 	// Limit the maximum number of tasks for shared thread pools.
-	queue.setMaximumTasks(10);
+	queue.setMaximumTasks(1);
 	// Register to receive task queue events.
 	queue.registerTaskProgressEvents(this);
 
@@ -113,6 +114,7 @@ void ofApp::setup() {
 
 	ofEnableAlphaBlending();
 #endif // USE_VIDEO_RECORDER
+	Alignment::alreadyChanged = false;
 }
 
 //--------------------------------------------------------------
@@ -207,6 +209,7 @@ void ofApp::draw() {
 		ldPassImage.setFromPixels(ldPixels);
 		hdImage.setFromPixels(hdVideoGrabber.getPixels());
 		combinedImage.setFromPixels(combinedCamera.combine(ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, 432*2, 224*2));
+		Alignment::alreadyChanged = true;
 		combinedImage.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
 	}
 
@@ -215,6 +218,7 @@ void ofApp::draw() {
 
 	ofDrawBitmapStringHighlight("PAN ANGLE: " + ofToString(PTZControl::GetPanning()), 10, 230);
 	ofDrawBitmapStringHighlight("TILT ANGLE: " + ofToString(PTZControl::GetTilting()), 10, 250);
+	ofDrawBitmapStringHighlight("ALIGNING: " + ofToString(Alignment::alreadyChanged), 10, 270);
 	ofDrawBitmapStringHighlight("Click 'p' to open PTZ camera control settings", 10, 270);
 }
 
@@ -252,7 +256,12 @@ void ofApp::keyPressed(int key) {
 		stop_record();
 		break;
 #endif // USE_VIDEO_RECORDER
-
+	case 'j':
+		Alignment::alreadyChanged = false;
+		break;
+//	case 'h':
+//		Alignment::alreadyChanged = true;
+//		break;
 	default:
 		break;
 	}
@@ -325,6 +334,7 @@ void ofApp::mousePressed(int x, int y, int button) {
 		followingMode = false;// true;
 		_easyCam.enableMouseMiddleButton();
 		_easyCam.enableMouseInput();
+		Alignment::alreadyChanged = false;
 	}
 }
 
@@ -484,6 +494,26 @@ void ofApp::restart()
 
 	tiltAngle = 0;
 	panAngle = 0;
+
+	panSend = -(panAngle + ptzPanOffset);
+	if (panSend > 180)
+	{
+		panSend -= 360;
+	}
+	else if (panSend < -180)
+	{
+		panSend += 360;
+	}
+	tiltSend = -(tiltAngle + ptzTiltOffset);
+	if (tiltSend > 180)
+	{
+		tiltSend -= 360;
+	}
+	else if (tiltSend < -180)
+	{
+		tiltSend += 360;
+	}
+	queue.start(new PTZMotorControl("UPDATE PT", panSend, tiltSend));
 }
 
 #ifdef USE_VIDEO_RECORDER

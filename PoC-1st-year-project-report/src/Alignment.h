@@ -15,13 +15,16 @@ class Alignment
 public:
 	Alignment();
 	Alignment(int minHessian);
-	Mat align(Mat refImage, Mat inputImage, int x, int y, int mask_width, int mask_height);
+	static Mat align(Mat refImage, Mat inputImage, int x, int y, int mask_width, int mask_height);
+	static bool alreadyChanged;
 	~Alignment();
 
 private:
-	Ptr<SURF> detector;
-	double comparisonThreshold;
+	static Ptr<SURF> detector;
+	static float comparisonThreshold;
 	vector<Point2f> pts, pts2;
-	Mat hBig;
+	static Mat hBig;
+	static bool alreadyCreated;
+	static int minHessian;
 };
 
