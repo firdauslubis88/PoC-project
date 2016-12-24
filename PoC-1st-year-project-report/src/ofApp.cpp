@@ -3,6 +3,9 @@
 
 #include "ofApp.h"
 
+int ofApp::panAngle = 0;
+int ofApp::tiltAngle = 0;
+
 //--------------------------------------------------------------
 void ofApp::setup() {
 //	ofSetVerticalSync(false);
@@ -69,13 +72,10 @@ void ofApp::setup() {
 		combinedToggle.setup("Combined Camera", false);
 		combinedToggle.addListener(this, &ofApp::onToggle);
 		ldPixels.allocate(VIDEO_WIDTH, VIDEO_HEIGHT, OF_IMAGE_COLOR);
-		ldPassImage.allocate(VIDEO_WIDTH, VIDEO_HEIGHT, OF_IMAGE_COLOR);
-		tempCombinedCameraPixels.allocate(VIDEO_WIDTH, VIDEO_HEIGHT, OF_IMAGE_COLOR);
 		_panel.add(&combinedToggle);
 		combinedCameraQueue.setMaximumTasks(1);
 		combinedCameraQueue.registerTaskProgressEvents(this);
 		combinedCamera = CombinedCamera(VIDEO_WIDTH, VIDEO_HEIGHT);
-		combinedCameraExist = false;
 	}
 	else
 	{
@@ -122,6 +122,10 @@ void ofApp::setup() {
 	ofEnableAlphaBlending();
 #endif // USE_VIDEO_RECORDER
 	Alignment::alreadyChanged = false;
+#ifdef USE_PTZ_ADJUSTMENT
+	Alignment::ptzAlreadyChanged = false;
+	combinedCameraFinished = true;
+#endif
 }
 
 //--------------------------------------------------------------
@@ -129,7 +133,7 @@ void ofApp::setup() {
 #ifdef USE_VIDEO_RECORDER
 	 vidRecorder.close();
 #endif // USE_VIDEO_RECORDER
- }
+}
 
 //--------------------------------------------------------------
  void ofApp::update() {
@@ -157,7 +161,12 @@ void ofApp::setup() {
 		 hdVideoGrabber.update();
 	 }
 
+#ifdef USE_PTZ_ADJUSTMENT
+	 panAngle += Alignment::xReturn;
+	 tiltAngle += Alignment::yReturn;
+#endif // USE_PTZ_ADJUSTMENT
 	 panSend = -(panAngle + ptzPanOffset);
+	 tiltSend = -(tiltAngle + ptzTiltOffset);
 	 if (panSend > 180)
 	 {
 		 panSend -= 360;
@@ -166,7 +175,6 @@ void ofApp::setup() {
 	 {
 		 panSend += 360;
 	 }
-	 tiltSend = -(tiltAngle + ptzTiltOffset);
 	 if (tiltSend > 180)
 	 {
 		 tiltSend -= 360;
@@ -175,10 +183,17 @@ void ofApp::setup() {
 	 {
 		 tiltSend += 360;
 	 }
+	 //We use this only because we need to move the PTZ in mouse dragging and key pressed event when cameraselected=="PTZ Camera"... please dont add other stuffs related to ptz PT control queue anymore here in update function T T
 	 if (cameraSelected == "PTZ Camera")
 	 {
 		 queue.start(new PTZMotorControl("UPDATE PT", panSend, tiltSend));
 	 }
+#ifdef USE_PTZ_ADJUSTMENT
+	 if (!combinedCameraFinished && !Alignment::ptzAlreadyChanged)
+	 {
+		 queue.start(new PTZMotorControl("UPDATE PT", panSend, tiltSend));
+	 }
+#endif
 //	 cout << "Tilt sent:\t" << tiltSend << endl;
 //	 tiltSend = 0;
  }
@@ -202,6 +217,11 @@ void ofApp::draw() {
 		hdVideoGrabber.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
 		hdFbo.end();
 	}
+	if (isldCameraConnected && isHdCameraConnected)
+	{
+		ldFbo.readToPixels(ldPixels);
+		hdImage.setFromPixels(hdVideoGrabber.getPixels());
+	}
 	if (cameraSelected == "360 Camera")
 	{
 		ldFbo.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
@@ -212,21 +232,9 @@ void ofApp::draw() {
 	}
 	else if (cameraSelected == "Combined Camera")
 	{
-		ldFbo.readToPixels(ldPixels);
-		ldPassImage.setFromPixels(ldPixels);
-		hdImage.setFromPixels(hdVideoGrabber.getPixels());
 //		combinedCameraExist = true;
-		combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, 432 * 2, 224 * 2, tempCombinedCameraPixels));
-		if (combinedCameraExist)
-		{
-//			combinedImage.setFromPixels(CombinedCamera::combine(ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, 432*2, 224*2));
-			combinedImage.setFromPixels(tempCombinedCameraPixels);
-			combinedImage.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
-		}
-		else
-		{
-			ldFbo.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
-		}
+		combinedImage.setFromPixels(CombinedCamera::combine_direct(ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, 432 * 2, 224 * 2));
+		combinedImage.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
 	}
 
 	ofDisableDepthTest();
@@ -243,19 +251,15 @@ void ofApp::keyPressed(int key) {
 	{
 	case 'w':
 		tiltAngle--;
-		followingMode = false;
 		break;
 	case 's':
 		tiltAngle++;
-		followingMode = false;
 		break;
 	case 'a':
 		panAngle++;
-		followingMode = false;
 		break;
 	case 'd':
 		panAngle--;
-		followingMode = false;
 		break;
 	case 'p':
 		onProperty();
@@ -273,6 +277,7 @@ void ofApp::keyPressed(int key) {
 #endif // USE_VIDEO_RECORDER
 	case 'j':
 		Alignment::alreadyChanged = false;
+		combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, 432 * 2, 224 * 2));
 		break;
 //	case 'h':
 //		Alignment::alreadyChanged = true;
@@ -346,10 +351,8 @@ void ofApp::mousePressed(int x, int y, int button) {
 	}
 	if (cameraSelected == "360 Camera")
 	{
-		followingMode = false;// true;
 		_easyCam.enableMouseMiddleButton();
 		_easyCam.enableMouseInput();
-		Alignment::alreadyChanged = false;
 	}
 }
 
@@ -405,6 +408,14 @@ void ofApp::onToggle(const void * sender)
 		queue.start(new PTZMotorControl("UPDATE PT", panSend, tiltSend));
 //		hdVideoGrabber.SetPanning(panSend);
 //		hdVideoGrabber.SetTilting(tiltSend);
+	}
+	if (cameraSelected == "Combined Camera")
+	{
+#ifdef USE_PTZ_ADJUSTMENT
+		Alignment::ptzAlreadyChanged = false;
+#endif
+		Alignment::alreadyChanged = false;
+		combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, 432 * 2, 224 * 2));
 	}
 }
 
@@ -475,6 +486,13 @@ void ofApp::onTaskQueued(const ofx::TaskQueueEventArgs & args)
 
 void ofApp::onTaskStarted(const ofx::TaskQueueEventArgs & args)
 {
+	taskProgress[args.getTaskId()].update(args);
+//	cout << args.getTaskName() << endl;
+	if (args.getTaskName() == "Combined Camera")
+	{
+//		cout << "START" << endl;
+		combinedCameraFinished = false;
+	}
 }
 
 void ofApp::onTaskCancelled(const ofx::TaskQueueEventArgs & args)
@@ -486,7 +504,7 @@ void ofApp::onTaskFinished(const ofx::TaskQueueEventArgs & args)
 	taskProgress[args.getTaskId()].update(args);
 	if (args.getTaskName() == "Combined Camera")
 	{
-		combinedCameraExist = true;
+		combinedCameraFinished = true;
 	}
 }
 

@@ -10,13 +10,19 @@
 using namespace cv;
 using namespace cv::xfeatures2d;
 
+#define USE_PTZ_ADJUSTMENT
+
 class Alignment
 {
 public:
 	Alignment();
 	Alignment(int minHessian);
-	static Mat align(Mat refImage, Mat inputImage, int x, int y, int mask_width, int mask_height);
+	static void ptzAlign(const Mat refImage, const Mat inputImage, const int x, const int y, const int mask_width, const int mask_height);
+	static void align(Mat refImage, Mat inputImage, int x, int y, int mask_width, int mask_height);
+	static Mat align_direct(Mat refImage, Mat inputImage, int x, int y, int mask_width, int mask_height);
+	static bool ptzAlreadyChanged;
 	static bool alreadyChanged;
+	static int xReturn, yReturn;
 	~Alignment();
 
 private:

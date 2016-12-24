@@ -5,7 +5,7 @@
 class CombinedCameraTask : public Poco::Task
 {
 public:
-	CombinedCameraTask(const std::string& name, ofPixels ldPixels, ofImage hdImage, int image_width, int image_height, int x, int y, int width, int height, ofPixels& outputPixels);
+	CombinedCameraTask(const std::string& name, ofPixels ldPixels, ofImage hdImage, int image_width, int image_height, int x, int y, int width, int height);
 	~CombinedCameraTask();
 	void runTask();
 
@@ -18,6 +18,5 @@ private:
 	int privateY;
 	int privateWidth;
 	int privateHeight;
-	ofPixels* privateOutputPixels;
 };
 

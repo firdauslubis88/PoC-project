@@ -1,6 +1,6 @@
 #include "CombinedCamera.h"
 
-ofxCvColorImage CombinedCamera::ldCvImage, CombinedCamera::hdCvImage, CombinedCamera::combinedCvImage;
+ofxCvColorImage CombinedCamera::ldCvImage, CombinedCamera::hdCvImage, CombinedCamera::combinedCvImage, CombinedCamera::ldCvImage2, CombinedCamera::hdCvImage2, CombinedCamera::combinedCvImage2;
 bool CombinedCamera::skipCloning = false, CombinedCamera::skipAligning = false, CombinedCamera::alreadyInitialized = false;
 
 
@@ -11,6 +11,9 @@ CombinedCamera::CombinedCamera(int image_width,int image_height)
 		ldCvImage.allocate(image_width, image_height);
 		hdCvImage.allocate(image_width, image_height);
 		combinedCvImage.allocate(image_width, image_height);
+		ldCvImage2.allocate(image_width, image_height);
+		hdCvImage2.allocate(image_width, image_height);
+		combinedCvImage2.allocate(image_width, image_height);
 		CombinedCamera::alreadyInitialized = true;
 	}
 }
@@ -87,6 +90,63 @@ void CombinedCamera::seamlessClone(InputArray _src, InputArray _dst, InputArray 
 
 }
 */
+ofPixels CombinedCamera::combine_direct(ofPixels ldPixel, ofImage hdImage, int image_width, int image_height, int x, int y, int width, int height)
+{
+	if (!CombinedCamera::alreadyInitialized)
+	{
+		ldCvImage.allocate(image_width, image_height);
+		hdCvImage.allocate(image_width, image_height);
+		combinedCvImage.allocate(image_width, image_height);
+		ldCvImage2.allocate(image_width, image_height);
+		hdCvImage2.allocate(image_width, image_height);
+		combinedCvImage2.allocate(image_width, image_height);
+		CombinedCamera::alreadyInitialized = true;
+	}
+	ofImage ldImage;
+
+	ldImage.setFromPixels(ldPixel);
+	ldImage.setImageType(OF_IMAGE_COLOR);
+
+	ldCvImage2.setFromPixels(ldImage.getPixels());
+	hdCvImage2.setFromPixels(hdImage.getPixels());
+
+	//Preparing (transfering) ofImage data type into ofxOpenCV image data type
+	Mat tempMatHdCvImage = cvarrToMat(hdCvImage2.getCvImage());
+	Mat tempMatLdCvImage = cvarrToMat(ldCvImage2.getCvImage());
+	Mat source, target;
+	Point cloneCenter;
+	target = tempMatLdCvImage;
+
+	//Aligning the images
+	Mat aligned = Alignment::align_direct(tempMatLdCvImage, tempMatHdCvImage, x, y, width, height);
+	aligned.copyTo(source);
+
+	if (skipCloning)
+	{
+		source(Rect(x, y, width, height)).copyTo(target(Rect(x, y, width, height)));
+		IplImage temp = target;
+		IplImage* pTemp = &temp;
+		combinedCvImage2 = pTemp;
+	}
+	else
+	{
+		//Stitching/blending the images
+		Mat clone_mask, clone;
+		clone_mask = Mat(tempMatLdCvImage.rows, tempMatLdCvImage.cols, CV_8UC1);
+		clone_mask.setTo(Scalar(0));
+		Rect clone_mask_ROI = Rect(x, y, width, height);
+		clone_mask(clone_mask_ROI).setTo(Scalar(255));
+		cloneCenter = Point(x + width / 2, y + height / 2);
+		//		seamlessClone(source, target, clone_mask, cloneCenter, clone, 1);
+		Cloning::MVCSeamlessClone(source(Rect(x, y, width, height)), target, clone_mask, cloneCenter, clone);
+		IplImage temp = clone;
+		IplImage* pTemp = &temp;
+		combinedCvImage2 = pTemp;
+	}
+
+	return combinedCvImage2.getPixels();
+}
+/*
 ofPixels CombinedCamera::combine(ofPixels ldPixel, ofImage hdImage, int image_width, int image_height, int x, int y, int width, int height)
 {
 	if (!CombinedCamera::alreadyInitialized)
@@ -94,6 +154,9 @@ ofPixels CombinedCamera::combine(ofPixels ldPixel, ofImage hdImage, int image_wi
 		ldCvImage.allocate(image_width, image_height);
 		hdCvImage.allocate(image_width, image_height);
 		combinedCvImage.allocate(image_width, image_height);
+		ldCvImage2.allocate(image_width, image_height);
+		hdCvImage2.allocate(image_width, image_height);
+		combinedCvImage2.allocate(image_width, image_height);
 		CombinedCamera::alreadyInitialized = true;
 	}
 	ofImage ldImage;
@@ -148,16 +211,20 @@ ofPixels CombinedCamera::combine(ofPixels ldPixel, ofImage hdImage, int image_wi
 
 	return combinedCvImage.getPixels();
 }
-
-void CombinedCamera::combine(ofPixels ldPixel, ofImage hdImage, int image_width, int image_height, int x, int y, int width, int height, ofPixels* outputPixels)
+*/
+void CombinedCamera::combine_align(ofPixels ldPixel, ofImage hdImage, int image_width, int image_height, int x, int y, int width, int height)
 {
 	if (!CombinedCamera::alreadyInitialized)
 	{
 		ldCvImage.allocate(image_width, image_height);
 		hdCvImage.allocate(image_width, image_height);
 		combinedCvImage.allocate(image_width, image_height);
+		ldCvImage2.allocate(image_width, image_height);
+		hdCvImage2.allocate(image_width, image_height);
+		combinedCvImage2.allocate(image_width, image_height);
 		CombinedCamera::alreadyInitialized = true;
 	}
+
 	ofImage ldImage;
 
 	ldImage.setFromPixels(ldPixel);
@@ -173,17 +240,9 @@ void CombinedCamera::combine(ofPixels ldPixel, ofImage hdImage, int image_width,
 	Point cloneCenter;
 	target = tempMatLdCvImage;
 
-	if (skipAligning)
-	{
-		tempMatHdCvImage.copyTo(source);
-	}
-	else
-	{
-		//Aligning the images
-		Mat aligned = Alignment::align(tempMatLdCvImage, tempMatHdCvImage, x, y, width, height);
-		aligned.copyTo(source);
-	}
+	Alignment::align(tempMatLdCvImage, tempMatHdCvImage, x, y, width, height);
 
+	/*
 	if (skipCloning)
 	{
 		source(Rect(x,y,width,height)).copyTo(target(Rect(x, y, width, height)));
@@ -208,6 +267,7 @@ void CombinedCamera::combine(ofPixels ldPixel, ofImage hdImage, int image_width,
 	}
 
 	*outputPixels = combinedCvImage.getPixels();
+	*/
 }
 
 void CombinedCamera::setSkipCloning(bool value)

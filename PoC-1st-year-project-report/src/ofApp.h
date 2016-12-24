@@ -67,7 +67,7 @@ public:
 	ofFbo hdFbo;
 	ofVboMesh sphereVboMesh;
 	ofEasyCam _easyCam;
-	ofImage ldImage, hdImage, combinedImage, ldPassImage;
+	ofImage ldImage, hdImage, combinedImage;
 	vector<ofVideoDevice> listVideoDevice;
 	ofShader _shader;
 	ofVideoGrabber ldVideoGrabber;
@@ -91,15 +91,12 @@ public:
 	string cameraSelected;
 
 	CombinedCamera combinedCamera;
-	ofPixels tempCombinedCameraPixels;
 	ofPixels ldPixels;
 
-	int panAngle = 0, tiltAngle = 0, prevPanAngle = 0, prevTiltAngle = 0;
+	static int panAngle, tiltAngle;
 	int prevXDrag;
 	int prevYDrag;
 	int ptzPanOffset = 0, ptzTiltOffset = 0;
-	bool followingMode = false;
-	bool singularMode = false;
 
 	ofx::TaskQueue queue, combinedCameraQueue;
 	typedef std::map<std::string, SimpleTaskProgress> TaskProgress;
@@ -116,5 +113,5 @@ public:
 #endif // USE_VIDEO_RECORDER
 
 	int panSend, tiltSend;
-	bool combinedCameraExist;
+	bool combinedCameraFinished;
 };
