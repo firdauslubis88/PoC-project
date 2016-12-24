@@ -4,17 +4,17 @@ bool Alignment::alreadyCreated = false;
 bool Alignment::alreadyChanged = false;
 Ptr<SURF> Alignment::detector = Ptr<SURF>();
 int Alignment::minHessian = 400;
-float Alignment::comparisonThreshold = 0.6;
+float Alignment::comparisonThreshold = 0.7;
 Mat Alignment::hBig = Mat();
 
 Alignment::Alignment()
 {
-	comparisonThreshold = 0.6;
+	comparisonThreshold = 0.7;
 }
 
 Alignment::Alignment(int minHessian)
 {
-	comparisonThreshold = 0.6;
+	comparisonThreshold = 0.7;
 }
 
 Mat Alignment::align(Mat refImage, Mat inputImage, int x, int y, int mask_width, int mask_height)
@@ -28,6 +28,7 @@ Mat Alignment::align(Mat refImage, Mat inputImage, int x, int y, int mask_width,
 			alreadyCreated = true;
 		}
 
+		cout << "TRYING!" << endl;
 		std::vector<KeyPoint> keypoints_ref, keypoints_input;
 		Mat descriptors_ref, descriptors_input;
 		Rect ROIRef = Rect(x, y, mask_width, mask_height);
@@ -81,6 +82,8 @@ Mat Alignment::align(Mat refImage, Mat inputImage, int x, int y, int mask_width,
 			if (!h.empty())
 			{
 				h.copyTo(Alignment::hBig);
+				Alignment::alreadyChanged = true;
+				cout << "DONE!" << endl;
 			}
 		}
 	}

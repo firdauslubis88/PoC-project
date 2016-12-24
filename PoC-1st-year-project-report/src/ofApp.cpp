@@ -85,7 +85,7 @@ void ofApp::setup() {
 	_easyCam.setAutoDistance(false);
 	_easyCam.setDistance(0);
 	_easyCam.rotate(-90, 0, 0, 1);
-	_easyCam.setFov(40.0);
+//	_easyCam.setFov(40.0);
 
 	combinedCamera.setSkipAligning(false);
 	combinedCamera.setSkipCloning(false);
@@ -222,7 +222,6 @@ void ofApp::draw() {
 //			combinedImage.setFromPixels(CombinedCamera::combine(ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, 432*2, 224*2));
 			combinedImage.setFromPixels(tempCombinedCameraPixels);
 			combinedImage.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
-			Alignment::alreadyChanged = true;
 		}
 		else
 		{
@@ -365,9 +364,11 @@ void ofApp::mouseReleased(int x, int y, int button) {
 
 void ofApp::mouseScrolled(int x, int y, float scrollX, float scrollY)
 {
-	if (cameraSelected == "Combined Camera")
+	if (cameraSelected == "PTZ Camera")
 	{
-		combinedCameraExist = true;
+		long currentValue = hdVideoGrabber.GetZooming();
+		long nextZoom = scrollY * 10 + currentValue;
+		hdVideoGrabber.SetZooming(nextZoom);
 	}
 }
 //--------------------------------------------------------------
