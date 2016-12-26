@@ -40,7 +40,7 @@ void Cloning::MVCSeamlessClone(Mat source, Mat target, Mat mask, Point center, M
 			mvc_indicator++;
 		}
 
-		for (size_t indicator = 0; indicator <= num_MVC_dim; indicator += 40)
+		for (size_t indicator = 0; indicator <= num_MVC_dim; indicator += 20)
 		{
 			Cloning::vPart_MVC.push_back(indicator);
 		}

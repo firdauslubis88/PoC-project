@@ -11,8 +11,8 @@ void ofApp::setup() {
 //	ofSetVerticalSync(false);
 	ofDisableArbTex();
 
-	VIDEO_WIDTH = 2560;
-	VIDEO_HEIGHT = 1280;
+//	VIDEO_WIDTH = 2560;
+//	VIDEO_HEIGHT = 1280;
 
 	listVideoDevice = ldVideoGrabber.listDevices();
 	isldCameraConnected = false;
@@ -41,13 +41,13 @@ void ofApp::setup() {
 			sphereVboMesh.setNormal(i, sphereVboMesh.getNormal(i) * ofVec3f(-1));
 		}
 		ldToggle.setup("360 Camera", false);
-		offsetParameter.set("uvOffset", ofVec4f(0, 0.0, 0, 0.0), ofVec4f(-0.1), ofVec4f(0.1));
-		radiusParameter.set("radius", 0.445, 0.0, 1.0);
-		ldParameterGroup.add(offsetParameter);
-		ldParameterGroup.add(radiusParameter);
+//		offsetParameter.set("uvOffset", ofVec4f(0, 0.0, 0, 0.0), ofVec4f(-0.1), ofVec4f(0.1));
+//		radiusParameter.set("radius", 0.445, 0.0, 1.0);
+//		ldParameterGroup.add(offsetParameter);
+//		ldParameterGroup.add(radiusParameter);
 		ldToggle.setup("360 Camera", false);
 		ldToggle.addListener(this, &ofApp::onToggle);
-		_panel.setup(ldParameterGroup);
+//		_panel.setup(ldParameterGroup);
 		_panel.add(&ldToggle);
 	}
 	else
@@ -88,7 +88,7 @@ void ofApp::setup() {
 //	_easyCam.setFov(40.0);
 
 	combinedCamera.setSkipAligning(false);
-	combinedCamera.setSkipCloning(false);
+	combinedCamera.setSkipCloning(true);
 
 	ptzPanOffset = 90;
 	ptzTiltOffset = 0;
@@ -124,8 +124,10 @@ void ofApp::setup() {
 	Alignment::alreadyChanged = false;
 #ifdef USE_PTZ_ADJUSTMENT
 	Alignment::ptzAlreadyChanged = false;
-	combinedCameraFinished = true;
 #endif
+	combinedCameraFinished = true;
+	showROI = true;
+	combinedMode = true;
 }
 
 //--------------------------------------------------------------
@@ -225,24 +227,46 @@ void ofApp::draw() {
 	if (cameraSelected == "360 Camera")
 	{
 		ldFbo.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
+		if (showROI)
+		{
+			ofSetColor(0, 255, 0);
+			ofNoFill();
+			ofRect(1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, 432 * 2, 224 * 2);
+			ofSetColor(255, 255, 255);
+		}
+		ofDrawBitmapStringHighlight("Click 'h' to toggle the ROI green area", 10, 100);
 	}
 	else if (cameraSelected == "PTZ Camera")
 	{
 		hdFbo.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
+		ofDrawBitmapStringHighlight("Click 'p' to open PTZ camera control settings", 10, 170);
 	}
 	else if (cameraSelected == "Combined Camera")
 	{
-//		combinedCameraExist = true;
-		combinedImage.setFromPixels(CombinedCamera::combine_direct(ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, 432 * 2, 224 * 2));
-		combinedImage.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
+		if (combinedMode)
+		{
+			combinedImage.setFromPixels(CombinedCamera::combine_direct(ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, 432 * 2, 224 * 2));
+			combinedImage.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
+		}
+		else
+		{
+			ldFbo.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
+			ofSetColor(0, 255, 0);
+			ofNoFill();
+			ofRect(1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, 432 * 2, 224 * 2);
+			ofSetColor(255, 255, 255);
+		}
+
+		ofDrawBitmapStringHighlight("Click 'j' to realign the camera", 10, 190);
+		if (combinedCameraFinished)ofDrawBitmapStringHighlight("DONE ALIGNING", 10, 210);
+		else ofDrawBitmapStringHighlight("ALIGNING...", VIDEO_WIDTH/2 - 40, VIDEO_HEIGHT / 2 - 40);
 	}
 
 	ofDisableDepthTest();
 	_panel.draw();
 
-	ofDrawBitmapStringHighlight("PAN ANGLE: " + ofToString(PTZControl::GetPanning()), 10, 230);
-	ofDrawBitmapStringHighlight("TILT ANGLE: " + ofToString(PTZControl::GetTilting()), 10, 250);
-	ofDrawBitmapStringHighlight("Click 'p' to open PTZ camera control settings", 10, 270);
+//	ofDrawBitmapStringHighlight("PAN ANGLE: " + ofToString(PTZControl::GetPanning()), 10, 130);
+//	ofDrawBitmapStringHighlight("TILT ANGLE: " + ofToString(PTZControl::GetTilting()), 10, 150);
 }
 
 //--------------------------------------------------------------
@@ -279,9 +303,9 @@ void ofApp::keyPressed(int key) {
 		Alignment::alreadyChanged = false;
 		combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, 432 * 2, 224 * 2));
 		break;
-//	case 'h':
-//		Alignment::alreadyChanged = true;
-//		break;
+	case 'h':
+		showROI = !showROI;
+		break;
 	default:
 		break;
 	}
@@ -322,9 +346,8 @@ void ofApp::mouseDragged(int x, int y, int button) {
 			panAngle++;
 		}
 	}
-	else if (cameraSelected == "360 Camera")
+	else if (cameraSelected == "360 Camera" || cameraSelected == "Combined Camera")
 	{
-		int currentPan = 0;
 		float ricohY = getPTZEuler().x;
 		float ricohX = getPTZEuler().y;
 		float ricohZ = getPTZEuler().z;
@@ -349,10 +372,14 @@ void ofApp::mousePressed(int x, int y, int button) {
 		_easyCam.disableMouseMiddleButton();
 		_easyCam.disableMouseInput();
 	}
-	if (cameraSelected == "360 Camera")
+	else if (cameraSelected == "360 Camera")
 	{
 		_easyCam.enableMouseMiddleButton();
 		_easyCam.enableMouseInput();
+	}
+	else if (cameraSelected == "Combined Camera")
+	{
+		combinedMode = false;
 	}
 }
 
@@ -362,6 +389,11 @@ void ofApp::mouseReleased(int x, int y, int button) {
 	{
 		prevXDrag = -1;
 		prevYDrag = -1;
+	}
+	if (cameraSelected == "Combined Camera")
+	{
+		combinedMode = true;
+		queue.start(new PTZMotorControl("UPDATE PT THEN COMBINE", panSend, tiltSend));
 	}
 }
 
@@ -403,19 +435,16 @@ void ofApp::onToggle(const void * sender)
 {
 	ofxButton * p = (ofxButton *)sender;
 	cameraSelected = p->getName();
-	if (cameraSelected == "PTZ Camera" || cameraSelected == "Combined Camera")
+	if (cameraSelected == "PTZ Camera")
 	{
 		queue.start(new PTZMotorControl("UPDATE PT", panSend, tiltSend));
-//		hdVideoGrabber.SetPanning(panSend);
-//		hdVideoGrabber.SetTilting(tiltSend);
 	}
 	if (cameraSelected == "Combined Camera")
 	{
 #ifdef USE_PTZ_ADJUSTMENT
 		Alignment::ptzAlreadyChanged = false;
 #endif
-		Alignment::alreadyChanged = false;
-		combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, 432 * 2, 224 * 2));
+		queue.start(new PTZMotorControl("UPDATE PT THEN COMBINE", panSend, tiltSend));
 	}
 }
 
@@ -505,6 +534,12 @@ void ofApp::onTaskFinished(const ofx::TaskQueueEventArgs & args)
 	if (args.getTaskName() == "Combined Camera")
 	{
 		combinedCameraFinished = true;
+	}
+	else if (args.getTaskName() == "UPDATE PT THEN COMBINE")
+	{
+		ofSleepMillis(1000);
+		Alignment::alreadyChanged = false;
+		combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, 432 * 2, 224 * 2));
 	}
 }
 

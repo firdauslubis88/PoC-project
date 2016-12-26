@@ -80,14 +80,14 @@ public:
 	ofSpherePrimitive sphere;
 
 	ofxPanel _panel;
-	ofParameter<ofVec4f> offsetParameter;
-	ofParameter<float> radiusParameter;
-	ofParameterGroup ldParameterGroup;
+//	ofParameter<ofVec4f> offsetParameter;
+//	ofParameter<float> radiusParameter;
+//	ofParameterGroup ldParameterGroup;
 	ofxButton ldToggle;
 	ofxButton hdToggle;
 	ofxButton combinedToggle;
 
-	int VIDEO_WIDTH = 2560, VIDEO_HEIGHT = 1280;
+	int VIDEO_WIDTH = 2560, VIDEO_HEIGHT = 1440;
 	string cameraSelected;
 
 	CombinedCamera combinedCamera;
@@ -114,4 +114,6 @@ public:
 
 	int panSend, tiltSend;
 	bool combinedCameraFinished;
+	bool showROI;
+	bool combinedMode;
 };

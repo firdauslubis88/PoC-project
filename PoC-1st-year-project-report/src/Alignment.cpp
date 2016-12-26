@@ -106,8 +106,7 @@ void Alignment::ptzAlign(const Mat refImage, const Mat inputImage, const int x, 
 				{
 					localYReturn = -1;
 				}
-//				cout << abs(inputMean.x - refMean.x) << endl;
-//				cout << abs(inputMean.y - refMean.y) << endl;
+
 				if (!doneX)
 				{
 					if ((abs(inputMean.x - refMean.x) < 200))
@@ -157,15 +156,14 @@ void Alignment::align(Mat refImage, Mat inputImage, int x, int y, int mask_width
 			Alignment::detector = SURF::create(Alignment::minHessian);
 			alreadyCreated = true;
 		}
-		cout << "ALIGNING AGAIN" << endl;
 #ifdef USE_PTZ_ADJUSTMENT
+		//		cout << "ALIGNING AGAIN" << endl;
 		if (!Alignment::ptzAlreadyChanged)
 		{
 			Alignment::ptzAlign(refImage, inputImage, x, y, mask_width, mask_height);
 		}
 #endif // USE_PTZ_ADJUSTMENT
-
-//		cout << "TRYING!" << endl;
+		//		cout << "TRYING!" << endl;
 		std::vector<KeyPoint> keypoints_ref, keypoints_input;
 		Mat descriptors_ref, descriptors_input;
 		Rect ROIRef = Rect(x, y, mask_width, mask_height);
@@ -209,7 +207,7 @@ void Alignment::align(Mat refImage, Mat inputImage, int x, int y, int mask_width
 		ptsROI2 = ptsTemp2;
 
 		Mat h;
-		cout << ptsROI.size() << endl;
+//		cout << ptsROI.size() << endl;
 		if (ptsROI.size() >= 3)
 		{
 			vector<Mat> ptsxy(2), pts2xy(2);

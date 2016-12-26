@@ -10,7 +10,7 @@
 using namespace cv;
 using namespace cv::xfeatures2d;
 
-#define USE_PTZ_ADJUSTMENT
+//#define USE_PTZ_ADJUSTMENT
 
 class Alignment
 {

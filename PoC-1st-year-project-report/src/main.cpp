@@ -8,8 +8,8 @@ int main( ){
 	ofGLFWWindowSettings settings;
 	settings.setGLVersion(4, 1);
 	settings.width = 2560;
-	settings.height = 1280;
-	settings.setPosition(ofVec2f(50, 50));
+	settings.height = 1440;
+	settings.setPosition(ofVec2f(0, 0));
 	shared_ptr<ofAppBaseWindow> dualCameraWindow = ofCreateWindow(settings);
 	HWND hWnd = dualCameraWindow->getWin32Window();
 	//This will disable windows resizing and maximizing:
