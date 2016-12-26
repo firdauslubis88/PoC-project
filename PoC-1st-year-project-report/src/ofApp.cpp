@@ -88,7 +88,7 @@ void ofApp::setup() {
 //	_easyCam.setFov(40.0);
 
 	combinedCamera.setSkipAligning(false);
-	combinedCamera.setSkipCloning(true);
+	combinedCamera.setSkipCloning(false);
 
 	ptzPanOffset = 90;
 	ptzTiltOffset = 0;
@@ -128,6 +128,8 @@ void ofApp::setup() {
 	combinedCameraFinished = true;
 	showROI = true;
 	combinedMode = true;
+	maskWidth = 432 * 1.5;
+	maskHeight = 224 * 1.5;
 }
 
 //--------------------------------------------------------------
@@ -135,6 +137,8 @@ void ofApp::setup() {
 #ifdef USE_VIDEO_RECORDER
 	 vidRecorder.close();
 #endif // USE_VIDEO_RECORDER
+	 queue.cancelAll();
+	 combinedCameraQueue.cancelAll();
 }
 
 //--------------------------------------------------------------
@@ -231,7 +235,7 @@ void ofApp::draw() {
 		{
 			ofSetColor(0, 255, 0);
 			ofNoFill();
-			ofRect(1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, 432 * 2, 224 * 2);
+			ofRect(1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight);
 			ofSetColor(255, 255, 255);
 		}
 		ofDrawBitmapStringHighlight("Click 'h' to toggle the ROI green area", 10, 100);
@@ -245,7 +249,7 @@ void ofApp::draw() {
 	{
 		if (combinedMode)
 		{
-			combinedImage.setFromPixels(CombinedCamera::combine_direct(ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, 432 * 2, 224 * 2));
+			combinedImage.setFromPixels(CombinedCamera::combine_direct(ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight));
 			combinedImage.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
 		}
 		else
@@ -253,7 +257,7 @@ void ofApp::draw() {
 			ldFbo.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
 			ofSetColor(0, 255, 0);
 			ofNoFill();
-			ofRect(1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, 432 * 2, 224 * 2);
+			ofRect(1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight);
 			ofSetColor(255, 255, 255);
 		}
 
@@ -301,7 +305,7 @@ void ofApp::keyPressed(int key) {
 #endif // USE_VIDEO_RECORDER
 	case 'j':
 		Alignment::alreadyChanged = false;
-		combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, 432 * 2, 224 * 2));
+		combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight));
 		break;
 	case 'h':
 		showROI = !showROI;
@@ -539,7 +543,7 @@ void ofApp::onTaskFinished(const ofx::TaskQueueEventArgs & args)
 	{
 		ofSleepMillis(1000);
 		Alignment::alreadyChanged = false;
-		combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, 432 * 2, 224 * 2));
+		combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight));
 	}
 }
 

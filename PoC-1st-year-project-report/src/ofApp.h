@@ -87,7 +87,7 @@ public:
 	ofxButton hdToggle;
 	ofxButton combinedToggle;
 
-	int VIDEO_WIDTH = 2560, VIDEO_HEIGHT = 1440;
+	int VIDEO_WIDTH = ofGetWidth(), VIDEO_HEIGHT = ofGetHeight();
 	string cameraSelected;
 
 	CombinedCamera combinedCamera;
@@ -116,4 +116,5 @@ public:
 	bool combinedCameraFinished;
 	bool showROI;
 	bool combinedMode;
+	int maskWidth, maskHeight;
 };
