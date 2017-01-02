@@ -8,11 +8,8 @@ int ofApp::tiltAngle = 0;
 
 //--------------------------------------------------------------
 void ofApp::setup() {
-//	ofSetVerticalSync(false);
+	ofSetVerticalSync(false);
 	ofDisableArbTex();
-
-//	VIDEO_WIDTH = 2560;
-//	VIDEO_HEIGHT = 1280;
 
 	listVideoDevice = ldVideoGrabber.listDevices();
 	isldCameraConnected = false;
@@ -41,13 +38,7 @@ void ofApp::setup() {
 			sphereVboMesh.setNormal(i, sphereVboMesh.getNormal(i) * ofVec3f(-1));
 		}
 		ldToggle.setup("360 Camera", false);
-//		offsetParameter.set("uvOffset", ofVec4f(0, 0.0, 0, 0.0), ofVec4f(-0.1), ofVec4f(0.1));
-//		radiusParameter.set("radius", 0.445, 0.0, 1.0);
-//		ldParameterGroup.add(offsetParameter);
-//		ldParameterGroup.add(radiusParameter);
-		ldToggle.setup("360 Camera", false);
 		ldToggle.addListener(this, &ofApp::onToggle);
-//		_panel.setup(ldParameterGroup);
 		_panel.add(&ldToggle);
 	}
 	else
@@ -77,11 +68,10 @@ void ofApp::setup() {
 		combinedCameraQueue.registerTaskProgressEvents(this);
 		combinedCamera = CombinedCamera(VIDEO_WIDTH, VIDEO_HEIGHT);
 	}
-	else
+	if (!isldCameraConnected && !isHdCameraConnected)
 	{
-		return;
+		exit();
 	}
-
 	_easyCam.setAutoDistance(false);
 	_easyCam.setDistance(0);
 	_easyCam.rotate(-90, 0, 0, 1);
@@ -92,6 +82,14 @@ void ofApp::setup() {
 
 	ptzPanOffset = 90;
 	ptzTiltOffset = 0;
+
+	combinedCameraFinished = true;
+	showROI = true;
+	combinedMode = true;
+	maskXStart = (float)VIDEO_WIDTH / 3;
+	maskYStart = (float)VIDEO_HEIGHT / 3;
+	maskWidth = 432 * 2;
+	maskHeight = 224 * 2;
 
 	// Limit the maximum number of tasks for shared thread pools.
 	queue.setMaximumTasks(1);
@@ -121,15 +119,9 @@ void ofApp::setup() {
 
 	ofEnableAlphaBlending();
 #endif // USE_VIDEO_RECORDER
-	Alignment::alreadyChanged = false;
 #ifdef USE_PTZ_ADJUSTMENT
 	Alignment::ptzAlreadyChanged = false;
 #endif
-	combinedCameraFinished = true;
-	showROI = true;
-	combinedMode = true;
-	maskWidth = 432 * 1.5;
-	maskHeight = 224 * 1.5;
 }
 
 //--------------------------------------------------------------
@@ -165,43 +157,42 @@ void ofApp::setup() {
 	 if (isHdCameraConnected)
 	 {
 		 hdVideoGrabber.update();
-	 }
-
 #ifdef USE_PTZ_ADJUSTMENT
-	 panAngle += Alignment::xReturn;
-	 tiltAngle += Alignment::yReturn;
+		 panAngle += Alignment::xReturn;
+		 tiltAngle += Alignment::yReturn;
 #endif // USE_PTZ_ADJUSTMENT
-	 panSend = -(panAngle + ptzPanOffset);
-	 tiltSend = -(tiltAngle + ptzTiltOffset);
-	 if (panSend > 180)
-	 {
-		 panSend -= 360;
-	 }
-	 else if(panSend < -180)
-	 {
-		 panSend += 360;
-	 }
-	 if (tiltSend > 180)
-	 {
-		 tiltSend -= 360;
-	 }
-	 else if (tiltSend < -180)
-	 {
-		 tiltSend += 360;
-	 }
-	 //We use this only because we need to move the PTZ in mouse dragging and key pressed event when cameraselected=="PTZ Camera"... please dont add other stuffs related to ptz PT control queue anymore here in update function T T
-	 if (cameraSelected == "PTZ Camera")
-	 {
-		 queue.start(new PTZMotorControl("UPDATE PT", panSend, tiltSend));
-	 }
+		 panSend = -(panAngle + ptzPanOffset);
+		 tiltSend = -(tiltAngle + ptzTiltOffset);
+		 if (panSend > 180)
+		 {
+			 panSend -= 360;
+		 }
+		 else if (panSend < -180)
+		 {
+			 panSend += 360;
+		 }
+		 if (tiltSend > 180)
+		 {
+			 tiltSend -= 360;
+		 }
+		 else if (tiltSend < -180)
+		 {
+			 tiltSend += 360;
+		 }
+		 //We use this only because we need to move the PTZ in mouse dragging and key pressed event when cameraselected=="PTZ Camera"... please dont add other stuffs related to ptz PT control queue anymore here in update function T T
+		 if (cameraSelected == "PTZ Camera")
+		 {
+			 queue.start(new PTZMotorControl("UPDATE PT", panSend, tiltSend));
+		 }
 #ifdef USE_PTZ_ADJUSTMENT
-	 if (!combinedCameraFinished && !Alignment::ptzAlreadyChanged)
-	 {
-		 queue.start(new PTZMotorControl("UPDATE PT", panSend, tiltSend));
-	 }
+		 if (!combinedCameraFinished && !Alignment::ptzAlreadyChanged)
+		 {
+			 queue.start(new PTZMotorControl("UPDATE PT", panSend, tiltSend));
+		 }
 #endif
-//	 cout << "Tilt sent:\t" << tiltSend << endl;
-//	 tiltSend = 0;
+		 //	 cout << "Tilt sent:\t" << tiltSend << endl;
+		 //	 tiltSend = 0;
+	 }
  }
 //--------------------------------------------------------------
 void ofApp::draw() {
@@ -235,7 +226,7 @@ void ofApp::draw() {
 		{
 			ofSetColor(0, 255, 0);
 			ofNoFill();
-			ofRect(1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight);
+			ofRect(maskXStart, maskYStart, maskWidth, maskHeight);
 			ofSetColor(255, 255, 255);
 		}
 		ofDrawBitmapStringHighlight("Click 'h' to toggle the ROI green area", 10, 100);

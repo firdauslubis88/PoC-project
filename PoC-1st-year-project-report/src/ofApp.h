@@ -116,5 +116,8 @@ public:
 	bool combinedCameraFinished;
 	bool showROI;
 	bool combinedMode;
-	int maskWidth, maskHeight;
+	float maskXStart;
+	float maskYStart;
+	int maskWidth;
+	int maskHeight;
 };
