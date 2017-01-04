@@ -121,7 +121,7 @@ ofPixels CombinedCamera::combine_direct(ofPixels ldPixel, ofImage hdImage, int i
 	Mat aligned = Alignment::align_direct(tempMatLdCvImage, tempMatHdCvImage, x, y, width, height);
 	aligned.copyTo(source);
 
-	if (skipCloning)
+	if (CombinedCamera::skipCloning)
 	{
 		source(Rect(x, y, width, height)).copyTo(target(Rect(x, y, width, height)));
 		IplImage temp = target;
@@ -239,7 +239,6 @@ void CombinedCamera::combine_align(ofPixels ldPixel, ofImage hdImage, int image_
 	Mat source, target;
 	Point cloneCenter;
 	target = tempMatLdCvImage;
-
 	Alignment::align(tempMatLdCvImage, tempMatHdCvImage, x, y, width, height);
 
 	/*
@@ -272,11 +271,11 @@ void CombinedCamera::combine_align(ofPixels ldPixel, ofImage hdImage, int image_
 
 void CombinedCamera::setSkipCloning(bool value)
 {
-	this->skipCloning = value;
+	CombinedCamera::skipCloning = value;
 }
 
 void CombinedCamera::setSkipAligning(bool value)
 {
-	this->skipAligning = value;
+	CombinedCamera::skipAligning = value;
 }
 

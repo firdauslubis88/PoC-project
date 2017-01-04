@@ -18,8 +18,8 @@ public:
 	static ofPixels combine_direct(ofPixels ldPixels, ofImage hdImage, int image_width, int image_height, int x, int y, int width, int height);
 //	ofPixels combine(ofPixels ldPixels, ofImage hdImage, int image_width, int image_height, int x, int y, int width, int height);
 	static void combine_align(ofPixels ldPixels, ofImage hdImage, int image_width, int image_height, int x, int y, int width, int height);
-	void setSkipCloning(bool value);
-	void setSkipAligning(bool value);
+	static void setSkipCloning(bool value);
+	static void setSkipAligning(bool value);
 
 private:
 	std::shared_ptr<ofxCvImage> combinedImage;

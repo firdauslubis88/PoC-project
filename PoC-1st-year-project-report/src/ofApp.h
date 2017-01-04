@@ -46,6 +46,7 @@ public:
 	ofVec3f getPTZEuler() const;
 	void start_record();
 	void stop_record();
+	void printScreen();
 
 	void onTaskQueued(const ofx::TaskQueueEventArgs & args);
 	void onTaskStarted(const ofx::TaskQueueEventArgs & args);

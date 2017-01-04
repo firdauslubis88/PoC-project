@@ -77,8 +77,8 @@ void ofApp::setup() {
 	_easyCam.rotate(-90, 0, 0, 1);
 //	_easyCam.setFov(40.0);
 
-	combinedCamera.setSkipAligning(false);
-	combinedCamera.setSkipCloning(false);
+//	combinedCamera.setSkipAligning(false);
+//	combinedCamera.setSkipCloning(false);
 
 	ptzPanOffset = 90;
 	ptzTiltOffset = 0;
@@ -90,6 +90,8 @@ void ofApp::setup() {
 	maskYStart = (float)VIDEO_HEIGHT / 3;
 	maskWidth = 432 * 2;
 	maskHeight = 224 * 2;
+
+	CombinedCamera::setSkipCloning(true);
 
 	// Limit the maximum number of tasks for shared thread pools.
 	queue.setMaximumTasks(1);
@@ -248,7 +250,7 @@ void ofApp::draw() {
 			ldFbo.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
 			ofSetColor(0, 255, 0);
 			ofNoFill();
-			ofRect(1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight);
+			ofRect(maskXStart, maskYStart, maskWidth, maskHeight);
 			ofSetColor(255, 255, 255);
 		}
 
@@ -298,8 +300,14 @@ void ofApp::keyPressed(int key) {
 		Alignment::alreadyChanged = false;
 		combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight));
 		break;
+	case 'n':
+		Alignment::alreadyChanged = true;
+		break;
 	case 'h':
 		showROI = !showROI;
+		break;
+	case 'g':
+		printScreen();
 		break;
 	default:
 		break;
@@ -503,6 +511,15 @@ void ofApp::stop_record()
 }
 
 #endif // USE_VIDEO_RECORDER
+void ofApp::printScreen()
+{
+	hdImage.save("PTZ.jpg");
+	ofImage ldImage;
+	ldImage.setFromPixels(ldPixels);
+	ldImage.setImageType(OF_IMAGE_COLOR);
+	ldImage.save("360.jpg");
+}
+
 
 void ofApp::onTaskQueued(const ofx::TaskQueueEventArgs & args)
 {
@@ -528,10 +545,18 @@ void ofApp::onTaskFinished(const ofx::TaskQueueEventArgs & args)
 	taskProgress[args.getTaskId()].update(args);
 	if (args.getTaskName() == "Combined Camera")
 	{
-		combinedCameraFinished = true;
+		if (Alignment::alreadyChanged)
+		{
+			combinedCameraFinished = true;
+		}
+		else
+		{
+			combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight));
+		}
 	}
 	else if (args.getTaskName() == "UPDATE PT THEN COMBINE")
 	{
+		cout << "Done 1st" << endl;
 		ofSleepMillis(1000);
 		Alignment::alreadyChanged = false;
 		combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight));
