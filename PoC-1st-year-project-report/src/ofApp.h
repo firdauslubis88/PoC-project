@@ -14,6 +14,9 @@
 #include "CombinedCameraTask.h"
 #include "SimpleTaskProgress.h"
 
+#include "PTZCamera.h"
+#include "PTZCameraTask.h"
+
 //#define USE_VIDEO_RECORDER
 
 class ofApp : public ofBaseApp {
@@ -72,7 +75,7 @@ public:
 	vector<ofVideoDevice> listVideoDevice;
 	ofShader _shader;
 	ofVideoGrabber ldVideoGrabber;
-	PTZControl hdVideoGrabber;
+	PTZCamera hdVideoGrabber;
 	bool isldCameraConnected;
 	bool isHdCameraConnected;
 	bool isCombined;
@@ -94,7 +97,7 @@ public:
 	CombinedCamera combinedCamera;
 	ofPixels ldPixels;
 
-	static int panAngle, tiltAngle;
+	int panAngle, tiltAngle;
 	int prevXDrag;
 	int prevYDrag;
 	int ptzPanOffset = 0, ptzTiltOffset = 0;
@@ -113,7 +116,7 @@ public:
 	ofSoundStream       soundStream;
 #endif // USE_VIDEO_RECORDER
 
-	int panSend, tiltSend;
+	volatile int panSend, tiltSend;
 	bool combinedCameraFinished;
 	bool showROI;
 	bool combinedMode;
@@ -121,4 +124,5 @@ public:
 	float maskYStart;
 	int maskWidth;
 	int maskHeight;
+	bool allowUpdatePT;
 };

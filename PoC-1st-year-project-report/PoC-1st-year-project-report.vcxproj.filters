@@ -88,6 +88,15 @@
     <ClCompile Include="src\SimpleTaskProgress.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\LogitechPTZCamera.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PTZCamera.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PTZCameraTask.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -393,9 +402,6 @@
       <Filter>addons\ofxGui\src</Filter>
     </ClInclude>
     <ClInclude Include="src\ofAppVR.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\PTZControl.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\Cloning.h">
@@ -1719,6 +1725,21 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\SimpleTaskProgress.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PTZControl.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LogitechPTZCamera.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BasePTZCamera.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PTZCamera.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PTZCameraTask.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

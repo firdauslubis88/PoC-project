@@ -20,7 +20,7 @@ using namespace cv::xfeatures2d;
 using namespace cv::reg;
 
 //#define USE_PTZ_ADJUSTMENT
-#define ALIGNMENT_CHECK
+//#define ALIGNMENT_CHECK
 
 class Alignment
 {

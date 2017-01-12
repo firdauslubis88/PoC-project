@@ -3,11 +3,11 @@
 
 #include "ofApp.h"
 
-int ofApp::panAngle = 0;
-int ofApp::tiltAngle = 0;
-
 //--------------------------------------------------------------
 void ofApp::setup() {
+	panAngle = 0;
+	tiltAngle = 0;
+	allowUpdatePT = true;
 	ofSetVerticalSync(false);
 	ofDisableArbTex();
 
@@ -21,7 +21,7 @@ void ofApp::setup() {
 			ldVideoGrabber.setDeviceID(listVideoDevice[i].id);
 			isldCameraConnected = true;
 		}
-		if (listVideoDevice[i].deviceName == "DFK Z12G445") {
+		if (listVideoDevice[i].deviceName == "PTZ Pro Camera") {
 			hdVideoGrabber.setDeviceID(listVideoDevice[i].id);
 			isHdCameraConnected = true;
 		}
@@ -46,7 +46,7 @@ void ofApp::setup() {
 		ofLog(OF_LOG_ERROR, "RICOH THETA S is not found.");
 	}
 	if (isHdCameraConnected) {
-		hdVideoGrabber.initGrabber(VIDEO_WIDTH, VIDEO_HEIGHT);
+		hdVideoGrabber.setup(VIDEO_WIDTH, VIDEO_HEIGHT);
 		hdFbo.allocate(VIDEO_WIDTH, VIDEO_HEIGHT);
 		hdToggle.setup("PTZ Camera", false);
 		hdToggle.addListener(this, &ofApp::onToggle);
@@ -80,7 +80,7 @@ void ofApp::setup() {
 //	combinedCamera.setSkipAligning(false);
 //	combinedCamera.setSkipCloning(false);
 
-	ptzPanOffset = 90;
+	ptzPanOffset = 0;// 90;
 	ptzTiltOffset = 0;
 
 	combinedCameraFinished = true;
@@ -181,11 +181,12 @@ void ofApp::setup() {
 		 {
 			 tiltSend += 360;
 		 }
-		 //We use this only because we need to move the PTZ in mouse dragging and key pressed event when cameraselected=="PTZ Camera"... please dont add other stuffs related to ptz PT control queue anymore here in update function T T
-		 if (cameraSelected == "PTZ Camera")
+		 if (cameraSelected == "PTZ Camera" && allowUpdatePT)
 		 {
-			 queue.start(new PTZMotorControl("UPDATE PT", panSend, tiltSend));
+			 allowUpdatePT = false;
+			 queue.start(new PTZCameraTask("UPDATE PT", hdVideoGrabber.getPTZ(), panSend, tiltSend));
 		 }
+
 #ifdef USE_PTZ_ADJUSTMENT
 		 if (!combinedCameraFinished && !Alignment::ptzAlreadyChanged)
 		 {
@@ -298,7 +299,7 @@ void ofApp::keyPressed(int key) {
 #endif // USE_VIDEO_RECORDER
 	case 'j':
 		Alignment::alreadyChanged = false;
-		combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight));
+///		combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight));
 		break;
 	case 'n':
 		Alignment::alreadyChanged = true;
@@ -310,6 +311,10 @@ void ofApp::keyPressed(int key) {
 		printScreen();
 		break;
 	default:
+		if (cameraSelected == "PTZ Camera")
+		{
+			queue.start(new PTZCameraTask("UPDATE PT", hdVideoGrabber.getPTZ(), 0, 0));
+		}
 		break;
 	}
 }
@@ -396,7 +401,7 @@ void ofApp::mouseReleased(int x, int y, int button) {
 	if (cameraSelected == "Combined Camera")
 	{
 		combinedMode = true;
-		queue.start(new PTZMotorControl("UPDATE PT THEN COMBINE", panSend, tiltSend));
+///		queue.start(new PTZMotorControl("UPDATE PT THEN COMBINE", panSend, tiltSend));
 	}
 }
 
@@ -440,14 +445,14 @@ void ofApp::onToggle(const void * sender)
 	cameraSelected = p->getName();
 	if (cameraSelected == "PTZ Camera")
 	{
-		queue.start(new PTZMotorControl("UPDATE PT", panSend, tiltSend));
+		queue.start(new PTZCameraTask("UPDATE PT", hdVideoGrabber.getPTZ(), panSend, tiltSend));
 	}
 	if (cameraSelected == "Combined Camera")
 	{
 #ifdef USE_PTZ_ADJUSTMENT
 		Alignment::ptzAlreadyChanged = false;
 #endif
-		queue.start(new PTZMotorControl("UPDATE PT THEN COMBINE", panSend, tiltSend));
+///		queue.start(new PTZMotorControl("UPDATE PT THEN COMBINE", panSend, tiltSend));
 	}
 }
 
@@ -528,10 +533,8 @@ void ofApp::onTaskQueued(const ofx::TaskQueueEventArgs & args)
 void ofApp::onTaskStarted(const ofx::TaskQueueEventArgs & args)
 {
 	taskProgress[args.getTaskId()].update(args);
-//	cout << args.getTaskName() << endl;
 	if (args.getTaskName() == "Combined Camera")
 	{
-//		cout << "START" << endl;
 		combinedCameraFinished = false;
 	}
 }
@@ -551,15 +554,19 @@ void ofApp::onTaskFinished(const ofx::TaskQueueEventArgs & args)
 		}
 		else
 		{
-			combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight));
+///			combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight));
 		}
 	}
 	else if (args.getTaskName() == "UPDATE PT THEN COMBINE")
 	{
-		cout << "Done 1st" << endl;
+		allowUpdatePT = true;
 		ofSleepMillis(1000);
 		Alignment::alreadyChanged = false;
-		combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight));
+///		combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight));
+	}
+	else
+	{
+		allowUpdatePT = true;
 	}
 }
 
@@ -605,7 +612,7 @@ void ofApp::restart()
 	{
 		tiltSend += 360;
 	}
-	queue.start(new PTZMotorControl("UPDATE PT", panSend, tiltSend));
+	queue.start(new PTZCameraTask("UPDATE PT", hdVideoGrabber.getPTZ(), panSend, tiltSend));
 }
 
 #ifdef USE_VIDEO_RECORDER
