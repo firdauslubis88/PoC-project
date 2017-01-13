@@ -196,7 +196,6 @@ void ofApp::draw() {
 	if (isHdCameraConnected)
 	{
 		hdFbo.begin();
-//		hdVideoGrabber.draw(VIDEO_WIDTH, VIDEO_HEIGHT, -VIDEO_WIDTH, -VIDEO_HEIGHT);
 		hdVideoGrabber.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
 		hdFbo.end();
 	}
@@ -246,8 +245,8 @@ void ofApp::draw() {
 	ofDisableDepthTest();
 	_panel.draw();
 
-//	ofDrawBitmapStringHighlight("PAN ANGLE: " + ofToString(PTZControl::GetPanning()), 10, 130);
-//	ofDrawBitmapStringHighlight("TILT ANGLE: " + ofToString(PTZControl::GetTilting()), 10, 150);
+//	ofDrawBitmapStringHighlight("PAN ANGLE: " + ofToString(hdVideoGrabber.getPanAngle()), 10, 130);
+//	ofDrawBitmapStringHighlight("TILT ANGLE: " + ofToString(hdVideoGrabber.getTiltAngle()), 10, 150);
 }
 
 //--------------------------------------------------------------

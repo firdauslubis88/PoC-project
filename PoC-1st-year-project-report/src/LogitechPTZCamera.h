@@ -1,5 +1,5 @@
 #pragma once
-#include "PTZCamera.h"
+#include "BasePTZCamera.h"
 
 class LogitechPTZCamera:  public BasePTZCamera
 {

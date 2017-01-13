@@ -22,28 +22,25 @@ using namespace cv::reg;
 //#define USE_PTZ_ADJUSTMENT
 //#define ALIGNMENT_CHECK
 
-class Alignment
+namespace Alignment
 {
-public:
-	Alignment();
-	Alignment(int minHessian);
-	static void ptzAlign(const Mat refImage, const Mat inputImage, const int x, const int y, const int mask_width, const int mask_height);
-	static void align(Mat refImage, Mat inputImage, int x, int y, int mask_width, int mask_height);
-	static Mat align_direct(Mat refImage, Mat inputImage, int x, int y, int mask_width, int mask_height);
-	static void align_reglib(Mat refImage, Mat inputImage, int x, int y, int mask_width, int mask_height);
-	static Mat align_direct_reglib(Mat refImage, Mat inputImage, int x, int y, int mask_width, int mask_height);
-	static bool ptzAlreadyChanged;
-	static bool alreadyChanged;
-	static int xReturn, yReturn;
-	static Ptr<Map> mapPtr;
-	~Alignment();
+	/*
+	Ptr<SURF> detector;
+	float comparisonThreshold;
+	bool alreadyCreated;
+	int counter;
+	bool ptzAlreadyChanged;
+	bool alreadyChanged;
+	int xReturn, yReturn;
+	*/
 
-private:
-	static Ptr<SURF> detector;
-	static float comparisonThreshold;
-	static Mat hBig;
-	static bool alreadyCreated;
-	static int minHessian;
-	static int counter;
+	Mat hBig;
+	Ptr<Map> mapPtr;
+
+	void ptzAlign(const Mat refImage, const Mat inputImage, const int x, const int y, const int mask_width, const int mask_height);
+	bool align(Mat refImage, Mat inputImage, int x, int y, int mask_width, int mask_height);
+	Mat align_direct(Mat refImage, Mat inputImage, int x, int y, int mask_width, int mask_height);
+	bool align_reglib(Mat refImage, Mat inputImage, int x, int y, int mask_width, int mask_height);
+	Mat align_direct_reglib(Mat refImage, Mat inputImage, int x, int y, int mask_width, int mask_height);
 };
 
