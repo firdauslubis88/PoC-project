@@ -13,9 +13,9 @@ PTZCamera::~PTZCamera()
 
 shared_ptr<BasePTZCamera> PTZCamera::getPTZ()
 {
-//	if (!this->ptz) {
-//		this->ptz = make_shared<PTZ_CAMERA_TYPE>();
-//	}
+	if (!this->ptz) {
+		this->ptz = make_shared<PTZ_CAMERA_TYPE>();
+	}
 	return this->ptz;
 
 }
@@ -27,58 +27,108 @@ void PTZCamera::setDeviceID(int deviceId)
 
 bool PTZCamera::setup(int w, int h)
 {
-	bool retVal = this->ptz->setup(w, h);
-	return retVal;
+	return this->ptz->setup(w, h);
 }
 
-int PTZCamera::SetPanning(int input)
+int PTZCamera::SetPanning()
 {
-	int retVal = this->ptz->SetPanning(input);
-	return retVal;
+	return this->ptz->SetPanning();
 }
 
 int PTZCamera::GetPanning()
 {
-	int retVal = this->ptz->GetPanning();
-	if (retVal == -1)
-	{
-		ofLog(OF_LOG_VERBOSE, "PTZ Camera doesn't support global pan");
-	}
-	return retVal;
+	return this->ptz->GetPanning();
 }
 
-int PTZCamera::SetTilting(int input)
+int PTZCamera::SetTilting()
 {
-	int retVal = this->ptz->SetTilting(input);
-	return retVal;
+	return this->ptz->SetTilting();
 }
 
 int PTZCamera::GetTilting()
 {
-	int retVal = this->ptz->GetTilting();
-	if (retVal == -1)
-	{
-		ofLog(OF_LOG_VERBOSE, "PTZ Camera doesn't support global tilt");
-	}
-	return retVal;
+	return this->ptz->GetTilting();
 }
 
-int PTZCamera::SetZooming(int zoom)
+int PTZCamera::SetZooming()
 {
-	int retVal = this->ptz->SetZooming(zoom);
-	return retVal;
+	return this->ptz->SetZooming();
 }
 
 long PTZCamera::GetZooming()
 {
-	int retVal = this->ptz->GetZooming();
-	if (retVal == -1)
-	{
-		ofLog(OF_LOG_VERBOSE, "PTZ Camera doesn't support zoom");
-	}
-	return retVal;
+	return this->ptz->GetZooming();
 }
 
+int PTZCamera::getPanAngle()
+{
+	return this->ptz->getPanAngle();
+}
+
+void PTZCamera::setPanAngle(int privatePanAngle)
+{
+	this->ptz->setPanAngle(privatePanAngle);
+}
+
+int PTZCamera::getTiltAngle()
+{
+	return this->ptz->getTiltAngle();
+}
+
+void PTZCamera::setTiltAngle(int privateTiltAngle)
+{
+	this->ptz->setTiltAngle(privateTiltAngle);
+}
+
+int PTZCamera::getZoom()
+{
+	return this->ptz->getZoom();
+}
+
+void PTZCamera::setZoom(int privateZoom)
+{
+	this->ptz->setZoom(privateZoom);
+}
+
+int PTZCamera::getPtzPanOffset()
+{
+	return this->ptz->getPtzPanOffset();
+}
+
+void PTZCamera::setPtzPanOffset(int privatePtzPanOffset)
+{
+	this->ptz->setPtzPanOffset(privatePtzPanOffset);
+}
+
+int PTZCamera::getPtzTiltOffset()
+{
+	return this->ptz->getPtzTiltOffset();
+}
+
+void PTZCamera::setPtzTiltOffset(int privatePtzTiltOffset)
+{
+	this->ptz->setPtzTiltOffset(privatePtzTiltOffset);
+}
+
+int PTZCamera::getPtzPanScale()
+{
+	return this->ptz->getPtzPanScale();
+}
+
+void PTZCamera::setPtzPanScale(int privatePtzPanScale)
+{
+	this->ptz->setPtzPanScale(privatePtzPanScale);
+}
+
+int PTZCamera::getPtzTiltScale()
+{
+	return this->ptz->getPtzTiltScale();
+}
+
+void PTZCamera::setPtzTiltScale(int privatePtzTiltScale)
+{
+	this->ptz->setPtzTiltScale(privatePtzTiltScale);
+}
 void PTZCamera::update()
 {
 	this->ptz->update();

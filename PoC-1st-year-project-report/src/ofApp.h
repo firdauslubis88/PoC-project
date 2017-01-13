@@ -97,10 +97,10 @@ public:
 	CombinedCamera combinedCamera;
 	ofPixels ldPixels;
 
-	int panAngle, tiltAngle;
+//	int panAngle, tiltAngle;
 	int prevXDrag;
 	int prevYDrag;
-	int ptzPanOffset = 0, ptzTiltOffset = 0;
+//	int ptzPanOffset = 0, ptzTiltOffset = 0;
 
 	ofx::TaskQueue queue, combinedCameraQueue;
 	typedef std::map<std::string, SimpleTaskProgress> TaskProgress;
@@ -116,7 +116,7 @@ public:
 	ofSoundStream       soundStream;
 #endif // USE_VIDEO_RECORDER
 
-	volatile int panSend, tiltSend;
+//	int panSend, tiltSend;
 	bool combinedCameraFinished;
 	bool showROI;
 	bool combinedMode;

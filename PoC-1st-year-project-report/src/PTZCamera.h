@@ -13,12 +13,26 @@ public:
 
 	bool setup(int w, int h);
 
-	int SetPanning(int input);
+	int SetPanning();
 	int GetPanning();
-	int SetTilting(int input);
+	int SetTilting();
 	int GetTilting();
-	int SetZooming(int zoom);
+	int SetZooming();
 	long GetZooming();
+	int getPanAngle();
+	void setPanAngle(int privatePanAngle);
+	int getTiltAngle();
+	void setTiltAngle(int privateTiltAngle);
+	int getZoom();
+	void setZoom(int privateZoom);
+	int getPtzPanOffset();
+	void setPtzPanOffset(int privatePtzTiltOffset);
+	int getPtzTiltOffset();
+	void setPtzTiltOffset(int privatePtzTiltOffset);
+	int getPtzPanScale();
+	void setPtzPanScale(int privatePtzTiltOffset);
+	int getPtzTiltScale();
+	void setPtzTiltScale(int privatePtzTiltOffset);
 
 	void update();
 	void draw(int x, int y, int width, int height);

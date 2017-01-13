@@ -258,6 +258,7 @@ D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\
     <ClCompile Include="..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src\ofxOpenVR.cpp" />
     <ClCompile Include="..\..\of_v0.9.8_vs_release\addons\ofxVideoRecorder\src\ofxVideoRecorder.cpp" />
     <ClCompile Include="src\Alignment.cpp" />
+    <ClCompile Include="src\BasePTZCamera.cpp" />
     <ClCompile Include="src\Cloning.cpp" />
     <ClCompile Include="src\CombinedCamera.cpp" />
     <ClCompile Include="src\CombinedCameraTask.cpp" />

@@ -1,21 +1,18 @@
 #pragma once
-#include "BasePTZCamera.h"
+#include "PTZCamera.h"
 
 class LogitechPTZCamera:  public BasePTZCamera
 {
 public:
-	LogitechPTZCamera();
-	~LogitechPTZCamera();
-
-	int SetPanning(int input);
+	int SetPanning();
 	int GetPanning();
-	int SetTilting(int input);
+	int SetTilting();
 	int GetTilting();
-	int SetZooming(int zoom);
+	int SetZooming();
 	long GetZooming();
 
 private:
-	PTZPanDirection panDirection = PANSTOP;
-	PTZTiltDirection tiltDirection = TILTSTOP;
+	PTZPanDirection panDirection;
+	PTZTiltDirection tiltDirection;
 };
 

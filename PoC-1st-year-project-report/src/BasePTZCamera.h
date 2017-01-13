@@ -4,16 +4,31 @@
 class BasePTZCamera : public ofVideoGrabber
 {
 public:
-	BasePTZCamera() {};
+	BasePTZCamera();
 	virtual ~BasePTZCamera() {};
+	void update();
 
-	virtual int SetPanning(int input) = 0;
+	virtual int SetPanning() = 0;
 	virtual int GetPanning() = 0;
-	virtual int SetTilting(int input) = 0;
+	virtual int SetTilting() = 0;
 	virtual int GetTilting() = 0;
-	virtual int SetZooming(int zoom) = 0;
+	virtual int SetZooming() = 0;
 	virtual long GetZooming() = 0;
 
+	virtual int getPanAngle();
+	virtual void setPanAngle(int privatePanAngle);
+	virtual int getTiltAngle();
+	virtual void setTiltAngle(int privateTiltAngle);
+	virtual int getZoom();
+	virtual void setZoom(int privateZoom);
+	virtual int getPtzPanOffset();
+	virtual void setPtzPanOffset(int privatePtzTiltOffset);
+	virtual int getPtzTiltOffset();
+	virtual void setPtzTiltOffset(int privatePtzTiltOffset);
+	virtual int getPtzPanScale();
+	virtual void setPtzPanScale(int privatePtzTiltOffset);
+	virtual int getPtzTiltScale();
+	virtual void setPtzTiltScale(int privatePtzTiltOffset);
 
 protected:
 	enum CameraControlFeature
@@ -53,5 +68,7 @@ protected:
 		TILTUP = 1,
 		TILTDOWN = -1
 	};
+
+	int panAngle, tiltAngle, zoom, ptzPanOffset, ptzTiltOffset, ptzPanScale, ptzTiltScale, panSend, tiltSend;
 };
 

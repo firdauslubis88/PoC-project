@@ -5,8 +5,6 @@
 
 //--------------------------------------------------------------
 void ofApp::setup() {
-	panAngle = 0;
-	tiltAngle = 0;
 	allowUpdatePT = true;
 	ofSetVerticalSync(false);
 	ofDisableArbTex();
@@ -17,44 +15,54 @@ void ofApp::setup() {
 	_panel.setup();
 	for (int i = 0; i < listVideoDevice.size(); i++) {
 		ofLog(OF_LOG_VERBOSE, listVideoDevice[i].deviceName);
+		if (listVideoDevice[i].deviceName == "RICOH THETA S") {
+			isldCameraConnected = true;
+			ldToggle.setup("360 Camera", false);
+			ldToggle.addListener(this, &ofApp::onToggle);
+			_panel.add(&ldToggle);
+		}
 		if (listVideoDevice[i].deviceName == "THETA UVC Blender") {
 			ldVideoGrabber.setDeviceID(listVideoDevice[i].id);
-			isldCameraConnected = true;
+			ldVideoGrabber.initGrabber(VIDEO_WIDTH, VIDEO_HEIGHT);
+			ldFbo.allocate(VIDEO_WIDTH, VIDEO_HEIGHT);
+			//	_shader.load("shaders/equirectanguler");
+			sphereVboMesh = ofSpherePrimitive(2000, 24).getMesh();
+			for (int i = 0; i<sphereVboMesh.getNumTexCoords(); i++) {
+				sphereVboMesh.setTexCoord(i, ofVec2f(1.0) - sphereVboMesh.getTexCoord(i));
+			}
+			for (int i = 0; i<sphereVboMesh.getNumNormals(); i++) {
+				sphereVboMesh.setNormal(i, sphereVboMesh.getNormal(i) * ofVec3f(-1));
+			}
 		}
+
 		if (listVideoDevice[i].deviceName == "PTZ Pro Camera") {
 			hdVideoGrabber.setDeviceID(listVideoDevice[i].id);
+			hdVideoGrabber.setup(VIDEO_WIDTH, VIDEO_HEIGHT);
+			hdVideoGrabber.setPtzPanOffset(0);
+			hdVideoGrabber.setPtzTiltOffset(0);
+			hdVideoGrabber.setPtzPanScale(1);
+			hdVideoGrabber.setPtzTiltScale(1);
+			//	ptzPanOffset = 0;// 90;
+			//	ptzTiltOffset = 0;
+			hdFbo.allocate(VIDEO_WIDTH, VIDEO_HEIGHT);
+			hdToggle.setup("PTZ Camera", false);
+			hdToggle.addListener(this, &ofApp::onToggle);
+			_panel.add(&hdToggle);
 			isHdCameraConnected = true;
 		}
 	}
-	if (isldCameraConnected) {
-		ldVideoGrabber.initGrabber(VIDEO_WIDTH, VIDEO_HEIGHT);
-		ldFbo.allocate(VIDEO_WIDTH, VIDEO_HEIGHT);
-	//	_shader.load("shaders/equirectanguler");
-		sphereVboMesh = ofSpherePrimitive(2000, 24).getMesh();
-		for (int i = 0; i<sphereVboMesh.getNumTexCoords(); i++) {
-			sphereVboMesh.setTexCoord(i, ofVec2f(1.0) - sphereVboMesh.getTexCoord(i));
-		}
-		for (int i = 0; i<sphereVboMesh.getNumNormals(); i++) {
-			sphereVboMesh.setNormal(i, sphereVboMesh.getNormal(i) * ofVec3f(-1));
-		}
-		ldToggle.setup("360 Camera", false);
-		ldToggle.addListener(this, &ofApp::onToggle);
-		_panel.add(&ldToggle);
-	}
-	else
-	{
+
+	if (!isldCameraConnected) {
 		ofLog(OF_LOG_ERROR, "RICOH THETA S is not found.");
 	}
-	if (isHdCameraConnected) {
-		hdVideoGrabber.setup(VIDEO_WIDTH, VIDEO_HEIGHT);
-		hdFbo.allocate(VIDEO_WIDTH, VIDEO_HEIGHT);
-		hdToggle.setup("PTZ Camera", false);
-		hdToggle.addListener(this, &ofApp::onToggle);
-		_panel.add(&hdToggle);
-	}
-	else
-	{
+
+	if (!isHdCameraConnected){
 		ofLog(OF_LOG_ERROR, "PTZ Pro Camera is not found.");
+	}
+
+	if (!isldCameraConnected && !isHdCameraConnected)
+	{
+		ofExit();
 	}
 
 	if (isldCameraConnected && isHdCameraConnected) {
@@ -68,10 +76,6 @@ void ofApp::setup() {
 		combinedCameraQueue.registerTaskProgressEvents(this);
 		combinedCamera = CombinedCamera(VIDEO_WIDTH, VIDEO_HEIGHT);
 	}
-	if (!isldCameraConnected && !isHdCameraConnected)
-	{
-		exit();
-	}
 	_easyCam.setAutoDistance(false);
 	_easyCam.setDistance(0);
 	_easyCam.rotate(-90, 0, 0, 1);
@@ -80,16 +84,13 @@ void ofApp::setup() {
 //	combinedCamera.setSkipAligning(false);
 //	combinedCamera.setSkipCloning(false);
 
-	ptzPanOffset = 0;// 90;
-	ptzTiltOffset = 0;
-
 	combinedCameraFinished = true;
 	showROI = true;
 	combinedMode = true;
 	maskXStart = (float)VIDEO_WIDTH / 3;
 	maskYStart = (float)VIDEO_HEIGHT / 3;
-	maskWidth = 432 * 2;
-	maskHeight = 224 * 2;
+	maskWidth = 432;
+	maskHeight = 224;
 
 	CombinedCamera::setSkipCloning(true);
 
@@ -163,28 +164,10 @@ void ofApp::setup() {
 		 panAngle += Alignment::xReturn;
 		 tiltAngle += Alignment::yReturn;
 #endif // USE_PTZ_ADJUSTMENT
-		 panSend = -(panAngle + ptzPanOffset);
-		 tiltSend = -(tiltAngle + ptzTiltOffset);
-		 if (panSend > 180)
-		 {
-			 panSend -= 360;
-		 }
-		 else if (panSend < -180)
-		 {
-			 panSend += 360;
-		 }
-		 if (tiltSend > 180)
-		 {
-			 tiltSend -= 360;
-		 }
-		 else if (tiltSend < -180)
-		 {
-			 tiltSend += 360;
-		 }
 		 if (cameraSelected == "PTZ Camera" && allowUpdatePT)
 		 {
 			 allowUpdatePT = false;
-			 queue.start(new PTZCameraTask("UPDATE PT", hdVideoGrabber.getPTZ(), panSend, tiltSend));
+			 queue.start(new PTZCameraTask("UPDATE PT", hdVideoGrabber.getPTZ()));
 		 }
 
 #ifdef USE_PTZ_ADJUSTMENT
@@ -272,16 +255,16 @@ void ofApp::keyPressed(int key) {
 	switch (key)
 	{
 	case 'w':
-		tiltAngle--;
+		hdVideoGrabber.setTiltAngle(hdVideoGrabber.getTiltAngle() - 1);
 		break;
 	case 's':
-		tiltAngle++;
-		break;
+		hdVideoGrabber.setTiltAngle(hdVideoGrabber.getTiltAngle() + 1);
+			break;
 	case 'a':
-		panAngle++;
+		hdVideoGrabber.setPanAngle(hdVideoGrabber.getPanAngle() + 1);
 		break;
 	case 'd':
-		panAngle--;
+		hdVideoGrabber.setPanAngle(hdVideoGrabber.getPanAngle() - 1);
 		break;
 	case 'p':
 		onProperty();
@@ -299,7 +282,7 @@ void ofApp::keyPressed(int key) {
 #endif // USE_VIDEO_RECORDER
 	case 'j':
 		Alignment::alreadyChanged = false;
-///		combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight));
+		combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight));
 		break;
 	case 'n':
 		Alignment::alreadyChanged = true;
@@ -311,10 +294,6 @@ void ofApp::keyPressed(int key) {
 		printScreen();
 		break;
 	default:
-		if (cameraSelected == "PTZ Camera")
-		{
-			queue.start(new PTZCameraTask("UPDATE PT", hdVideoGrabber.getPTZ(), 0, 0));
-		}
 		break;
 	}
 }
@@ -339,19 +318,19 @@ void ofApp::mouseDragged(int x, int y, int button) {
 	{
 		if (y > (prevYDrag + 50))
 		{
-			tiltAngle++;
+			hdVideoGrabber.setTiltAngle(hdVideoGrabber.getTiltAngle() + 1);
 		}
 		else if (y < (prevYDrag - 50))
 		{
-			tiltAngle--;
+			hdVideoGrabber.setTiltAngle(hdVideoGrabber.getTiltAngle() - 1);
 		}
 		if (x >(prevXDrag + 50))
 		{
-			panAngle--;
+			hdVideoGrabber.setPanAngle(hdVideoGrabber.getPanAngle() - 1);
 		}
 		else if (x < (prevXDrag - 50))
 		{
-			panAngle++;
+			hdVideoGrabber.setPanAngle(hdVideoGrabber.getPanAngle() + 1);
 		}
 	}
 	else if (cameraSelected == "360 Camera" || cameraSelected == "Combined Camera")
@@ -360,16 +339,18 @@ void ofApp::mouseDragged(int x, int y, int button) {
 		float ricohX = getPTZEuler().y;
 		float ricohZ = getPTZEuler().z;
 
-		panAngle = (int)ricohY;
+		int localPanAngle = (int)ricohY;
 		if (abs(ricohX) >= 90)
 		{
-			panAngle = -(180 + ricohY);
+			localPanAngle = -(180 + ricohY);
 		}
-		tiltAngle = (int)ricohX;
+		hdVideoGrabber.setPanAngle(localPanAngle);
+		int localTiltAngle = (int)ricohX;
 		if (abs(ricohX) >= 90)
 		{
-			tiltAngle = -(ricohX) + 180;
+			localTiltAngle = -(ricohX) + 180;
 		}
+		hdVideoGrabber.setTiltAngle(localTiltAngle);
 	}
 }
 
@@ -387,6 +368,8 @@ void ofApp::mousePressed(int x, int y, int button) {
 	}
 	else if (cameraSelected == "Combined Camera")
 	{
+		_easyCam.enableMouseMiddleButton();
+		_easyCam.enableMouseInput();
 		combinedMode = false;
 	}
 }
@@ -401,7 +384,7 @@ void ofApp::mouseReleased(int x, int y, int button) {
 	if (cameraSelected == "Combined Camera")
 	{
 		combinedMode = true;
-///		queue.start(new PTZMotorControl("UPDATE PT THEN COMBINE", panSend, tiltSend));
+		queue.start(new PTZCameraTask("UPDATE PT THEN COMBINE",hdVideoGrabber.getPTZ()));
 	}
 }
 
@@ -409,9 +392,10 @@ void ofApp::mouseScrolled(int x, int y, float scrollX, float scrollY)
 {
 	if (cameraSelected == "PTZ Camera")
 	{
-		long currentValue = hdVideoGrabber.GetZooming();
+		long currentValue = hdVideoGrabber.getZoom();
 		long nextZoom = scrollY * 10 + currentValue;
-		hdVideoGrabber.SetZooming(nextZoom);
+		hdVideoGrabber.setZoom(nextZoom);
+		hdVideoGrabber.SetZooming();
 	}
 }
 //--------------------------------------------------------------
@@ -445,14 +429,14 @@ void ofApp::onToggle(const void * sender)
 	cameraSelected = p->getName();
 	if (cameraSelected == "PTZ Camera")
 	{
-		queue.start(new PTZCameraTask("UPDATE PT", hdVideoGrabber.getPTZ(), panSend, tiltSend));
+		queue.start(new PTZCameraTask("UPDATE PT", hdVideoGrabber.getPTZ()));
 	}
 	if (cameraSelected == "Combined Camera")
 	{
 #ifdef USE_PTZ_ADJUSTMENT
 		Alignment::ptzAlreadyChanged = false;
 #endif
-///		queue.start(new PTZMotorControl("UPDATE PT THEN COMBINE", panSend, tiltSend));
+		queue.start(new PTZCameraTask("UPDATE PT THEN COMBINE", hdVideoGrabber.getPTZ()));
 	}
 }
 
@@ -554,7 +538,7 @@ void ofApp::onTaskFinished(const ofx::TaskQueueEventArgs & args)
 		}
 		else
 		{
-///			combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight));
+			combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight));
 		}
 	}
 	else if (args.getTaskName() == "UPDATE PT THEN COMBINE")
@@ -562,7 +546,7 @@ void ofApp::onTaskFinished(const ofx::TaskQueueEventArgs & args)
 		allowUpdatePT = true;
 		ofSleepMillis(1000);
 		Alignment::alreadyChanged = false;
-///		combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight));
+		combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight));
 	}
 	else
 	{
@@ -591,28 +575,10 @@ void ofApp::restart()
 	_easyCam.reset();
 	_easyCam.rotate(-90, 0, 0, 1);
 
-	tiltAngle = 0;
-	panAngle = 0;
+	hdVideoGrabber.setPanAngle(0);
+	hdVideoGrabber.setTiltAngle(0);
 
-	panSend = -(panAngle + ptzPanOffset);
-	if (panSend > 180)
-	{
-		panSend -= 360;
-	}
-	else if (panSend < -180)
-	{
-		panSend += 360;
-	}
-	tiltSend = -(tiltAngle + ptzTiltOffset);
-	if (tiltSend > 180)
-	{
-		tiltSend -= 360;
-	}
-	else if (tiltSend < -180)
-	{
-		tiltSend += 360;
-	}
-	queue.start(new PTZCameraTask("UPDATE PT", hdVideoGrabber.getPTZ(), panSend, tiltSend));
+	queue.start(new PTZCameraTask("UPDATE PT", hdVideoGrabber.getPTZ()));
 }
 
 #ifdef USE_VIDEO_RECORDER
