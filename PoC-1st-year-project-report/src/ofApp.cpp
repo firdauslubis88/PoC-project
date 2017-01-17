@@ -17,8 +17,11 @@ void ofApp::setup() {
 	_panel.setup();
 	for (int i = 0; i < listVideoDevice.size(); i++) {
 		ofLog(OF_LOG_VERBOSE, listVideoDevice[i].deviceName);
-		if (listVideoDevice[i].deviceName == "THETA UVC Blender") {
+		if (listVideoDevice[i].deviceName == "THETA UVC Blender") { // -> If RICOH THETA doesn't work, comment this "if"
 			ldVideoGrabber.setDeviceID(listVideoDevice[i].id);
+		}
+		if (listVideoDevice[i].deviceName == "RICOH THETA S") // -> If RICOH THETA doesn't work, move the "ldVideoGrabber.setDeviceID(listVideoDevice[i].id);" line in this "if"
+		{
 			isldCameraConnected = true;
 		}
 		if (listVideoDevice[i].deviceName == "DFK Z12G445") {
@@ -29,7 +32,7 @@ void ofApp::setup() {
 	if (isldCameraConnected) {
 		ldVideoGrabber.initGrabber(VIDEO_WIDTH, VIDEO_HEIGHT);
 		ldFbo.allocate(VIDEO_WIDTH, VIDEO_HEIGHT);
-	//	_shader.load("shaders/equirectanguler");
+	//	_shader.load("shaders/equirectanguler"); --> If the RICOH THETA doesn't work, uncomment this line
 		sphereVboMesh = ofSpherePrimitive(2000, 24).getMesh();
 		for (int i = 0; i<sphereVboMesh.getNumTexCoords(); i++) {
 			sphereVboMesh.setTexCoord(i, ofVec2f(1.0) - sphereVboMesh.getTexCoord(i));
@@ -70,7 +73,7 @@ void ofApp::setup() {
 	}
 	if (!isldCameraConnected && !isHdCameraConnected)
 	{
-		exit();
+		ofExit();
 	}
 	_easyCam.setAutoDistance(false);
 	_easyCam.setDistance(0);

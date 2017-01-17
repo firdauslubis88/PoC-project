@@ -104,6 +104,11 @@ ofPixels CombinedCamera::combine_direct(ofPixels ldPixel, ofImage hdImage, int i
 	}
 	ofImage ldImage;
 
+	/*How to integrate openFramework class with opencv class (from oF -> openCV):
+	1. ofPixels -> ofImage
+	2. ofImage -> ofxCvColorImage
+	3. ofxCvColorImage -> Mat
+	*/
 	ldImage.setFromPixels(ldPixel);
 	ldImage.setImageType(OF_IMAGE_COLOR);
 
@@ -139,6 +144,11 @@ ofPixels CombinedCamera::combine_direct(ofPixels ldPixel, ofImage hdImage, int i
 		cloneCenter = Point(x + width / 2, y + height / 2);
 		//		seamlessClone(source, target, clone_mask, cloneCenter, clone, 1);
 		Cloning::MVCSeamlessClone(source(Rect(x, y, width, height)), target, clone_mask, cloneCenter, clone);
+		/*How to integrate openFramework class with opencv class (from openCV -> oF):
+		1. Mat -> IplImage
+		2. IplImage -> IplImage*
+		3. IplImage* -> ofxCvColorImage
+		*/
 		IplImage temp = clone;
 		IplImage* pTemp = &temp;
 		combinedCvImage2 = pTemp;
