@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\ofApp.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -40,18 +37,6 @@
     <ClCompile Include="..\..\of_v0.9.8_vs_release\addons\ofxGui\src\ofxToggle.cpp">
       <Filter>addons\ofxGui\src</Filter>
     </ClCompile>
-    <ClCompile Include="src\ofAppVR.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\PTZControl.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Cloning.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\CombinedCamera.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\src\ofxCvColorImage.cpp">
       <Filter>addons\ofxOpenCv\src</Filter>
     </ClCompile>
@@ -73,32 +58,50 @@
     <ClCompile Include="..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\src\ofxCvShortImage.cpp">
       <Filter>addons\ofxOpenCv\src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Alignment.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\PTZMotorControl.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\of_v0.9.8_vs_release\addons\ofxVideoRecorder\src\ofxVideoRecorder.cpp">
       <Filter>addons\ofxVideoRecorder\src</Filter>
     </ClCompile>
-    <ClCompile Include="src\CombinedCameraTask.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="src\ofApp\ofApp.cpp">
+      <Filter>src\ofApp</Filter>
     </ClCompile>
-    <ClCompile Include="src\SimpleTaskProgress.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="src\combined\Alignment.cpp">
+      <Filter>src\combined</Filter>
     </ClCompile>
-    <ClCompile Include="src\LogitechPTZCamera.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="src\combined\Cloning.cpp">
+      <Filter>src\combined</Filter>
     </ClCompile>
-    <ClCompile Include="src\PTZCamera.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="src\combined\CombinedCamera.cpp">
+      <Filter>src\combined</Filter>
     </ClCompile>
-    <ClCompile Include="src\PTZCameraTask.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="src\ptz\BasePTZCamera.cpp">
+      <Filter>src\ptz</Filter>
     </ClCompile>
-    <ClCompile Include="src\BasePTZCamera.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="src\ptz\LogitechPTZCamera.cpp">
+      <Filter>src\ptz</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ptz\PTZCamera.cpp">
+      <Filter>src\ptz</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ptz\PTZControl.cpp">
+      <Filter>src\ptz</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ptz\SimpleTaskProgress.cpp">
+      <Filter>src\ptz</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ptz\ViewrunPTZCamera.cpp">
+      <Filter>src\ptz</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hmd\ofAppVR.cpp">
+      <Filter>src\hmd</Filter>
+    </ClCompile>
+    <ClCompile Include="src\task\CombinedCameraTask.cpp">
+      <Filter>src\task</Filter>
+    </ClCompile>
+    <ClCompile Include="src\task\PTZCameraTask.cpp">
+      <Filter>src\task</Filter>
+    </ClCompile>
+    <ClCompile Include="src\task\PTZMotorControl.cpp">
+      <Filter>src\task</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -351,11 +354,23 @@
     <Filter Include="addons\ofxVideoRecorder\src">
       <UniqueIdentifier>{dcc22953-1c7e-4301-8429-c862d2fc2151}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\ofApp">
+      <UniqueIdentifier>{a4d98fae-08f8-4073-b821-edbbb8327b22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ptz">
+      <UniqueIdentifier>{79f6c2a8-58fa-4d65-bd7a-cd0aff761b93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\combined">
+      <UniqueIdentifier>{e681aa25-29ae-45e3-8f54-ad90e7a02c36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\hmd">
+      <UniqueIdentifier>{d57bc5a0-3f41-43f3-b14e-a5858ce85c9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\task">
+      <UniqueIdentifier>{b69b1848-fb88-4387-9601-f6d1c8548db5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\ofApp.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src\CGLRenderModel.h">
       <Filter>addons\ofxOpenVR\src</Filter>
     </ClInclude>
@@ -403,15 +418,6 @@
     </ClInclude>
     <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxGui\src\ofxToggle.h">
       <Filter>addons\ofxGui\src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ofAppVR.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Cloning.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\CombinedCamera.h">
-      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\src\ofxCvBlob.h">
       <Filter>addons\ofxOpenCv\src</Filter>
@@ -1706,9 +1712,6 @@
     <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\xphoto\white_balance.hpp">
       <Filter>addons\ofxOpenCv\libs\opencv\include\opencv2\xphoto</Filter>
     </ClInclude>
-    <ClInclude Include="src\Alignment.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxTaskQueue\src\ofxTaskQueue.h">
       <Filter>addons\ofxTaskQueue\src</Filter>
     </ClInclude>
@@ -1718,47 +1721,65 @@
     <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxTaskQueue\libs\ofxTaskQueue\include\ofx\TaskQueueEvents.h">
       <Filter>addons\ofxTaskQueue\libs\ofxTaskQueue\include\ofx</Filter>
     </ClInclude>
-    <ClInclude Include="src\PTZMotorControl.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxVideoRecorder\src\ofxVideoRecorder.h">
       <Filter>addons\ofxVideoRecorder\src</Filter>
     </ClInclude>
-    <ClInclude Include="src\CombinedCameraTask.h">
-      <Filter>src</Filter>
+    <ClInclude Include="src\ofApp\ofApp.h">
+      <Filter>src\ofApp</Filter>
     </ClInclude>
-    <ClInclude Include="src\SimpleTaskProgress.h">
-      <Filter>src</Filter>
+    <ClInclude Include="src\ofApp\ofApp_All.h">
+      <Filter>src\ofApp</Filter>
     </ClInclude>
-    <ClInclude Include="src\PTZControl.h">
-      <Filter>src</Filter>
+    <ClInclude Include="src\ofApp\ofApp_ptz.h">
+      <Filter>src\ofApp</Filter>
     </ClInclude>
-    <ClInclude Include="src\LogitechPTZCamera.h">
-      <Filter>src</Filter>
+    <ClInclude Include="src\ofApp\ofApp_task.h">
+      <Filter>src\ofApp</Filter>
     </ClInclude>
-    <ClInclude Include="src\BasePTZCamera.h">
-      <Filter>src</Filter>
+    <ClInclude Include="src\ofApp\ofApp_util.h">
+      <Filter>src\ofApp</Filter>
     </ClInclude>
-    <ClInclude Include="src\PTZCamera.h">
-      <Filter>src</Filter>
+    <ClInclude Include="src\ofApp\ofApp_videoRecorderUtil.h">
+      <Filter>src\ofApp</Filter>
     </ClInclude>
-    <ClInclude Include="src\PTZCameraTask.h">
-      <Filter>src</Filter>
+    <ClInclude Include="src\combined\Alignment.h">
+      <Filter>src\combined</Filter>
     </ClInclude>
-    <ClInclude Include="src\ofApp_videoRecorderUtil.h">
-      <Filter>src</Filter>
+    <ClInclude Include="src\combined\Cloning.h">
+      <Filter>src\combined</Filter>
     </ClInclude>
-    <ClInclude Include="src\ofApp_All.h">
-      <Filter>src</Filter>
+    <ClInclude Include="src\combined\CombinedCamera.h">
+      <Filter>src\combined</Filter>
     </ClInclude>
-    <ClInclude Include="src\ofApp_task.h">
-      <Filter>src</Filter>
+    <ClInclude Include="src\ptz\BasePTZCamera.h">
+      <Filter>src\ptz</Filter>
     </ClInclude>
-    <ClInclude Include="src\ofApp_ptz.h">
-      <Filter>src</Filter>
+    <ClInclude Include="src\ptz\LogitechPTZCamera.h">
+      <Filter>src\ptz</Filter>
     </ClInclude>
-    <ClInclude Include="src\ofApp_util.h">
-      <Filter>src</Filter>
+    <ClInclude Include="src\ptz\PTZCamera.h">
+      <Filter>src\ptz</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ptz\PTZControl.h">
+      <Filter>src\ptz</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ptz\SimpleTaskProgress.h">
+      <Filter>src\ptz</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ptz\ViewrunPTZCamera.h">
+      <Filter>src\ptz</Filter>
+    </ClInclude>
+    <ClInclude Include="src\hmd\ofAppVR.h">
+      <Filter>src\hmd</Filter>
+    </ClInclude>
+    <ClInclude Include="src\task\CombinedCameraTask.h">
+      <Filter>src\task</Filter>
+    </ClInclude>
+    <ClInclude Include="src\task\PTZCameraTask.h">
+      <Filter>src\task</Filter>
+    </ClInclude>
+    <ClInclude Include="src\task\PTZMotorControl.h">
+      <Filter>src\task</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

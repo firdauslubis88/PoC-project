@@ -18,7 +18,7 @@ void ofApp::restart()
 	hdVideoGrabber.setPanAngle(0);
 	hdVideoGrabber.setTiltAngle(0);
 
-	queue.start(new PTZCameraTask("UPDATE PT", hdVideoGrabber.getPTZ()));
+	queue.start(new PTZCameraTask("UPDATE PTZ", hdVideoGrabber.getPTZ()));
 }
 
 void ofApp::onToggle(const void * sender)
@@ -34,6 +34,6 @@ void ofApp::onToggle(const void * sender)
 #ifdef USE_PTZ_ADJUSTMENT
 		Alignment::ptzAlreadyChanged = false;
 #endif
-		ptzCameraCommand("UPDATE PT THEN COMBINE");
+		ptzCameraCommand("UPDATE PTZ THEN COMBINE");
 	}
 }

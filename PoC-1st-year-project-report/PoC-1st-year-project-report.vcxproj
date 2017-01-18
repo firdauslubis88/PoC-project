@@ -105,25 +105,25 @@ D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxVideoRecorder\src;%(Add
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\ippicv\lib\vs\Win32\ippicvmt.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\libwebpd.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_calib3d310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_core310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_features2d310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_flann310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_highgui310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_imgcodecs310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_imgproc310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_ml310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_objdetect310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_photo310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_shape310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_stitching310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_superres310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_video310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_videoio310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_videostab310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\zlibd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\ippicv\lib\vs\Win32\ippicvmt.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\libwebpd.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_calib3d310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_core310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_features2d310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_flann310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_highgui310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_imgcodecs310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_imgproc310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_ml310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_objdetect310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_photo310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_shape310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_stitching310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_superres310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_video310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_videoio310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\opencv_videostab310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Debug\zlibd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
     </PostBuildEvent>
@@ -146,26 +146,26 @@ D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxVideoRecorder\src;%(Add
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\ippicv\lib\vs\x64\ippicvmt.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\libwebpd.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_calib3d310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_core310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_features2d310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_flann310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_highgui310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_imgcodecs310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_imgproc310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_ml310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_objdetect310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_photo310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_shape310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_stitching310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_superres310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_video310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_videoio310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_videostab310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_world310d.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\zlibd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\ippicv\lib\vs\x64\ippicvmt.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\libwebpd.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_calib3d310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_core310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_features2d310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_flann310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_highgui310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_imgcodecs310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_imgproc310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_ml310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_objdetect310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_photo310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_shape310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_stitching310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_superres310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_video310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_videoio310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_videostab310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\opencv_world310d.lib%3b
+..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\x64\Debug\zlibd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
     </PostBuildEvent>
@@ -190,25 +190,25 @@ D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxVideoRecorder\src;%(Add
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\ippicv\lib\vs\Win32\ippicvmt.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\libwebp.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_calib3d310.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_core310.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_features2d310.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_flann310.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_highgui310.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_imgcodecs310.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_imgproc310.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_ml310.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_objdetect310.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_photo310.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_shape310.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_stitching310.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_superres310.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_video310.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_videoio310.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_videostab310.lib%3b
-D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+..\..\addons\ofxOpenCv\libs\ippicv\lib\vs\Win32\ippicvmt.lib%3b
+..\..\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\libwebp.lib%3b
+..\..\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_calib3d310.lib%3b
+..\..\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_core310.lib%3b
+..\..\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_features2d310.lib%3b
+..\..\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_flann310.lib%3b
+..\..\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_highgui310.lib%3b
+..\..\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_imgcodecs310.lib%3b
+..\..\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_imgproc310.lib%3b
+..\..\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_ml310.lib%3b
+..\..\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_objdetect310.lib%3b
+..\..\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_photo310.lib%3b
+..\..\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_shape310.lib%3b
+..\..\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_stitching310.lib%3b
+..\..\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_superres310.lib%3b
+..\..\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_video310.lib%3b
+..\..\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_videoio310.lib%3b
+..\..\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\opencv_videostab310.lib%3b
+..\..\addons\ofxOpenCv\libs\opencv\lib\vs\Win32\Release\zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
     </PostBuildEvent>
@@ -219,7 +219,7 @@ D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src;..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\libs\OpenVR\include;..\..\of_v0.9.8_vs_release\addons\ofxGui\src;src\Header_Library\include;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\src;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\ippicv\include;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\aruco;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\bioinspired;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\calib3d;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ccalib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\cuda;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\cuda\detail;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\hal;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudalegacy;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\block;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\block\detail;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\expr;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\functional;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\functional\detail;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\grid;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\grid\detail;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\ptr2d;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\ptr2d\detail;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\util;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\util\detail;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\warp;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\warp\detail;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\datasets;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\dnn;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\face;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\features2d;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\flann;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\fuzzy;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\highgui;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgcodecs;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc\detail;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc\hal;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\line_descriptor;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ml;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\objdetect;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\optflow;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\photo;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\reg;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\rgbd;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\saliency;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\shape;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stereo;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stitching;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stitching\detail;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\structured_light;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\superres;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\surface_matching;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\text;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\tracking;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\video;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\videoio;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\videostab;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\xfeatures2d;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ximgproc;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\xphoto;..\..\of_v0.9.8_vs_release\addons\ofxTaskQueue\src;..\..\of_v0.9.8_vs_release\addons\ofxTaskQueue\libs\ofxTaskQueue\include;..\..\of_v0.9.8_vs_release\addons\ofxTaskQueue\libs\ofxTaskQueue\include\ofx;..\..\of_v0.9.8_vs_release\addons\ofxVideoRecorder\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src;..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\libs\OpenVR\include;..\..\of_v0.9.8_vs_release\addons\ofxGui\src;src\Header_Library\include;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\src;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\ippicv\include;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\aruco;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\bioinspired;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\calib3d;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ccalib;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\cuda;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\cuda\detail;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\core\hal;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudalegacy;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\block;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\block\detail;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\expr;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\functional;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\functional\detail;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\grid;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\grid\detail;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\ptr2d;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\ptr2d\detail;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\util;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\util\detail;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\warp;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\cudev\warp\detail;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\datasets;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\dnn;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\face;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\features2d;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\flann;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\fuzzy;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\highgui;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgcodecs;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc\detail;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\imgproc\hal;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\line_descriptor;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ml;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\objdetect;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\optflow;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\photo;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\reg;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\rgbd;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\saliency;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\shape;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stereo;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stitching;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\stitching\detail;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\structured_light;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\superres;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\surface_matching;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\text;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\tracking;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\video;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\videoio;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\videostab;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\xfeatures2d;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\ximgproc;..\..\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\xphoto;..\..\of_v0.9.8_vs_release\addons\ofxTaskQueue\src;..\..\of_v0.9.8_vs_release\addons\ofxTaskQueue\libs\ofxTaskQueue\include;..\..\of_v0.9.8_vs_release\addons\ofxTaskQueue\libs\ofxTaskQueue\include\ofx;..\..\of_v0.9.8_vs_release\addons\ofxVideoRecorder\src;src\ofApp;src\ptz;src\task;src\hmd;src\combined;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
@@ -257,20 +257,21 @@ D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\
     <ClCompile Include="..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src\Matrices.cpp" />
     <ClCompile Include="..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src\ofxOpenVR.cpp" />
     <ClCompile Include="..\..\of_v0.9.8_vs_release\addons\ofxVideoRecorder\src\ofxVideoRecorder.cpp" />
-    <ClCompile Include="src\Alignment.cpp" />
-    <ClCompile Include="src\BasePTZCamera.cpp" />
-    <ClCompile Include="src\Cloning.cpp" />
-    <ClCompile Include="src\CombinedCamera.cpp" />
-    <ClCompile Include="src\CombinedCameraTask.cpp" />
-    <ClCompile Include="src\LogitechPTZCamera.cpp" />
+    <ClCompile Include="src\combined\Alignment.cpp" />
+    <ClCompile Include="src\combined\Cloning.cpp" />
+    <ClCompile Include="src\combined\CombinedCamera.cpp" />
+    <ClCompile Include="src\hmd\ofAppVR.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\ofApp.cpp" />
-    <ClCompile Include="src\ofAppVR.cpp" />
-    <ClCompile Include="src\PTZCamera.cpp" />
-    <ClCompile Include="src\PTZCameraTask.cpp" />
-    <ClCompile Include="src\PTZControl.cpp" />
-    <ClCompile Include="src\PTZMotorControl.cpp" />
-    <ClCompile Include="src\SimpleTaskProgress.cpp" />
+    <ClCompile Include="src\ofApp\ofApp.cpp" />
+    <ClCompile Include="src\ptz\BasePTZCamera.cpp" />
+    <ClCompile Include="src\ptz\LogitechPTZCamera.cpp" />
+    <ClCompile Include="src\ptz\PTZCamera.cpp" />
+    <ClCompile Include="src\ptz\PTZControl.cpp" />
+    <ClCompile Include="src\ptz\SimpleTaskProgress.cpp" />
+    <ClCompile Include="src\ptz\ViewrunPTZCamera.cpp" />
+    <ClCompile Include="src\task\CombinedCameraTask.cpp" />
+    <ClCompile Include="src\task\PTZCameraTask.cpp" />
+    <ClCompile Include="src\task\PTZMotorControl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxGui\src\ofxBaseGui.h" />
@@ -724,24 +725,25 @@ D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\
     <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxTaskQueue\libs\ofxTaskQueue\include\ofx\TaskQueueEvents.h" />
     <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxTaskQueue\src\ofxTaskQueue.h" />
     <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxVideoRecorder\src\ofxVideoRecorder.h" />
-    <ClInclude Include="src\Alignment.h" />
-    <ClInclude Include="src\BasePTZCamera.h" />
-    <ClInclude Include="src\Cloning.h" />
-    <ClInclude Include="src\CombinedCamera.h" />
-    <ClInclude Include="src\CombinedCameraTask.h" />
-    <ClInclude Include="src\LogitechPTZCamera.h" />
-    <ClInclude Include="src\ofApp.h" />
-    <ClInclude Include="src\ofAppVR.h" />
-    <ClInclude Include="src\ofApp_All.h" />
-    <ClInclude Include="src\ofApp_ptz.h" />
-    <ClInclude Include="src\ofApp_task.h" />
-    <ClInclude Include="src\ofApp_util.h" />
-    <ClInclude Include="src\ofApp_videoRecorderUtil.h" />
-    <ClInclude Include="src\PTZCamera.h" />
-    <ClInclude Include="src\PTZCameraTask.h" />
-    <ClInclude Include="src\PTZControl.h" />
-    <ClInclude Include="src\PTZMotorControl.h" />
-    <ClInclude Include="src\SimpleTaskProgress.h" />
+    <ClInclude Include="src\combined\Alignment.h" />
+    <ClInclude Include="src\combined\Cloning.h" />
+    <ClInclude Include="src\combined\CombinedCamera.h" />
+    <ClInclude Include="src\hmd\ofAppVR.h" />
+    <ClInclude Include="src\ofApp\ofApp.h" />
+    <ClInclude Include="src\ofApp\ofApp_All.h" />
+    <ClInclude Include="src\ofApp\ofApp_ptz.h" />
+    <ClInclude Include="src\ofApp\ofApp_task.h" />
+    <ClInclude Include="src\ofApp\ofApp_util.h" />
+    <ClInclude Include="src\ofApp\ofApp_videoRecorderUtil.h" />
+    <ClInclude Include="src\ptz\BasePTZCamera.h" />
+    <ClInclude Include="src\ptz\LogitechPTZCamera.h" />
+    <ClInclude Include="src\ptz\PTZCamera.h" />
+    <ClInclude Include="src\ptz\PTZControl.h" />
+    <ClInclude Include="src\ptz\SimpleTaskProgress.h" />
+    <ClInclude Include="src\ptz\ViewrunPTZCamera.h" />
+    <ClInclude Include="src\task\CombinedCameraTask.h" />
+    <ClInclude Include="src\task\PTZCameraTask.h" />
+    <ClInclude Include="src\task\PTZMotorControl.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
