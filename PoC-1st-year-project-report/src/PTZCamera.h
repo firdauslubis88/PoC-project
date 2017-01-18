@@ -12,6 +12,7 @@ public:
 	~PTZCamera();
 
 	bool setup(int w, int h);
+	void update();
 
 	int SetPanning();
 	int GetPanning();
@@ -33,8 +34,11 @@ public:
 	void setPtzPanScale(int privatePtzTiltOffset);
 	int getPtzTiltScale();
 	void setPtzTiltScale(int privatePtzTiltOffset);
+	int getCameraPanDragThres();
+	void setCameraPanDragThres();
+	int getCameraTiltDragThres();
+	void setCameraTiltDragThres();
 
-	void update();
 	void draw(int x, int y, int width, int height);
 	ofPixels& getPixels();
 	void setDeviceID(int deviceId);

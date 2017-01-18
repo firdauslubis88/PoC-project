@@ -4,10 +4,6 @@
 class BasePTZCamera : public ofVideoGrabber
 {
 public:
-	BasePTZCamera();
-	virtual ~BasePTZCamera() {};
-	void update();
-
 	virtual int SetPanning() = 0;
 	virtual int GetPanning() = 0;
 	virtual int SetTilting() = 0;
@@ -29,6 +25,8 @@ public:
 	virtual void setPtzPanScale(int privatePtzTiltOffset);
 	virtual int getPtzTiltScale();
 	virtual void setPtzTiltScale(int privatePtzTiltOffset);
+
+	int cameraPanDragThres, cameraTiltDragThres;
 
 protected:
 	enum CameraControlFeature

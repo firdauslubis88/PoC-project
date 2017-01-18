@@ -13,4 +13,5 @@ void PTZCameraTask::runTask()
 {
 	privatePtz->SetPanning();
 	privatePtz->SetTilting();
+	privatePtz->SetZooming();
 }

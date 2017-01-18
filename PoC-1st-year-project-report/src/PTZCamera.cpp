@@ -3,7 +3,7 @@
 
 PTZCamera::PTZCamera()
 {
-	this->ptz = make_shared<PTZ_CAMERA_TYPE>();
+	this->ptz = make_shared<PTZ_CAMERA_TYPE>(PTZ_CAMERA_TYPE());
 }
 
 
@@ -14,7 +14,7 @@ PTZCamera::~PTZCamera()
 shared_ptr<BasePTZCamera> PTZCamera::getPTZ()
 {
 	if (!this->ptz) {
-		this->ptz = make_shared<PTZ_CAMERA_TYPE>();
+		this->ptz = make_shared<PTZ_CAMERA_TYPE>(PTZ_CAMERA_TYPE());
 	}
 	return this->ptz;
 
@@ -28,6 +28,11 @@ void PTZCamera::setDeviceID(int deviceId)
 bool PTZCamera::setup(int w, int h)
 {
 	return this->ptz->setup(w, h);
+}
+
+void PTZCamera::update()
+{
+	this->ptz->update();
 }
 
 int PTZCamera::SetPanning()
@@ -129,9 +134,23 @@ void PTZCamera::setPtzTiltScale(int privatePtzTiltScale)
 {
 	this->ptz->setPtzTiltScale(privatePtzTiltScale);
 }
-void PTZCamera::update()
+
+int PTZCamera::getCameraPanDragThres()
 {
-	this->ptz->update();
+	return this->ptz->cameraPanDragThres;
+}
+
+void PTZCamera::setCameraPanDragThres()
+{
+}
+
+int PTZCamera::getCameraTiltDragThres()
+{
+	return this->ptz->cameraTiltDragThres;
+}
+
+void PTZCamera::setCameraTiltDragThres()
+{
 }
 
 void PTZCamera::draw(int x, int y, int width, int height)

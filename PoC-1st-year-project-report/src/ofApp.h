@@ -22,13 +22,18 @@
 class ofApp : public ofBaseApp {
 
 public:
+
+	enum PTZSIGN {
+		PAN,
+		TILT,
+		ZOOM
+	};
+
 	void setup();
 	void exit();
 
 	void update();
 	void draw();
-
-	void render(vr::Hmd_Eye nEye);
 
 	void keyPressed(int key);
 	void keyReleased(int key);
@@ -43,30 +48,52 @@ public:
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
 
+	//UTIL functions
 	void onToggle(const void* sender);
 	void restart();
-	void onProperty();
-	ofVec3f getPTZEuler() const;
-	void start_record();
-	void stop_record();
 	void printScreen();
 
+	//PTZ functions
+	void onProperty();
+	ofVec3f getPTZEuler() const;
+	void ptzCameraCommand(PTZSIGN sign, int value, string taskName);
+	void ptzCameraCommand(string taskName);
+
+	//THREAD TASK functions
+	ofx::TaskQueue queue, combinedCameraQueue;
+	typedef std::map<std::string, SimpleTaskProgress> TaskProgress;
+	// We keep a simple task progress queue.
+	TaskProgress taskProgress;
 	void onTaskQueued(const ofx::TaskQueueEventArgs & args);
 	void onTaskStarted(const ofx::TaskQueueEventArgs & args);
 	void onTaskCancelled(const ofx::TaskQueueEventArgs & args);
 	void onTaskFinished(const ofx::TaskQueueEventArgs & args);
 	void onTaskFailed(const ofx::TaskFailedEventArgs & args);
 	void onTaskProgress(const ofx::TaskProgressEventArgs & args);
-#ifdef USE_VIDEO_RECORDER
+
+	//VIDEO RECORDER functions
+	ofxVideoRecorder    vidRecorder;
+	bool bRecording;
+	string fileName;
+	string fileExt;
+	int sampleRate;
+	int channels;
+	ofSoundStream       soundStream;
+	bool videoRecorderSetup();
+	bool videoRecorderUpdate();
+	bool videoRecorderExit();
+	bool videoRecorderStartRecord();
+	bool videoRecorderStopRecord();
 	void audioIn(float * input, int bufferSize, int nChannels);
-#endif // USE_VIDEO_RECORDER
 
-
+	//HMD functions
 	ofxOpenVR openVR;
+	void render(vr::Hmd_Eye nEye);
 
 	bool bShowHelp;
 	std::ostringstream _strHelp;
 
+	int VIDEO_WIDTH, VIDEO_HEIGHT;
 	ofFbo ldFbo;
 	ofFbo hdFbo;
 	ofVboMesh sphereVboMesh;
@@ -79,50 +106,27 @@ public:
 	bool isldCameraConnected;
 	bool isHdCameraConnected;
 	bool isCombined;
-
 	ofShader shader;
 	ofSpherePrimitive sphere;
-
 	ofxPanel _panel;
-//	ofParameter<ofVec4f> offsetParameter;
-//	ofParameter<float> radiusParameter;
-//	ofParameterGroup ldParameterGroup;
 	ofxButton ldToggle;
 	ofxButton hdToggle;
 	ofxButton combinedToggle;
 
-	int VIDEO_WIDTH = ofGetWidth(), VIDEO_HEIGHT = ofGetHeight();
 	string cameraSelected;
-
-	CombinedCamera combinedCamera;
 	ofPixels ldPixels;
 
-//	int panAngle, tiltAngle;
 	int prevXDrag;
 	int prevYDrag;
-//	int ptzPanOffset = 0, ptzTiltOffset = 0;
 
-	ofx::TaskQueue queue, combinedCameraQueue;
-	typedef std::map<std::string, SimpleTaskProgress> TaskProgress;
-	// We keep a simple task progress queue.
-	TaskProgress taskProgress;
-#ifdef USE_VIDEO_RECORDER
-	ofxVideoRecorder    vidRecorder;
-	bool bRecording;
-	string fileName;
-	string fileExt;
-	int sampleRate;
-	int channels;
-	ofSoundStream       soundStream;
-#endif // USE_VIDEO_RECORDER
-
-//	int panSend, tiltSend;
 	bool combinedCameraFinished;
 	bool showROI;
 	bool combinedMode;
+	bool allowUpdatePTZ;
+
+	CombinedCamera combinedCamera;
 	float maskXStart;
 	float maskYStart;
 	int maskWidth;
 	int maskHeight;
-	bool allowUpdatePT;
 };

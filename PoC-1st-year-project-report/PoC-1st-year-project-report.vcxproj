@@ -732,6 +732,11 @@ D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\lib\
     <ClInclude Include="src\LogitechPTZCamera.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\ofAppVR.h" />
+    <ClInclude Include="src\ofApp_All.h" />
+    <ClInclude Include="src\ofApp_ptz.h" />
+    <ClInclude Include="src\ofApp_task.h" />
+    <ClInclude Include="src\ofApp_util.h" />
+    <ClInclude Include="src\ofApp_videoRecorderUtil.h" />
     <ClInclude Include="src\PTZCamera.h" />
     <ClInclude Include="src\PTZCameraTask.h" />
     <ClInclude Include="src\PTZControl.h" />

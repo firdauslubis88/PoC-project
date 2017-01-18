@@ -1,38 +1,5 @@
 #include "BasePTZCamera.h"
 
-BasePTZCamera::BasePTZCamera()
-{
-	this->panAngle = 0;
-	this->tiltAngle = 0;
-	this->ptzPanOffset = 0;
-	this->ptzTiltOffset = 0;
-	this->ptzPanScale = 1;
-	this->ptzTiltScale = 1;
-}
-
-void BasePTZCamera::update()
-{
-	ofVideoGrabber::update();
-	this->panSend = this->ptzPanScale*(this->panAngle + this->ptzPanOffset);
-	this->tiltSend = this->ptzTiltScale*(this->tiltAngle + this->ptzTiltOffset);
-	if (this->panSend > 180)
-	{
-		this->panSend -= 360;
-	}
-	else if (this->panSend < -180)
-	{
-		this->panSend += 360;
-	}
-	if (this->tiltSend > 180)
-	{
-		this->tiltSend -= 360;
-	}
-	else if (this->tiltSend < -180)
-	{
-		this->tiltSend += 360;
-	}
-}
-
 
 int BasePTZCamera::getPanAngle()
 {

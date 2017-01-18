@@ -1,11 +1,13 @@
 // Thanks to @num3ric for sharing Athis:
 // http://discourse.libcinder.org/t/360-vr-video-player-for-ios-in-cinder/294/6
 
-#include "ofApp.h"
+#include "ofApp_All.h"
 
 //--------------------------------------------------------------
 void ofApp::setup() {
-	allowUpdatePT = true;
+	VIDEO_WIDTH = ofGetWidth();
+	VIDEO_HEIGHT = ofGetHeight();
+	allowUpdatePTZ = true;
 	ofSetVerticalSync(false);
 	ofDisableArbTex();
 
@@ -99,29 +101,7 @@ void ofApp::setup() {
 	// Register to receive task queue events.
 	queue.registerTaskProgressEvents(this);
 
-
-#ifdef USE_VIDEO_RECORDER
-#ifdef TARGET_WIN32
-	string appPath = ofFilePath::getAbsolutePath(ofFilePath::getCurrentExePath());
-	vidRecorder.setFfmpegLocation(appPath + "\\ffmpeg.exe"); // use this is you have ffmpeg installed in your data folder
-#endif
-	fileName = "testMovie";
-	fileExt = ".mp4"; // ffmpeg uses the extension to determine the container type. run 'ffmpeg -formats' to see supported formats
-
-					  // override the default codecs if you like
-					  // run 'ffmpeg -codecs' to find out what your implementation supports (or -formats on some older versions)
-	vidRecorder.setVideoCodec("mpeg4");
-	vidRecorder.setVideoBitrate("800k");
-	vidRecorder.setAudioCodec("mp3");
-	vidRecorder.setAudioBitrate("192k");
-	bRecording = false;
-	sampleRate = 44100;
-	channels = 2;
-
-	soundStream.setup(this, 0, channels, sampleRate, 256, 4);
-
-	ofEnableAlphaBlending();
-#endif // USE_VIDEO_RECORDER
+	videoRecorderSetup();
 #ifdef USE_PTZ_ADJUSTMENT
 	Alignment::ptzAlreadyChanged = false;
 #endif
@@ -129,9 +109,7 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
  void ofApp::exit() {
-#ifdef USE_VIDEO_RECORDER
-	 vidRecorder.close();
-#endif // USE_VIDEO_RECORDER
+	 videoRecorderExit();
 	 queue.cancelAll();
 	 combinedCameraQueue.cancelAll();
 }
@@ -141,21 +119,7 @@ void ofApp::setup() {
 	 if (isldCameraConnected)
 	 {
 		 ldVideoGrabber.update();
-#ifdef USE_VIDEO_RECORDER
-		 if (ldVideoGrabber.isFrameNew() && bRecording)
-		 {
-			 vidRecorder.addFrame(ldVideoGrabber.getPixelsRef());
-			 //			 ofLogWarning("This frame was not added!");
-		 }
-		 // Check if the video recorder encountered any error while writing video frame or audio smaples.
-		 if (vidRecorder.hasVideoError()) {
-			 ofLogWarning("The video recorder failed to write some frames!");
-		 }
-
-		 if (vidRecorder.hasAudioError()) {
-			 ofLogWarning("The video recorder failed to write some audio samples!");
-		 }
-#endif
+		 videoRecorderUpdate();
 	 }
 	 if (isHdCameraConnected)
 	 {
@@ -164,20 +128,12 @@ void ofApp::setup() {
 		 panAngle += Alignment::xReturn;
 		 tiltAngle += Alignment::yReturn;
 #endif // USE_PTZ_ADJUSTMENT
-		 if (cameraSelected == "PTZ Camera" && allowUpdatePT)
-		 {
-			 allowUpdatePT = false;
-			 queue.start(new PTZCameraTask("UPDATE PT", hdVideoGrabber.getPTZ()));
-		 }
-
 #ifdef USE_PTZ_ADJUSTMENT
 		 if (!combinedCameraFinished && !Alignment::ptzAlreadyChanged)
 		 {
 			 queue.start(new PTZMotorControl("UPDATE PT", panSend, tiltSend));
 		 }
 #endif
-		 //	 cout << "Tilt sent:\t" << tiltSend << endl;
-		 //	 tiltSend = 0;
 	 }
  }
 //--------------------------------------------------------------
@@ -196,8 +152,8 @@ void ofApp::draw() {
 	if (isHdCameraConnected)
 	{
 		hdFbo.begin();
-//		hdVideoGrabber.draw(VIDEO_WIDTH, VIDEO_HEIGHT, -VIDEO_WIDTH, -VIDEO_HEIGHT);
-		hdVideoGrabber.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
+		hdVideoGrabber.draw(VIDEO_WIDTH, VIDEO_HEIGHT, -VIDEO_WIDTH, -VIDEO_HEIGHT);
+//		hdVideoGrabber.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
 		hdFbo.end();
 	}
 	if (isldCameraConnected && isHdCameraConnected)
@@ -255,16 +211,28 @@ void ofApp::keyPressed(int key) {
 	switch (key)
 	{
 	case 'w':
-		hdVideoGrabber.setTiltAngle(hdVideoGrabber.getTiltAngle() - 1);
+		if (cameraSelected == "PTZ Camera")
+		{
+			ptzCameraCommand(TILT, -1, "UPDATE PTZ");
+		}
 		break;
 	case 's':
-		hdVideoGrabber.setTiltAngle(hdVideoGrabber.getTiltAngle() + 1);
-			break;
+		if (cameraSelected == "PTZ Camera")
+		{
+			ptzCameraCommand(TILT, 1, "UPDATE PTZ");
+		}
+		break;
 	case 'a':
-		hdVideoGrabber.setPanAngle(hdVideoGrabber.getPanAngle() + 1);
+		if (cameraSelected == "PTZ Camera")
+		{
+			ptzCameraCommand(PAN, 1, "UPDATE PTZ");
+		}
 		break;
 	case 'd':
-		hdVideoGrabber.setPanAngle(hdVideoGrabber.getPanAngle() - 1);
+		if (cameraSelected == "PTZ Camera")
+		{
+			ptzCameraCommand(PAN, -1, "UPDATE PTZ");
+		}
 		break;
 	case 'p':
 		onProperty();
@@ -272,14 +240,12 @@ void ofApp::keyPressed(int key) {
 	case 'r':
 		restart();
 		break;
-#ifdef USE_VIDEO_RECORDER
 	case 'l':
-		start_record();
+		videoRecorderStartRecord();
 		break;
 	case 'k':
-		stop_record();
+		videoRecorderStopRecord();
 		break;
-#endif // USE_VIDEO_RECORDER
 	case 'j':
 		Alignment::alreadyChanged = false;
 		combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight));
@@ -316,21 +282,21 @@ void ofApp::mouseDragged(int x, int y, int button) {
 	}
 	if (cameraSelected == "PTZ Camera")
 	{
-		if (y > (prevYDrag + 50))
+		if (y > (prevYDrag + hdVideoGrabber.getCameraTiltDragThres()))
 		{
-			hdVideoGrabber.setTiltAngle(hdVideoGrabber.getTiltAngle() + 1);
+			ptzCameraCommand(TILT, 1, "UPDATE PTZ");
 		}
-		else if (y < (prevYDrag - 50))
+		else if (y < (prevYDrag - hdVideoGrabber.getCameraTiltDragThres()))
 		{
-			hdVideoGrabber.setTiltAngle(hdVideoGrabber.getTiltAngle() - 1);
+			ptzCameraCommand(TILT, -1, "UPDATE PTZ");
 		}
-		if (x >(prevXDrag + 50))
+		if (x >(prevXDrag + hdVideoGrabber.getCameraPanDragThres()))
 		{
-			hdVideoGrabber.setPanAngle(hdVideoGrabber.getPanAngle() - 1);
+			ptzCameraCommand(PAN, -1, "UPDATE PTZ");
 		}
-		else if (x < (prevXDrag - 50))
+		else if (x < (prevXDrag - hdVideoGrabber.getCameraPanDragThres()))
 		{
-			hdVideoGrabber.setPanAngle(hdVideoGrabber.getPanAngle() + 1);
+			ptzCameraCommand(PAN, 1, "UPDATE PTZ");
 		}
 	}
 	else if (cameraSelected == "360 Camera" || cameraSelected == "Combined Camera")
@@ -384,7 +350,7 @@ void ofApp::mouseReleased(int x, int y, int button) {
 	if (cameraSelected == "Combined Camera")
 	{
 		combinedMode = true;
-		queue.start(new PTZCameraTask("UPDATE PT THEN COMBINE",hdVideoGrabber.getPTZ()));
+		ptzCameraCommand("UPDATE PTZ THEN COMBINE");
 	}
 }
 
@@ -392,10 +358,7 @@ void ofApp::mouseScrolled(int x, int y, float scrollX, float scrollY)
 {
 	if (cameraSelected == "PTZ Camera")
 	{
-		long currentValue = hdVideoGrabber.getZoom();
-		long nextZoom = scrollY * 10 + currentValue;
-		hdVideoGrabber.setZoom(nextZoom);
-		hdVideoGrabber.SetZooming();
+		ptzCameraCommand(ZOOM, scrollY, "UPDATE PTZ");
 	}
 }
 //--------------------------------------------------------------
@@ -422,170 +385,3 @@ void ofApp::gotMessage(ofMessage msg) {
 void ofApp::dragEvent(ofDragInfo dragInfo) {
 
 }
-
-void ofApp::onToggle(const void * sender)
-{
-	ofxButton * p = (ofxButton *)sender;
-	cameraSelected = p->getName();
-	if (cameraSelected == "PTZ Camera")
-	{
-		queue.start(new PTZCameraTask("UPDATE PT", hdVideoGrabber.getPTZ()));
-	}
-	if (cameraSelected == "Combined Camera")
-	{
-#ifdef USE_PTZ_ADJUSTMENT
-		Alignment::ptzAlreadyChanged = false;
-#endif
-		queue.start(new PTZCameraTask("UPDATE PT THEN COMBINE", hdVideoGrabber.getPTZ()));
-	}
-}
-
-// ref at http://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToEuler/index.htm
-ofVec3f ofApp::getPTZEuler() const {
-	ofQuaternion myQuaternion = _easyCam.getOrientationQuat();
-	double theta3, theta2, theta1;
-	double e = -1;
-	double p0 = myQuaternion.w(), p1 = myQuaternion.z(), p2 = myQuaternion.x(), p3 = myQuaternion.y();
-	double test = e*p3*p1 + p2*p0;
-	//	cout << test << endl;
-	if (test > 0.499999) { // singularity at north pole
-		theta1 = 2 * atan2(p1, p0);
-		theta2 = PI / 2;
-		theta3 = 0;
-	}
-	else if (test < -0.499999) { // singularity at south pole
-		theta1 = -2 * atan2(p1, p0);
-		theta2 = -PI / 2;
-		theta3 = 0;
-	}
-	else {
-		double sqp3 = p3 * p3;
-		double sqp1 = p1 * p1;
-		double sqp2 = p2 * p2;
-		theta1 = atan2(2.0f * p1 * p0 - 2.0f * p3 * p2 * e, 1.0f - 2.0f*sqp1 - 2.0f*sqp2);
-		theta2 = asin(2 * test);
-		theta3 = atan2(2.0f*p3 * p0 - 2.0f * p1 * p2 * e, 1.0f - 2.0f*sqp3 - 2.0f*sqp2);
-	}
-	float attitude = theta1;
-	float heading = theta3;
-	float bank = theta2;
-	return ofVec3f(ofRadToDeg(bank), ofRadToDeg(heading), ofRadToDeg(attitude));
-}
-
-#ifdef USE_VIDEO_RECORDER
-void ofApp::start_record()
-{
-	bRecording = true;
-	if (bRecording && !vidRecorder.isInitialized()) {
-		vidRecorder.setup(fileName + ofGetTimestampString() + fileExt, ldVideoGrabber.getWidth(), ldVideoGrabber.getHeight(), 30, sampleRate, channels);
-		//          vidRecorder.setup(fileName+ofGetTimestampString()+fileExt, vidGrabber.getWidth(), vidGrabber.getHeight(), 30); // no audio
-		//            vidRecorder.setup(fileName+ofGetTimestampString()+fileExt, 0,0,0, sampleRate, channels); // no video
-		//          vidRecorder.setupCustomOutput(vidGrabber.getWidth(), vidGrabber.getHeight(), 30, sampleRate, channels, "-vcodec mpeg4 -b 1600k -acodec mp2 -ab 128k -f mpegts udp://localhost:1234"); // for custom ffmpeg output string (streaming, etc)
-
-		// Start recording
-		vidRecorder.start();
-	}
-	else if (!bRecording && vidRecorder.isInitialized()) {
-		vidRecorder.setPaused(true);
-	}
-	else if (bRecording && vidRecorder.isInitialized()) {
-		vidRecorder.setPaused(false);
-	}
-}
-
-void ofApp::stop_record()
-{
-	bRecording = false;
-	vidRecorder.close();
-}
-
-#endif // USE_VIDEO_RECORDER
-void ofApp::printScreen()
-{
-	hdImage.save("PTZ.jpg");
-	ofImage ldImage;
-	ldImage.setFromPixels(ldPixels);
-	ldImage.setImageType(OF_IMAGE_COLOR);
-	ldImage.save("360.jpg");
-}
-
-
-void ofApp::onTaskQueued(const ofx::TaskQueueEventArgs & args)
-{
-}
-
-void ofApp::onTaskStarted(const ofx::TaskQueueEventArgs & args)
-{
-	taskProgress[args.getTaskId()].update(args);
-	if (args.getTaskName() == "Combined Camera")
-	{
-		combinedCameraFinished = false;
-	}
-}
-
-void ofApp::onTaskCancelled(const ofx::TaskQueueEventArgs & args)
-{
-}
-
-void ofApp::onTaskFinished(const ofx::TaskQueueEventArgs & args)
-{
-	taskProgress[args.getTaskId()].update(args);
-	if (args.getTaskName() == "Combined Camera")
-	{
-		if (Alignment::alreadyChanged)
-		{
-			combinedCameraFinished = true;
-		}
-		else
-		{
-			combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight));
-		}
-	}
-	else if (args.getTaskName() == "UPDATE PT THEN COMBINE")
-	{
-		allowUpdatePT = true;
-		ofSleepMillis(1000);
-		Alignment::alreadyChanged = false;
-		combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight));
-	}
-	else
-	{
-		allowUpdatePT = true;
-	}
-}
-
-void ofApp::onTaskFailed(const ofx::TaskFailedEventArgs & args)
-{
-}
-
-void ofApp::onTaskProgress(const ofx::TaskProgressEventArgs & args)
-{
-}
-
-void ofApp::onProperty()
-{
-	if (cameraSelected == "PTZ Camera")
-	{
-		hdVideoGrabber.videoSettings();
-	}
-}
-
-void ofApp::restart()
-{
-	_easyCam.reset();
-	_easyCam.rotate(-90, 0, 0, 1);
-
-	hdVideoGrabber.setPanAngle(0);
-	hdVideoGrabber.setTiltAngle(0);
-
-	queue.start(new PTZCameraTask("UPDATE PT", hdVideoGrabber.getPTZ()));
-}
-
-#ifdef USE_VIDEO_RECORDER
-void ofApp::audioIn(float *input, int bufferSize, int nChannels) {
-	if (bRecording)
-		vidRecorder.addAudioSamples(input, bufferSize, nChannels);
-}
-#endif // USE_VIDEO_RECORDER
-
-
