@@ -3,11 +3,25 @@
 
 void ofApp::printScreen()
 {
-	hdImage.save("PTZ.jpg");
-	ofImage ldImage;
-	ldImage.setFromPixels(ldPixels);
-	ldImage.setImageType(OF_IMAGE_COLOR);
-	ldImage.save("360.jpg");
+	if (isHdCameraConnected)
+	{
+		stringstream hdImageName;
+		ofImage hdImage;
+		hdImage.setFromPixels(hdPixels);
+		hdImage.setImageType(OF_IMAGE_COLOR);
+		hdImageName << "PTZ_" << printScreenCount << ".jpg";
+		hdImage.save(hdImageName.str());
+	}
+	if (isldCameraConnected)
+	{
+		stringstream ldImageName;
+		ofImage ldImage;
+		ldImage.setFromPixels(ldPixels);
+		ldImage.setImageType(OF_IMAGE_COLOR);
+		ldImageName << "360_" << printScreenCount << ".jpg";
+		ldImage.save(ldImageName.str());
+	}
+	printScreenCount++;
 }
 
 void ofApp::restart()

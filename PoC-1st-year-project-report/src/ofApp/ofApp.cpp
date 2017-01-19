@@ -10,7 +10,7 @@ void ofApp::setup() {
 	allowUpdatePTZ = true;
 	ofSetVerticalSync(false);
 	ofDisableArbTex();
-
+	printScreenCount = 0;
 	listVideoDevice = ldVideoGrabber.listDevices();
 	isldCameraConnected = false;
 	isHdCameraConnected = false;
@@ -19,6 +19,7 @@ void ofApp::setup() {
 		ofLog(OF_LOG_VERBOSE, listVideoDevice[i].deviceName);
 		if (listVideoDevice[i].deviceName == "RICOH THETA S") {
 			isldCameraConnected = true;
+			ldPixels.allocate(VIDEO_WIDTH, VIDEO_HEIGHT, OF_IMAGE_COLOR);
 			ldToggle.setup("360 Camera", false);
 			ldToggle.addListener(this, &ofApp::onToggle);
 			_panel.add(&ldToggle);
@@ -51,6 +52,7 @@ void ofApp::setup() {
 			hdToggle.addListener(this, &ofApp::onToggle);
 			_panel.add(&hdToggle);
 			isHdCameraConnected = true;
+			hdPixels.allocate(VIDEO_WIDTH, VIDEO_HEIGHT, OF_IMAGE_COLOR);
 		}
 	}
 
@@ -72,7 +74,6 @@ void ofApp::setup() {
 		combinedImage.allocate(VIDEO_WIDTH, VIDEO_HEIGHT, OF_IMAGE_COLOR);
 		combinedToggle.setup("Combined Camera", false);
 		combinedToggle.addListener(this, &ofApp::onToggle);
-		ldPixels.allocate(VIDEO_WIDTH, VIDEO_HEIGHT, OF_IMAGE_COLOR);
 		_panel.add(&combinedToggle);
 		combinedCameraQueue.setMaximumTasks(1);
 		combinedCameraQueue.registerTaskProgressEvents(this);
@@ -148,6 +149,7 @@ void ofApp::draw() {
 		ldVideoGrabber.getTextureReference().unbind();
 		_easyCam.end();
 		ldFbo.end();
+		ldFbo.readToPixels(ldPixels);
 	}
 	if (isHdCameraConnected)
 	{
@@ -155,11 +157,8 @@ void ofApp::draw() {
 		hdVideoGrabber.draw(VIDEO_WIDTH, VIDEO_HEIGHT, -VIDEO_WIDTH, -VIDEO_HEIGHT);
 //		hdVideoGrabber.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
 		hdFbo.end();
-	}
-	if (isldCameraConnected && isHdCameraConnected)
-	{
-		ldFbo.readToPixels(ldPixels);
-		hdImage.setFromPixels(hdVideoGrabber.getPixels());
+		hdFbo.readToPixels(hdPixels);
+		hdImage.setFromPixels(hdPixels);
 	}
 	if (cameraSelected == "360 Camera")
 	{

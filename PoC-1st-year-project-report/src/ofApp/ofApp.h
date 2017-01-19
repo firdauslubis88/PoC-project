@@ -49,6 +49,7 @@ public:
 	void gotMessage(ofMessage msg);
 
 	//UTIL functions
+	int printScreenCount;
 	void onToggle(const void* sender);
 	void restart();
 	void printScreen();
@@ -115,6 +116,7 @@ public:
 
 	string cameraSelected;
 	ofPixels ldPixels;
+	ofPixels hdPixels;
 
 	int prevXDrag;
 	int prevYDrag;

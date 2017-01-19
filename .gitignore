@@ -139,3 +139,5 @@ dxl_x64_cpp.iobj
 dxl_x64_cpp.ipdb
 dxl_x64_cpp.lib
 filename.txt
+*.jpg
+*.obj
