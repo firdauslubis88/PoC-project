@@ -31,7 +31,6 @@ public:
 
 	void setup();
 	void exit();
-
 	void update();
 	void draw();
 
@@ -48,22 +47,21 @@ public:
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
 
-	//UTIL functions
+	//UTIL variables and functions
 	int printScreenCount;
 	void onToggle(const void* sender);
 	void restart();
 	void printScreen();
 
-	//PTZ functions
+	//PTZ variables and functions
 	void onProperty();
 	ofVec3f getPTZEuler() const;
 	void ptzCameraCommand(PTZSIGN sign, int value, string taskName);
 	void ptzCameraCommand(string taskName);
 
-	//THREAD TASK functions
+	//THREAD TASK variables and functions
 	ofx::TaskQueue queue, combinedCameraQueue;
 	typedef std::map<std::string, SimpleTaskProgress> TaskProgress;
-	// We keep a simple task progress queue.
 	TaskProgress taskProgress;
 	void onTaskQueued(const ofx::TaskQueueEventArgs & args);
 	void onTaskStarted(const ofx::TaskQueueEventArgs & args);
@@ -72,7 +70,7 @@ public:
 	void onTaskFailed(const ofx::TaskFailedEventArgs & args);
 	void onTaskProgress(const ofx::TaskProgressEventArgs & args);
 
-	//VIDEO RECORDER functions
+	//VIDEO RECORDER variables and functions
 	ofxVideoRecorder    vidRecorder;
 	bool bRecording;
 	string fileName;
@@ -87,13 +85,13 @@ public:
 	bool videoRecorderStopRecord();
 	void audioIn(float * input, int bufferSize, int nChannels);
 
-	//HMD functions
+	//HMD variables and functions
 	ofxOpenVR openVR;
 	void render(vr::Hmd_Eye nEye);
 
+	//OFAPP variables and functions
 	bool bShowHelp;
 	std::ostringstream _strHelp;
-
 	int VIDEO_WIDTH, VIDEO_HEIGHT;
 	ofFbo ldFbo;
 	ofFbo hdFbo;
@@ -113,19 +111,17 @@ public:
 	ofxButton ldToggle;
 	ofxButton hdToggle;
 	ofxButton combinedToggle;
-
 	string cameraSelected;
 	ofPixels ldPixels;
 	ofPixels hdPixels;
-
 	int prevXDrag;
 	int prevYDrag;
-
 	bool combinedCameraFinished;
 	bool showROI;
 	bool combinedMode;
 	bool allowUpdatePTZ;
 
+	//COMBINEDCAMERA variables and functions
 	CombinedCamera combinedCamera;
 	float maskXStart;
 	float maskYStart;

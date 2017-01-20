@@ -103,6 +103,15 @@
     <ClCompile Include="src\task\PTZMotorControl.cpp">
       <Filter>src\task</Filter>
     </ClCompile>
+    <ClCompile Include="src\ofApp\ofApp_calibration.cpp">
+      <Filter>src\ofApp</Filter>
+    </ClCompile>
+    <ClCompile Include="src\calibration\Calibration.cpp">
+      <Filter>src\calibration</Filter>
+    </ClCompile>
+    <ClCompile Include="src\calibration\StereoCalibration.cpp">
+      <Filter>src\calibration</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -368,6 +377,9 @@
     </Filter>
     <Filter Include="src\task">
       <UniqueIdentifier>{b69b1848-fb88-4387-9601-f6d1c8548db5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\calibration">
+      <UniqueIdentifier>{389ba444-da9c-441f-85db-ebe6aa9495c8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1780,6 +1792,21 @@
     </ClInclude>
     <ClInclude Include="src\task\PTZMotorControl.h">
       <Filter>src\task</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ofApp\ofApp_calibration.h">
+      <Filter>src\ofApp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\calibration\NSCalibration.h">
+      <Filter>src\calibration</Filter>
+    </ClInclude>
+    <ClInclude Include="src\calibration\Calibration.h">
+      <Filter>src\calibration</Filter>
+    </ClInclude>
+    <ClInclude Include="src\calibration\NSStereoCalibration.h">
+      <Filter>src\calibration</Filter>
+    </ClInclude>
+    <ClInclude Include="src\calibration\StereoCalibration.h">
+      <Filter>src\calibration</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

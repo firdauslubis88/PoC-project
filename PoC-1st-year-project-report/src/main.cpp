@@ -1,14 +1,15 @@
 #include "ofMain.h"
 #include "ofApp.h"
 #include "ofAppVR.h"
+#include "ofApp_calibration.h"
 #include "ofAppGLFWWindow.h"
 
 //========================================================================
 int main( ){
 	ofGLFWWindowSettings settings;
 	settings.setGLVersion(4, 1);
-	settings.width = 1280;
-	settings.height = 640;
+	settings.width = 640;
+	settings.height = 480;
 	settings.setPosition(ofVec2f(0, 0));
 	shared_ptr<ofAppBaseWindow> dualCameraWindow = ofCreateWindow(settings);
 	HWND hWnd = dualCameraWindow->getWin32Window();
@@ -22,10 +23,12 @@ int main( ){
 //	shared_ptr<ofAppBaseWindow> vrWindow = ofCreateWindow(settings);
 
 //	shared_ptr<ofAppVR> vrApp(new ofAppVR);
-	shared_ptr<ofApp> mainApp(new ofApp);
+//	shared_ptr<ofApp> mainApp(new ofApp);
+	shared_ptr<ofApp_calibration> calibrationApp(new ofApp_calibration);
+
 //	vrApp->mainApp = mainApp;
 
-	ofRunApp(dualCameraWindow, mainApp);
+	ofRunApp(dualCameraWindow, calibrationApp);
 //	ofRunApp(vrWindow, vrApp);
 	ofRunMainLoop();
 }

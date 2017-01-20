@@ -6,8 +6,8 @@
 #include "opencv2/core/core.hpp"
 #include "opencv2/photo/photo.hpp"
 
-using namespace cv;
-using namespace std;
+//using namespace cv;
+//using namespace std;
 
 typedef struct boundary_coords {
 	int i;
@@ -20,12 +20,12 @@ class Cloning
 public:
 	Cloning() = default;
 	void normalClone(const cv::Mat& destination, const cv::Mat &mask, const cv::Mat &wmask, cv::Mat &cloned, int flag);
-	static void MVCSeamlessClone(Mat source, Mat target, Mat mask, Point center, Mat & clone);
+	static void MVCSeamlessClone(cv::Mat source, cv::Mat target, cv::Mat mask, cv::Point center, cv::Mat & clone);
 	static bool alreadyPrecalculated;
 	static float*** source_MVC_0, *** source_MVC_1, ***source_MVC_2;
 	static int num_MVC_dim, prev_num_MVC_dim;
 	static MVC_Coords* mvc;
-	static vector<int> vPart_MVC;
+	static std::vector<int> vPart_MVC;
 
 	enum CLONE_TYPE
 	{
@@ -298,9 +298,9 @@ protected:
 	void scalarProduct(cv::Mat mat, float r, float g, float b);
 	void poisson(const cv::Mat &destination);
 	void evaluate(const cv::Mat &I, const cv::Mat &wmask, const cv::Mat &cloned);
-	void dst(const Mat& src, Mat& dest, bool invert = false);
-	void idst(const Mat& src, Mat& dest);
-	void solve(const Mat &img, Mat& mod_diff, Mat &result);
+	void dst(const cv::Mat& src, cv::Mat& dest, bool invert = false);
+	void idst(const cv::Mat& src, cv::Mat& dest);
+	void solve(const cv::Mat &img, cv::Mat& mod_diff, cv::Mat &result);
 
 	void poissonSolver(const cv::Mat &img, cv::Mat &gxx, cv::Mat &gyy, cv::Mat &result);
 

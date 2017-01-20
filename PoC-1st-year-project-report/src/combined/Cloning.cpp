@@ -1,6 +1,9 @@
 #include "Cloning.h"
 #include <iostream>
 
+using namespace std;
+using namespace cv;
+
 float*** Cloning::source_MVC_0 = nullptr, *** Cloning::source_MVC_1 = nullptr, ***Cloning::source_MVC_2 = nullptr;
 int Cloning::num_MVC_dim = 0, Cloning::prev_num_MVC_dim = 0;
 MVC_Coords* Cloning::mvc = nullptr;

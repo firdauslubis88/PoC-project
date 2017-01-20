@@ -1,5 +1,8 @@
 #include "CombinedCamera.h"
 
+using namespace std;
+using namespace cv;
+
 ofxCvColorImage CombinedCamera::ldCvImage, CombinedCamera::hdCvImage, CombinedCamera::combinedCvImage, CombinedCamera::ldCvImage2, CombinedCamera::hdCvImage2, CombinedCamera::combinedCvImage2;
 bool CombinedCamera::skipCloning = false, CombinedCamera::skipAligning = false, CombinedCamera::alreadyInitialized = false;
 

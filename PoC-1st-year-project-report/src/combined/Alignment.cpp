@@ -1,5 +1,10 @@
 #include "Alignment.h"
 
+using namespace std;
+using namespace cv;
+using namespace cv::xfeatures2d;
+using namespace cv::reg;
+
 bool Alignment::alreadyCreated = false;
 bool Alignment::alreadyChanged = false;
 bool Alignment::ptzAlreadyChanged = false;
@@ -11,6 +16,7 @@ int Alignment::xReturn = 0;
 int Alignment::yReturn = 0;
 Ptr<Map> Alignment::mapPtr;
 int Alignment::counter = 0;
+
 
 Alignment::Alignment()
 {

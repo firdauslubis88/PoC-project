@@ -4,7 +4,7 @@
 #include "Alignment.h"
 #include "Cloning.h"
 
-using namespace cv;
+//using namespace cv;
 
 class CombinedCamera
 {
