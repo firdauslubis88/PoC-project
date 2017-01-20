@@ -141,3 +141,4 @@ dxl_x64_cpp.lib
 filename.txt
 *.jpg
 *.obj
+*.dll
