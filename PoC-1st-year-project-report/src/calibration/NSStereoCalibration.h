@@ -9,20 +9,21 @@
 //#include <algorithm>
 #include <iostream>
 #include <iterator>
+#include "NSCalibration.h"
 
 //using namespace std;
 //using namespace cv;
 
 
 
-enum { DETECTION = 0, CAPTURING = 1, CALIBRATED = 2 };
-enum Pattern { CHESSBOARD, CIRCLES_GRID, ASYMMETRIC_CIRCLES_GRID };
+//enum { DETECTION = 0, CAPTURING = 1, CALIBRATED = 2 };
+//enum Pattern { CHESSBOARD, CIRCLES_GRID, ASYMMETRIC_CIRCLES_GRID };
 
-enum INPUT_TYPE {
-	bLiveVideo,
-	bVideoInput,
-	bFileInput
-};
+//enum INPUT_TYPE {
+//	bLiveVideo,
+//	bVideoInput,
+//	bFileInput
+//};
 
 namespace {
 	void StereoCalib(const std::vector<std::string>& imagelist, cv::Size boardSize, float squareSize, bool displayCorners = false, bool useCalibrated = true, bool showRectified = true)

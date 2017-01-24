@@ -11,9 +11,9 @@ public:
 
 
 	bool init(int image_width, int image_height, int chess_width, int chess_height, float square_size, INPUT_TYPE type);
-	ofPixels main(ofPixels ldPixels);
 	ofPixels main(ofPixels ldPixels, int image_width, int image_height, int x, int y, int width, int height);
 	bool main(ofImage hdImage);
+	bool main(ofPixels ldPixels);
 	ofPixels main(ofImage hdImage, int image_width, int image_height, int x, int y, int width, int height);
 	ofPixels main(ofPixels ldPixels, ofImage hdImage);
 	ofPixels main(ofPixels ldPixels, ofImage hdImage, int image_width, int image_height, int x, int y, int width, int height);
@@ -21,17 +21,16 @@ public:
 	ofxCvColorImage ldCvImage, hdCvImage;
 
 	bool bStartCapture;
-	Size boardSize, imageSize;
+	cv::Size boardSize, imageSize;
 	float squareSize, aspectRatio;
-	Mat cameraMatrix, distCoeffs;
-	string outputFilename;
-	string inputFilename = "";
+	cv::Mat cameraMatrix, distCoeffs;
+	std::string outputFilename;
+	std::string inputFilename = "";
 
 	int i, nframes;
 	bool writeExtrinsics, writePoints;
 	bool undistortImage = false;
 	int flags = 0;
-	VideoCapture capture;
 	bool flipVertical;
 	bool showUndistorted;
 	bool videofile;
@@ -41,9 +40,9 @@ public:
 	int cameraId = 0;
 	vector<string> imageList;
 	Pattern pattern;
-	ofxCvColorImage calibrationView;
+	ofxCvColorImage ldCalibrationView, hdCalibrationView;
 
 private:
-	vector<vector<Point2f> > imagePoints;
+	std::vector<std::vector<cv::Point2f> > imagePoints;
 };
 

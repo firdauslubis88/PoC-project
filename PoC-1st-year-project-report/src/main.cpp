@@ -9,7 +9,7 @@ int main( ){
 	ofGLFWWindowSettings settings;
 	settings.setGLVersion(4, 1);
 	settings.width = 640;
-	settings.height = 480;
+	settings.height = 960;
 	settings.setPosition(ofVec2f(0, 0));
 	shared_ptr<ofAppBaseWindow> dualCameraWindow = ofCreateWindow(settings);
 	HWND hWnd = dualCameraWindow->getWin32Window();

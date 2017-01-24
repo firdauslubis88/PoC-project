@@ -2,8 +2,9 @@
 
 void ofApp_calibration::setup()
 {
-	VIDEO_WIDTH = ofGetWidth();
-	VIDEO_HEIGHT = ofGetHeight();
+	ofDisableArbTex();
+	VIDEO_WIDTH = 640;
+	VIDEO_HEIGHT = 480;
 	bLdCameraShow = false;
 	bHdCameraShow = false;
 	
@@ -54,7 +55,17 @@ void ofApp_calibration::setup()
 	{
 		ofLog(OF_LOG_ERROR, "NO PTZ CAMERA FOUND!!");
 	}
-	calibration.init(VIDEO_WIDTH, VIDEO_HEIGHT, 9, 6, 0.0262, bLiveVideo);
+
+//	calibration.init(VIDEO_WIDTH, VIDEO_HEIGHT, 9, 6, 0.0262, bLiveVideo);
+	stereoCalibration.init(VIDEO_WIDTH, VIDEO_HEIGHT, 9, 6, 0.0262, bLiveVideo);
+
+	_panel.setup();
+	calibrationToggle.setup("Single Calibration", false);
+	calibrationToggle.addListener(this, &ofApp_calibration::onToggle);
+	_panel.add(&calibrationToggle);
+	stereoCalibrationToggle.setup("Stereo Calibration", false);
+	stereoCalibrationToggle.addListener(this, &ofApp_calibration::onToggle);
+	_panel.add(&stereoCalibrationToggle);
 }
 
 void ofApp_calibration::exit()
@@ -105,8 +116,12 @@ void ofApp_calibration::draw()
 			hdFbo.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
 		}
 	}
-	calibration.main(hdImage);
-	calibration.calibrationView.draw(0, 0);
+//	calibration.main(hdImage);
+//	calibration.hdCalibrationView.draw(0, 0);
+	stereoCalibration.main(ldPixels, hdImage);
+	stereoCalibration.ldCalibrationView.draw(0, 0);
+	stereoCalibration.hdCalibrationView.draw(0, 480);
+	_panel.draw();
 }
 
 void ofApp_calibration::keyPressed(int key)
@@ -114,10 +129,10 @@ void ofApp_calibration::keyPressed(int key)
 	switch (key)
 	{
 	case 'g':
-		calibration.bStartCapture = true;
+		stereoCalibration.bStartCapture = true;
 		break;
 	case 'u':
-		calibration.undistortImage = !calibration.undistortImage;
+		stereoCalibration.undistortImage = !stereoCalibration.undistortImage;
 		break;
 	default:
 		break;
@@ -166,4 +181,19 @@ void ofApp_calibration::dragEvent(ofDragInfo dragInfo)
 
 void ofApp_calibration::gotMessage(ofMessage msg)
 {
+}
+
+void ofApp_calibration::onToggle(const void * sender)
+{
+	ofxButton * p = (ofxButton *)sender;
+	cameraSelected = p->getName();
+	if (cameraSelected == "Single Calibration")
+	{
+		VIDEO_HEIGHT = 480;
+	}
+	if (cameraSelected == "Stereo Calibration")
+	{
+		VIDEO_HEIGHT = 960;
+	}
+	ofSetWindowShape(VIDEO_WIDTH, VIDEO_HEIGHT);
 }

@@ -3,6 +3,7 @@
 #include "ofxGui.h"
 #include "PTZCamera.h"
 #include "Calibration.h"
+#include "StereoCalibration.h"
 
 class ofApp_calibration: public ofBaseApp
 {
@@ -24,9 +25,11 @@ public:
 	void windowResized(int w, int h);
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
+	void onToggle(const void* sender);
 
 	//CALIBRATION variables and functions
 	Calibration calibration = Calibration();
+	StereoCalibration stereoCalibration = StereoCalibration();
 
 	bool bShowHelp, bHdCameraShow, bLdCameraShow;
 	std::ostringstream _strHelp;
@@ -45,9 +48,6 @@ public:
 	bool isCombined;
 	ofShader shader;
 	ofSpherePrimitive sphere;
-	ofxPanel _panel;
-	ofxButton ldToggle;
-	ofxButton hdToggle;
 	ofxButton combinedToggle;
 	string cameraSelected;
 	ofPixels ldPixels;
@@ -58,5 +58,9 @@ public:
 	bool showROI;
 	bool combinedMode;
 	bool allowUpdatePTZ;
+
+	ofxPanel _panel;
+	ofxButton calibrationToggle;
+	ofxButton stereoCalibrationToggle;
 };
 
