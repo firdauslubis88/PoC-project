@@ -15,5 +15,5 @@ void CombinedCameraTask::runTask()
 {
 //	Alignment::ptzAlreadyChanged = false;
 //	Alignment::alreadyChanged = false;
-	CombinedCamera::combine_align(privateLdPixels, privateHdImage, privateImage_width, privateImage_height, privateX, privateY, privateWidth, privateHeight);
+	combinedCamera.combine_align(privateLdPixels, privateHdImage, privateImage_width, privateImage_height, privateX, privateY, privateWidth, privateHeight);
 }

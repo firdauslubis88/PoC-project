@@ -95,7 +95,7 @@ void ofApp::setup() {
 	maskWidth = 432;
 	maskHeight = 224;
 
-	CombinedCamera::setSkipCloning(true);
+	combinedCamera.setSkipCloning(true);
 
 	// Limit the maximum number of tasks for shared thread pools.
 	queue.setMaximumTasks(1);
@@ -181,7 +181,7 @@ void ofApp::draw() {
 	{
 		if (combinedMode)
 		{
-			combinedImage.setFromPixels(CombinedCamera::combine_direct(ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight));
+			combinedImage.setFromPixels(combinedCamera.combine_direct(ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight));
 			combinedImage.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
 		}
 		else
@@ -246,11 +246,11 @@ void ofApp::keyPressed(int key) {
 		videoRecorderStopRecord();
 		break;
 	case 'j':
-		Alignment::alreadyChanged = false;
+		combinedCamera.alignment.alreadyChanged = false;
 		combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight));
 		break;
 	case 'n':
-		Alignment::alreadyChanged = true;
+		combinedCamera.alignment.alreadyChanged = true;
 		break;
 	case 'h':
 		showROI = !showROI;

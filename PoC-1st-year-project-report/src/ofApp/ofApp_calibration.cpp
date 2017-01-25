@@ -121,6 +121,10 @@ void ofApp_calibration::draw()
 	stereoCalibration.main(ldPixels, hdImage);
 	stereoCalibration.ldCalibrationView.draw(0, 0);
 	stereoCalibration.hdCalibrationView.draw(0, 480);
+	if (stereoCalibration.mode == CALIBRATED)
+	{
+		stereoCalibration.rectifyCalibrationView.draw(640, 0);
+	}
 	_panel.draw();
 }
 
@@ -133,6 +137,9 @@ void ofApp_calibration::keyPressed(int key)
 		break;
 	case 'u':
 		stereoCalibration.undistortImage = !stereoCalibration.undistortImage;
+		break;
+	case 't':
+		stereoCalibration.trackImage = !stereoCalibration.trackImage;
 		break;
 	default:
 		break;
@@ -187,13 +194,16 @@ void ofApp_calibration::onToggle(const void * sender)
 {
 	ofxButton * p = (ofxButton *)sender;
 	cameraSelected = p->getName();
+	int WINDOW_WIDTH, WINDOW_HEIGHT;
 	if (cameraSelected == "Single Calibration")
 	{
-		VIDEO_HEIGHT = 480;
+		WINDOW_WIDTH = 640;
+		WINDOW_HEIGHT = 480;
 	}
 	if (cameraSelected == "Stereo Calibration")
 	{
-		VIDEO_HEIGHT = 960;
+		WINDOW_WIDTH = 1280;
+		WINDOW_HEIGHT = 960;
 	}
-	ofSetWindowShape(VIDEO_WIDTH, VIDEO_HEIGHT);
+	ofSetWindowShape(WINDOW_WIDTH, WINDOW_HEIGHT);
 }

@@ -730,7 +730,6 @@ D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxVideoRecorder\src;%(Add
     <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxVideoRecorder\src\ofxVideoRecorder.h" />
     <ClInclude Include="src\calibration\Calibration.h" />
     <ClInclude Include="src\calibration\NSCalibration.h" />
-    <ClInclude Include="src\calibration\NSStereoCalibration.h" />
     <ClInclude Include="src\calibration\StereoCalibration.h" />
     <ClInclude Include="src\combined\Alignment.h" />
     <ClInclude Include="src\combined\Cloning.h" />

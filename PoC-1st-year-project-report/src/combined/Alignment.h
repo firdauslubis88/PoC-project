@@ -27,23 +27,25 @@ class Alignment
 public:
 	Alignment();
 	Alignment(int minHessian);
-	static void ptzAlign(const cv::Mat refImage, const cv::Mat inputImage, const int x, const int y, const int mask_width, const int mask_height);
-	static void align(cv::Mat refImage, cv::Mat inputImage, int x, int y, int mask_width, int mask_height);
-	static cv::Mat align_direct(cv::Mat refImage, cv::Mat inputImage, int x, int y, int mask_width, int mask_height);
-	static void align_reglib(cv::Mat refImage, cv::Mat inputImage, int x, int y, int mask_width, int mask_height);
-	static cv::Mat align_direct_reglib(cv::Mat refImage, cv::Mat inputImage, int x, int y, int mask_width, int mask_height);
-	static bool ptzAlreadyChanged;
-	static bool alreadyChanged;
-	static int xReturn, yReturn;
-	static cv::Ptr<cv::reg::Map> mapPtr;
+	void ptzAlign(const cv::Mat refImage, const cv::Mat inputImage, const int x, const int y, const int mask_width, const int mask_height);
+	std::pair<cv::Point2f, cv::Point2f> track(cv::Mat refImage, cv::Mat inputImage, int x, int y, int mask_width, int mask_height);
+	void align(cv::Mat refImage, cv::Mat inputImage, int x, int y, int mask_width, int mask_height);
+	cv::Mat align_direct(cv::Mat refImage, cv::Mat inputImage, int x, int y, int mask_width, int mask_height);
+	void align_reglib(cv::Mat refImage, cv::Mat inputImage, int x, int y, int mask_width, int mask_height);
+	cv::Mat align_direct_reglib(cv::Mat refImage, cv::Mat inputImage, int x, int y, int mask_width, int mask_height);
+	bool ptzAlreadyChanged;
+	bool alreadyChanged;
+	bool bPair;
+	int xReturn, yReturn;
+	cv::Ptr<cv::reg::Map> mapPtr;
 	~Alignment();
 
 private:
-	static cv::Ptr<cv::xfeatures2d::SURF> detector;
-	static float comparisonThreshold;
-	static cv::Mat hBig;
-	static bool alreadyCreated;
-	static int minHessian;
-	static int counter;
+	cv::Ptr<cv::xfeatures2d::SURF> detector;
+	float comparisonThreshold;
+	cv::Mat hBig;
+	bool alreadyCreated;
+	int minHessian;
+	int counter;
 };
 

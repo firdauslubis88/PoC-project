@@ -10,6 +10,7 @@ public:
 	void runTask();
 
 private:
+	CombinedCamera combinedCamera;
 	ofPixels privateLdPixels;
 	ofImage privateHdImage;
 	int privateImage_width;

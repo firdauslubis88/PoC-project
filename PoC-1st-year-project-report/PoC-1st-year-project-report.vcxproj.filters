@@ -1802,9 +1802,6 @@
     <ClInclude Include="src\calibration\Calibration.h">
       <Filter>src\calibration</Filter>
     </ClInclude>
-    <ClInclude Include="src\calibration\NSStereoCalibration.h">
-      <Filter>src\calibration</Filter>
-    </ClInclude>
     <ClInclude Include="src\calibration\StereoCalibration.h">
       <Filter>src\calibration</Filter>
     </ClInclude>

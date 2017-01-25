@@ -20,6 +20,8 @@ StereoCalibration::StereoCalibration()
 	undistortImage = false;
 	nimages = nframes;
 	j = 0;
+	isVerticalStereo = true;
+	trackImage = false;
 }
 
 
@@ -67,8 +69,10 @@ bool StereoCalibration::init(int image_width, int image_height, int chess_width,
 
 	ldCvImage.allocate(image_width, image_height);
 	hdCvImage.allocate(image_width, image_height);
+	rectifyCvImage.allocate(image_width, 2 * image_height);
 	ldCalibrationView.allocate(image_width, image_height);
 	hdCalibrationView.allocate(image_width, image_height);
+	rectifyCalibrationView.allocate(image_width, 2 * image_height);
 	imagePoints[0].resize(nimages);
 	imagePoints[1].resize(nimages);
 
@@ -79,7 +83,7 @@ bool StereoCalibration::init(int image_width, int image_height, int chess_width,
 
 bool StereoCalibration::main(ofPixels ldPixels, ofImage hdImage)
 {
-	Mat ldView, hdView, ldViewGray, hdViewGray;
+	Mat ldView, hdView, ldViewGray, hdViewGray, rectifyView;
 
 	ofImage ldImage;
 
@@ -227,66 +231,94 @@ bool StereoCalibration::main(ofPixels ldPixels, ofImage hdImage)
 	}
 	else if (mode == CALIBRATED)
 	{
-		if (!undistortImage)
+		Mat canvas;
+		vector<Point2f> ldPoint, hdPoint;
+//		Mat ldMat = Mat(2,1,CV_64FC1), hdMat = Mat(2, 1, CV_64FC1);
+		if (trackImage)
 		{
-		}
-		else 
-		{
-			Mat ldTemp = ldView.clone();
-			undistort(ldTemp, ldView, cameraMatrix[0], distCoeffs[0]);
-			Mat hdTemp = hdView.clone();
-			undistort(hdTemp, hdView, cameraMatrix[1], distCoeffs[1]);
+			pair<Point2f, Point2f>trackedPair = alignment.track(ldView, hdView, 213, 160, 213, 160);
+//			cout << trackedPair.first << endl;
+			circle(bothImages[0], trackedPair.first, 2, Scalar(255, 0, 0), -1);
+			circle(bothImages[1], trackedPair.second, 2, Scalar(255, 0, 0), -1);
 			/*
+			ldMat.at<double>(0, 0) = trackedPair.first.x;
+			ldMat.at<double>(1, 0) = trackedPair.first.y;
+			hdMat.at<double>(0, 0) = trackedPair.second.x;
+			hdMat.at<double>(1, 0) = trackedPair.second.y;
+			*/
+			ldPoint.push_back(trackedPair.first);
+			hdPoint.push_back(trackedPair.second);
+//			cout << "BEFORE:\t" << ldPoint << endl;
+			undistortPoints(ldPoint, ldPoint, cameraMatrix[0], distCoeffs[0], Mat(), cameraMatrix[0]);
+			undistortPoints(hdPoint, hdPoint, cameraMatrix[1], distCoeffs[1], Mat(), cameraMatrix[1]);
+//			cout << "AFTER:\t" << ldPoint << endl;
+			Mat triangulationResult = Mat(4, 1, CV_64FC1);
+			Mat cam0, cam1, RT0, RT1;
+			RT0 = Mat(3, 4, CV_64FC1);
+			RT1 = Mat(3, 4, CV_64FC1);
+			RT0(Rect(0, 0, 3, 3)) = Mat::eye(3, 3, CV_64FC1);
+			RT0(Rect(3, 0, 1, 3)) = Mat::zeros(3, 1, CV_64FC1);
+			R.copyTo(RT1(Rect(0, 0, 3, 3)));
+			T.copyTo(RT1(Rect(3, 0, 1, 3)));
+//			cout << RT0 << endl;
+//			cout << RT1 << endl;
+
+			triangulatePoints(P1, P2, ldPoint, hdPoint, triangulationResult);
+			cout << "Distance:\t" << triangulationResult.at<float>(2, 0)/triangulationResult.at<float>(3, 0) << endl;
+//			cout << triangulationResult << endl;
+		}
+		if (undistortImage)
+		{
 			//Precompute maps for cv::remap()
 			initUndistortRectifyMap(cameraMatrix[0], distCoeffs[0], R1, P1, imageSize, CV_16SC2, rmap[0][0], rmap[0][1]);
 			initUndistortRectifyMap(cameraMatrix[1], distCoeffs[1], R2, P2, imageSize, CV_16SC2, rmap[1][0], rmap[1][1]);
-			Mat canvas;
-			double sf;
+			double sf = 1.0;
 			int w, h;
 			if (!isVerticalStereo)
 			{
-			sf = 600. / (imageSize.width>imageSize.height? imageSize.width: imageSize.height);
-			w = cvRound(imageSize.width*sf);
-			h = cvRound(imageSize.height*sf);
-			canvas.create(h, w * 2, CV_8UC3);
+//				sf = 600. / (imageSize.width>imageSize.height ? imageSize.width : imageSize.height);
+				w = imageSize.width;// cvRound(imageSize.width*sf);
+				h = imageSize.height;// cvRound(imageSize.height*sf);
+				canvas.create(h, w * 2, CV_8UC3);
 			}
 			else
 			{
-			sf = 300. / (imageSize.width>imageSize.height ? imageSize.width : imageSize.height);
-			w = cvRound(imageSize.width*sf);
-			h = cvRound(imageSize.height*sf);
-			canvas.create(h * 2, w, CV_8UC3);
+//				sf = 300. / (imageSize.width>imageSize.height ? imageSize.width : imageSize.height);
+				w = imageSize.width;// cvRound(imageSize.width*sf);
+				h = imageSize.height;// cvRound(imageSize.height*sf);
+				canvas.create(h * 2, w, CV_8UC3);
 			}
 
 			for (k = 0; k < 2; k++)
 			{
-			Mat img = bothImages[k], rimg, cimg;
-			remap(img, rimg, rmap[k][0], rmap[k][1], INTER_LINEAR);
-			cvtColor(rimg, cimg, COLOR_GRAY2BGR);
-			Mat canvasPart = !isVerticalStereo ? canvas(Rect(w*k, 0, w, h)) : canvas(Rect(0, h*k, w, h));
-			resize(cimg, canvasPart, canvasPart.size(), 0, 0, INTER_AREA);
-			if (useCalibrated)
-			{
-			Rect vroi(cvRound(validRoi[k].x*sf), cvRound(validRoi[k].y*sf),
-			cvRound(validRoi[k].width*sf), cvRound(validRoi[k].height*sf));
-			rectangle(canvasPart, vroi, Scalar(0, 0, 255), 3, 8);
+				Mat img = bothImages[k], rimg, cimg;
+				remap(img, rimg, rmap[k][0], rmap[k][1], INTER_LINEAR);
+//				cvtColor(rimg, cimg, COLOR_GRAY2BGR);
+				cimg = rimg.clone();
+				Mat canvasPart = !isVerticalStereo ? canvas(Rect(w*k, 0, w, h)) : canvas(Rect(0, h*k, w, h));
+				resize(cimg, canvasPart, canvasPart.size(), 0, 0, INTER_AREA);
+				if (useCalibrated)
+				{
+					Rect vroi(cvRound(validRoi[k].x*sf), cvRound(validRoi[k].y*sf),
+						cvRound(validRoi[k].width*sf), cvRound(validRoi[k].height*sf));
+					rectangle(canvasPart, vroi, Scalar(0, 0, 255), 3, 8);
+				}
 			}
-			}
-
 			if (!isVerticalStereo)
-			for (j = 0; j < canvas.rows; j += 16)
-			line(canvas, Point(0, j), Point(canvas.cols, j), Scalar(0, 255, 0), 1, 8);
+				for (int j = 0; j < canvas.rows; j += 16)
+					line(canvas, Point(0, j), Point(canvas.cols, j), Scalar(0, 255, 0), 1, 8);
 			else
-			for (j = 0; j < canvas.cols; j += 16)
-			line(canvas, Point(j, 0), Point(j, canvas.rows), Scalar(0, 255, 0), 1, 8);
-			imshow("rectified", canvas);
-			char c = (char)waitKey();
-			//	if (c == 27 || c == 'q' || c == 'Q')
-			//		break;
-			*/
-
+				for (int j = 0; j < canvas.cols; j += 16)
+					line(canvas, Point(j, 0), Point(j, canvas.rows), Scalar(0, 255, 0), 1, 8);
+			rectifyView = canvas.clone();
 		}
-		/*
+		else 
+		{
+			rectifyView = Mat(2 * imageSize.height, imageSize.width, CV_8UC3);
+			ldView.copyTo(rectifyView(Rect(0, 0, imageSize.width, imageSize.height)));
+			hdView.copyTo(rectifyView(Rect(0, imageSize.height, imageSize.width, imageSize.height)));
+		}
+	/*
 		// IF BY CALIBRATED (BOUGUET'S METHOD)
 		if (useCalibrated)
 		{
@@ -315,12 +347,19 @@ bool StereoCalibration::main(ofPixels ldPixels, ofImage hdImage)
 		}
 		*/
 	}
+	bothImages.clear();
 	IplImage ldTemp = ldView;
 	IplImage* pLdTemp = &ldTemp;
 	ldCalibrationView = pLdTemp;
 	IplImage hdTemp = hdView;
 	IplImage* pHdTemp = &hdTemp;
 	hdCalibrationView = pHdTemp;
+	if (mode == CALIBRATED)
+	{
+		IplImage rectifyTemp = rectifyView;
+		IplImage* pRectifyTemp = &rectifyTemp;
+		rectifyCalibrationView = pRectifyTemp;
+	}
 	return true;
 }
 
