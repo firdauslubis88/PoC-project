@@ -144,3 +144,7 @@ filename.txt
 *.dll
 *.yml
 *.aps
+*.pdb
+_gitkeep
+*.gitkeep
+*.opensdf

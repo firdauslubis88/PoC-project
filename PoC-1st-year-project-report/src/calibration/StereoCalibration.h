@@ -14,6 +14,10 @@ public:
 
 	bool init(int image_width, int image_height, int chess_width, int chess_height, float square_size, INPUT_TYPE type);
 	bool main(ofPixels ldPixels, ofImage hdImage);
+	bool main2(ofPixels ldPixels, ofImage hdImage);
+
+	bool checkInputValidity();
+
 	vector<cv::Mat> bothImages, goodImageList;
 	vector<vector<cv::Point2f> > imagePoints[2];
 	vector<vector<cv::Point3f> > objectPoints;

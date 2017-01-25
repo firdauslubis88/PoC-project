@@ -3,21 +3,19 @@
 #include "ofxOpenCv.h"
 #include "NSCalibration.h"
 
-class Calibration
+class BaseCalibration
 {
 public:
-	Calibration();
-	~Calibration();
+	BaseCalibration();
+	~BaseCalibration();
 
 
-	bool init(int image_width, int image_height, int chess_width, int chess_height, float square_size, INPUT_TYPE type);
-	bool main(ofImage hdImage);
-	bool main(ofImage hdImage, std::string outputFileName);
-	bool main(ofPixels ldPixels);
-	bool main(ofPixels ldPixels, std::string outputFileName);
-	bool main(cv::Mat tempMatCvImage);
-	bool preUpdateCalibList(cv::Mat& view, std::vector<cv::Point2f>& pointBuf);
-	void updateCalibList(cv::Mat& view, std::vector<cv::Point2f>& pointBuf);
+	virtual bool init(int image_width, int image_height, int chess_width, int chess_height, float square_size, INPUT_TYPE type);
+	virtual bool main(ofImage hdImage);
+	virtual bool main(ofImage hdImage, std::string outputFileName);
+	virtual bool main(ofPixels ldPixels);
+	virtual bool main(ofPixels ldPixels, std::string outputFileName);
+	virtual bool main(cv::Mat tempMatCvImage);
 
 	ofxCvColorImage cvImage;
 
@@ -44,6 +42,10 @@ public:
 	ofxCvColorImage calibrationView;
 	int image_width, image_height, j;
 	bool bPreUpdateResult;
+
+protected:
+	bool preUpdateCalibList(cv::Mat& view, std::vector<cv::Point2f>& pointBuf);
+	void updateCalibList(cv::Mat& view, std::vector<cv::Point2f>& pointBuf);
 
 private:
 	std::vector<std::vector<cv::Point2f> > imagePoints;

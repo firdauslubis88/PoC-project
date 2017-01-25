@@ -1,9 +1,9 @@
-#include "Calibration.h"
+#include "BaseCalibration.h"
 
 using namespace std;
 using namespace cv;
 
-Calibration::Calibration()
+BaseCalibration::BaseCalibration()
 {
 	aspectRatio = 1;
 	pattern = CHESSBOARD;
@@ -23,11 +23,11 @@ Calibration::Calibration()
 }
 
 
-Calibration::~Calibration()
+BaseCalibration::~BaseCalibration()
 {
 }
 
-bool Calibration::init(int localImage_width, int localImage_height, int chess_width, int chess_height, float square_size, INPUT_TYPE type)
+bool BaseCalibration::init(int localImage_width, int localImage_height, int chess_width, int chess_height, float square_size, INPUT_TYPE type)
 {
 	boardSize.width = chess_width;
 	boardSize.height = chess_height;
@@ -75,14 +75,14 @@ bool Calibration::init(int localImage_width, int localImage_height, int chess_wi
 	return true;
 }
 
-bool Calibration::main(ofImage hdImage, string localOutputFileName)
+bool BaseCalibration::main(ofImage hdImage, string localOutputFileName)
 {
 	this->outputFilename = ofToDataPath(localOutputFileName);
 
 	return main(hdImage);
 }
 
-bool Calibration::main(ofImage hdImage)
+bool BaseCalibration::main(ofImage hdImage)
 {
 	Mat view, viewGray;
 
@@ -92,14 +92,14 @@ bool Calibration::main(ofImage hdImage)
 	return main(tempMatHdCvImage);
 }
 
-bool Calibration::main(ofPixels ldPixels, string localOutputFileName)
+bool BaseCalibration::main(ofPixels ldPixels, string localOutputFileName)
 {
 	this->outputFilename = ofToDataPath(localOutputFileName);
 
 	return main(ldPixels);
 }
 
-bool Calibration::main(ofPixels ldPixels)
+bool BaseCalibration::main(ofPixels ldPixels)
 {
 	Mat view, viewGray;
 
@@ -113,7 +113,7 @@ bool Calibration::main(ofPixels ldPixels)
 	return main(tempMatLdCvImage);
 }
 
-bool Calibration::main(Mat tempMatCvImage)
+bool BaseCalibration::main(Mat tempMatCvImage)
 {
 	Mat view;
 	tempMatCvImage.copyTo(view);
@@ -161,7 +161,7 @@ bool Calibration::main(Mat tempMatCvImage)
 	return true;
 }
 
-bool Calibration::preUpdateCalibList(Mat& view, vector<Point2f>& pointBuf)
+bool BaseCalibration::preUpdateCalibList(Mat& view, vector<Point2f>& pointBuf)
 {
 	bool localFound = findChessboardCorners(view, boardSize, pointBuf,
 		CALIB_CB_ADAPTIVE_THRESH | CALIB_CB_FAST_CHECK | CALIB_CB_NORMALIZE_IMAGE);
@@ -178,7 +178,7 @@ bool Calibration::preUpdateCalibList(Mat& view, vector<Point2f>& pointBuf)
 	return localFound;
 }
 
-void Calibration::updateCalibList(Mat& view, vector<Point2f>& pointBuf)
+void BaseCalibration::updateCalibList(Mat& view, vector<Point2f>& pointBuf)
 {
 	bool bTake = bPreUpdateResult;
 	if (bTake)
