@@ -119,11 +119,11 @@ void ofApp_calibration::draw()
 //	calibration.main(hdImage);
 //	calibration.hdCalibrationView.draw(0, 0);
 	stereoCalibration.main(ldPixels, hdImage);
-	stereoCalibration.ldCalibrationView.draw(0, 0);
-	stereoCalibration.hdCalibrationView.draw(0, 480);
+	stereoCalibration.calibrationView[0].draw(0, 0);
+	stereoCalibration.calibrationView[1].draw(0, 480);
 	if (stereoCalibration.mode == CALIBRATED)
 	{
-		stereoCalibration.rectifyCalibrationView.draw(640, 0);
+		stereoCalibration.calibrationView[2].draw(640, 0);
 	}
 	_panel.draw();
 }

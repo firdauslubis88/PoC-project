@@ -112,7 +112,7 @@
     <ClCompile Include="src\calibration\StereoCalibration.cpp">
       <Filter>src\calibration</Filter>
     </ClCompile>
-    <ClCompile Include="src\calibration\BaseCalibration.cpp">
+    <ClCompile Include="src\calibration\SingleCalibration.cpp">
       <Filter>src\calibration</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1806,6 +1806,9 @@
       <Filter>src\calibration</Filter>
     </ClInclude>
     <ClInclude Include="src\calibration\StereoCalibration.h">
+      <Filter>src\calibration</Filter>
+    </ClInclude>
+    <ClInclude Include="src\calibration\SingleCalibration.h">
       <Filter>src\calibration</Filter>
     </ClInclude>
     <ClInclude Include="src\calibration\BaseCalibration.h">

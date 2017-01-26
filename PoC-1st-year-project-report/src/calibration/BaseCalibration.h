@@ -6,16 +6,16 @@
 class BaseCalibration
 {
 public:
-	BaseCalibration();
-	~BaseCalibration();
+	BaseCalibration() {};
+	~BaseCalibration() {};
 
 
-	virtual bool init(int image_width, int image_height, int chess_width, int chess_height, float square_size, INPUT_TYPE type);
-	virtual bool main(ofImage hdImage);
-	virtual bool main(ofImage hdImage, std::string outputFileName);
-	virtual bool main(ofPixels ldPixels);
-	virtual bool main(ofPixels ldPixels, std::string outputFileName);
-	virtual bool main(cv::Mat tempMatCvImage);
+	virtual bool init(int image_width, int image_height, int chess_width, int chess_height, float square_size, INPUT_TYPE type) = 0;
+	virtual bool main(ofImage hdImage) = 0;
+	virtual bool main(ofImage hdImage, std::string outputFileName) = 0;
+	virtual bool main(ofPixels ldPixels) = 0;
+	virtual bool main(ofPixels ldPixels, std::string outputFileName) = 0;
+	virtual bool main(cv::Mat tempMatCvImage) = 0;
 
 	ofxCvColorImage cvImage;
 
