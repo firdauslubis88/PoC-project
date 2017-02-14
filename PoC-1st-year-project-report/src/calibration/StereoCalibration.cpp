@@ -26,6 +26,8 @@ StereoCalibration::StereoCalibration()
 	msg = "Press 'g' to start";
 	writePoints = true;
 	writeExtrinsics = true;
+
+	cameraNum = 2;
 }
 
 
@@ -87,7 +89,6 @@ bool StereoCalibration::init(int image_width, int image_height, int chess_width,
 
 bool StereoCalibration::main2(ofPixels ldPixels, ofImage hdImage)
 {
-//	Mat ldView, hdView, rectifyView;
 	vector<Mat> matView;
 	ofImage ldImage;
 
@@ -166,12 +167,29 @@ bool StereoCalibration::main2(ofPixels ldPixels, ofImage hdImage)
 	return true;
 }
 
+bool StereoCalibration::main2(ofPixels* ldPixels)
+{
+	ofImage hdImage;
+	hdImage.setFromPixels(ldPixels[1]);
+	hdImage.setImageType(OF_IMAGE_COLOR);
+
+	return main2(ldPixels[0], hdImage);
+}
+
 bool StereoCalibration::main2(ofPixels ldPixels, ofImage hdImage, std::string localOutputFileName)
 {
 	this->outputFilename = ofToDataPath(localOutputFileName);
 	return main2(ldPixels, hdImage);
 }
 
+bool StereoCalibration::main2(ofPixels* ldPixels, std::string localOutputFileName)
+{
+	ofImage hdImage;
+	hdImage.setFromPixels(ldPixels[1]);
+	hdImage.setImageType(OF_IMAGE_COLOR);
+
+	return main2(ldPixels[0], hdImage, localOutputFileName);
+}
 
 bool StereoCalibration::main(ofPixels ldPixels, ofImage hdImage)
 {

@@ -1,8 +1,8 @@
 #pragma once
-#include "NSCalibration.h"
 #include "ofMain.h"
 #include "ofxOpenCv.h"
 #include "Alignment.h"
+#include "NSCalibration.h"
 
 class StereoCalibration
 {
@@ -10,14 +10,20 @@ public:
 	StereoCalibration();
 	~StereoCalibration();
 
-	ofxCvColorImage ldCvImage, hdCvImage, rectifyCvImage;
-
 	bool init(int image_width, int image_height, int chess_width, int chess_height, float square_size, INPUT_TYPE type);
 	bool main(ofPixels ldPixels, ofImage hdImage);
-	bool main2(ofPixels ldPixels, ofImage hdImage, std::string outputFileName);
+	bool main(ofPixels* imagePixels);
 	bool main2(ofPixels ldPixels, ofImage hdImage);
+	bool main2(ofPixels ldPixels, ofImage hdImage, std::string outputFileName);
+	bool main2(ofPixels* imagePixels);
+	bool main2(ofPixels* imagePixels, std::string outputFileName);
 	void preUpdateCalibList(cv::Mat& view, std::vector<cv::Point2f>& pointBuf);
 	void updateCalibList(cv::Mat& view, std::vector<cv::Point2f>& pointBuf);
+
+	ofxCvColorImage ldCvImage, hdCvImage, rectifyCvImage, calibrationView[3];
+	int cameraNum;
+
+private:
 	bool runAndSave(const std::string& outputFilename,
 		const std::vector<std::vector<cv::Point2f> >* imagePoints,
 		cv::Size imageSize, cv::Size boardSize, Pattern patternType, float squareSize,
@@ -27,9 +33,7 @@ public:
 	cv::Mat StereoCalibration::postProcessing(const std::vector<cv::Mat>& matView, const cv::Mat* cameraMatrix, const cv::Mat* distCoeffs, cv::Size imageSize, const cv::Mat R1, const cv::Mat P1, const cv::Mat R2, const cv::Mat P2, cv::Rect* validRoi, bool isVerticalStereo, bool useCalibrated);
 
 	std::vector<cv::Mat> goodImageList;
-	int cameraNum = 2;
 	vector<vector<cv::Point2f> > imagePoints[2];
-	ofxCvColorImage calibrationView[3];
 	cv::Rect validRoi[2];
 	std::string msg;
 	cv::Size boardSize;

@@ -115,6 +115,9 @@
     <ClCompile Include="src\calibration\SingleCalibration.cpp">
       <Filter>src\calibration</Filter>
     </ClCompile>
+    <ClCompile Include="src\ofApp\ofApp_test.cpp">
+      <Filter>src\ofApp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -1813,6 +1816,9 @@
     </ClInclude>
     <ClInclude Include="src\calibration\BaseCalibration.h">
       <Filter>src\calibration</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ofApp\ofApp_test.h">
+      <Filter>src\ofApp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

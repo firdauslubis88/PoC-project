@@ -2,6 +2,7 @@
 #include "ofApp.h"
 #include "ofAppVR.h"
 #include "ofApp_calibration.h"
+#include "ofApp_test.h"
 #include "ofAppGLFWWindow.h"
 
 //========================================================================

@@ -22,6 +22,10 @@ SingleCalibration::SingleCalibration()
 	j = 0;
 	bPreUpdateResult = true;
 	msg = "Press 'g' to start";
+
+	cameraNum = 1;
+	additionalViewNum = 0;
+	undistortImage = false;
 }
 
 
@@ -69,7 +73,14 @@ bool SingleCalibration::init(int localImage_width, int localImage_height, int ch
 	image_width = localImage_width;
 	image_height = localImage_height;
 	cvImage.allocate(image_width, image_height);
-	calibrationView.allocate(image_width, image_height);
+	for (size_t k = 0; k < cameraNum; k++)
+	{
+		calibrationView[0].allocate(image_width, image_height);
+	}
+	for (size_t k = 0; k < additionalViewNum; k++)
+	{
+		calibrationView[cameraNum + k].allocate(image_width, 2*image_height);
+	}
 	imageSize.width = image_width;
 	imageSize.height = image_height;
 	imagePoints.resize(nimages);
@@ -138,6 +149,7 @@ bool SingleCalibration::main(Mat tempMatCvImage)
 				{
 					updateCalibList(view, imagePoints[j]);
 				}
+				prevTimestamp = clock();
 				j++;
 			}
 			msg = format("%d/%d", j, nimages);
@@ -150,7 +162,6 @@ bool SingleCalibration::main(Mat tempMatCvImage)
 				writeExtrinsics, writePoints))
 				mode = CALIBRATED;
 		}
-		prevTimestamp = clock();
 	}
 	else if (mode == CALIBRATED)
 	{
@@ -158,14 +169,27 @@ bool SingleCalibration::main(Mat tempMatCvImage)
 		{
 			Mat temp = view.clone();
 			undistort(temp, view, cameraMatrix, distCoeffs);
+			msg = "Undistorted image. Press 'u' to distort";
+		}
+		else
+		{
+			msg = "Distorted image. Press 'u' to undistort";
 		}
 	}
 	putText(view, msg, textOrigin, 1, 1,
 		mode != CALIBRATED ? Scalar(255, 0, 0) : Scalar(0, 255, 0));
 
-	IplImage temp = view;
-	IplImage* pTemp = &temp;
-	calibrationView = pTemp;
+	for (size_t k = 0; k < cameraNum; k++)
+	{
+		IplImage ldTemp = view;
+		IplImage* pLdTemp = &ldTemp;
+		calibrationView[k] = pLdTemp;
+	}
+
+	if (mode == CALIBRATED)
+	{
+
+	}
 
 	return true;
 }

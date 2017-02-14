@@ -1,12 +1,8 @@
 #pragma once
 #include "ofMain.h"
 #include "ofxGui.h"
-#include "PTZCamera.h"
-#include "Calibration.h"
-//#include "StereoCalibration.h"
-#include "SingleCalibration.h"
 
-class ofApp_calibration: public ofBaseApp
+class ofApp_test: public ofBaseApp
 {
 public:
 	void setup();
@@ -28,9 +24,6 @@ public:
 	void gotMessage(ofMessage msg);
 	void onToggle(const void* sender);
 
-	//CALIBRATION variables and functions
-	Calibration calibration = Calibration();
-
 	bool bShowHelp, bHdCameraShow, bLdCameraShow;
 	std::ostringstream _strHelp;
 	int VIDEO_WIDTH, VIDEO_HEIGHT;
@@ -42,7 +35,7 @@ public:
 	vector<ofVideoDevice> listVideoDevice;
 	ofShader _shader;
 	ofVideoGrabber ldVideoGrabber;
-	PTZCamera hdVideoGrabber;
+//	PTZCamera hdVideoGrabber;
 	bool isldCameraConnected;
 	bool isHdCameraConnected;
 	bool isCombined;
@@ -52,17 +45,22 @@ public:
 	string cameraSelected;
 	ofPixels ldPixels;
 	ofPixels hdPixels;
-	ofPixels *imagePixels;
 	int prevXDrag;
 	int prevYDrag;
 	bool combinedCameraFinished;
 	bool showROI;
 	bool combinedMode;
 	bool allowUpdatePTZ;
-	int cameraNum;
 
 	ofxPanel _panel;
 	ofxButton calibrationToggle;
 	ofxButton stereoCalibrationToggle;
+
+	ofParameter<ofVec4f> offsetParameter;
+	ofParameter<float> radiusParameter;
+	ofParameterGroup ldParameterGroup;
+	ofImage tempLdImage;
+	ofFbo tempLdFbo;
+
 };
 

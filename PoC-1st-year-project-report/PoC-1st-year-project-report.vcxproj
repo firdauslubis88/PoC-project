@@ -267,6 +267,7 @@ D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxVideoRecorder\src;%(Add
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp\ofApp.cpp" />
     <ClCompile Include="src\ofApp\ofApp_calibration.cpp" />
+    <ClCompile Include="src\ofApp\ofApp_test.cpp" />
     <ClCompile Include="src\ptz\BasePTZCamera.cpp" />
     <ClCompile Include="src\ptz\LogitechPTZCamera.cpp" />
     <ClCompile Include="src\ptz\PTZCamera.cpp" />
@@ -743,6 +744,7 @@ D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxVideoRecorder\src;%(Add
     <ClInclude Include="src\ofApp\ofApp_calibration.h" />
     <ClInclude Include="src\ofApp\ofApp_ptz.h" />
     <ClInclude Include="src\ofApp\ofApp_task.h" />
+    <ClInclude Include="src\ofApp\ofApp_test.h" />
     <ClInclude Include="src\ofApp\ofApp_util.h" />
     <ClInclude Include="src\ofApp\ofApp_videoRecorderUtil.h" />
     <ClInclude Include="src\ptz\BasePTZCamera.h" />

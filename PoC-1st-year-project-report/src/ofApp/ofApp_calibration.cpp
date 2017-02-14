@@ -57,7 +57,9 @@ void ofApp_calibration::setup()
 	}
 
 //	calibration.init(VIDEO_WIDTH, VIDEO_HEIGHT, 9, 6, 0.0262, bLiveVideo);
-	stereoCalibration.init(VIDEO_WIDTH, VIDEO_HEIGHT, 9, 6, 0.0262, bLiveVideo);
+	this->cameraNum = 2;
+	imagePixels = new ofPixels[this->cameraNum];
+	calibration.init(VIDEO_WIDTH, VIDEO_HEIGHT, 9, 6, 0.0262, bLiveVideo, this->cameraNum, 1);
 
 	_panel.setup();
 	calibrationToggle.setup("Single Calibration", false);
@@ -70,6 +72,7 @@ void ofApp_calibration::setup()
 
 void ofApp_calibration::exit()
 {
+	delete[] imagePixels;
 }
 
 void ofApp_calibration::update()
@@ -116,15 +119,17 @@ void ofApp_calibration::draw()
 			hdFbo.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
 		}
 	}
-//	calibration.main(hdImage);
-//	calibration.hdCalibrationView.draw(0, 0);
-	stereoCalibration.main(ldPixels, hdImage);
-	stereoCalibration.calibrationView[0].draw(0, 0);
-	stereoCalibration.calibrationView[1].draw(0, 480);
-	if (stereoCalibration.mode == CALIBRATED)
+	imagePixels[0] = ldPixels;
+	imagePixels[1] = hdPixels;
+	calibration.main(imagePixels);
+	calibration.calibrationView[0].draw(0, 0);
+	calibration.calibrationView[1].draw(0, VIDEO_HEIGHT);
+
+	if (calibration.mode == CALIBRATED && calibration.cameraNum > 1)
 	{
-		stereoCalibration.calibrationView[2].draw(640, 0);
+		calibration.calibrationView[2].draw(640, 0);
 	}
+
 	_panel.draw();
 }
 
@@ -133,14 +138,16 @@ void ofApp_calibration::keyPressed(int key)
 	switch (key)
 	{
 	case 'g':
-		stereoCalibration.bStartCapture = true;
+		calibration.bStartCapture = true;
 		break;
 	case 'u':
-		stereoCalibration.undistortImage = !stereoCalibration.undistortImage;
+		calibration.undistortImage = !calibration.undistortImage;
 		break;
+	/*
 	case 't':
-		stereoCalibration.trackImage = !stereoCalibration.trackImage;
+		calibration.trackImage = !calibration.trackImage;
 		break;
+	*/
 	default:
 		break;
 	}
