@@ -204,6 +204,10 @@ bool Calibration::main(Mat tempMatCvImage)
 				{
 					updateCalibList(view, imagePoints[k][j]);
 				}
+				if (bPreUpdateResult)
+				{
+					j++;
+				}
 				prevTimestamp = clock();
 			}
 			msg = format("%d/%d", j, nimages);
@@ -263,7 +267,6 @@ bool Calibration::main2(ofPixels* ldPixels)
 bool Calibration::main2(ofPixels ldPixels, ofImage hdImage)
 {
 	vector<Mat> matView;
-	Mat tempLocalMat;
 	ofImage ldImage;
 
 	ldImage.setFromPixels(ldPixels);
@@ -275,10 +278,14 @@ bool Calibration::main2(ofPixels ldPixels, ofImage hdImage)
 	Mat tempMatHdCvImage = cvarrToMat(cvImages[1].getCvImage());
 	tempMatLdCvImage.copyTo(this->tempMatView[0]);
 	tempMatHdCvImage.copyTo(this->tempMatView[1]);
-	tempLocalMat = Mat(2 * 480, 640, CV_8UC3);
 	matView.push_back(this->tempMatView[0]);
 	matView.push_back(this->tempMatView[1]);
-	matView.push_back(tempLocalMat);
+	if (this->additionalViewNum > 0)
+	{
+		Mat tempLocalMat;
+		tempLocalMat = Mat(2 * 480, 640, CV_8UC3);
+		matView.push_back(tempLocalMat);
+	}
 
 	int i, k;
 
@@ -317,15 +324,18 @@ bool Calibration::main2(ofPixels ldPixels, ofImage hdImage)
 	}
 	else if (mode == CALIBRATED)
 	{
-		if (undistortImage)
+		if (this->additionalViewNum > 0)
 		{
-			Mat temp = postProcessing(matView, this->cameraMatrix, this->distCoeffs, this->imageSize, this->R1, this->P1, this->R2, this->P2, this->validRoi, this->isVerticalStereo, this->useCalibrated);
-			matView[2] = temp.clone();
-		}
-		else
-		{
-			matView[0].copyTo(matView[2](Rect(0, 0, imageSize.width, imageSize.height)));
-			matView[1].copyTo(matView[2](Rect(0, imageSize.height, imageSize.width, imageSize.height)));
+			if (undistortImage)
+			{
+				Mat temp = postProcessing(matView, this->cameraMatrix, this->distCoeffs, this->imageSize, this->R1, this->P1, this->R2, this->P2, this->validRoi, this->isVerticalStereo, this->useCalibrated);
+				matView[2] = temp.clone();
+			}
+			else
+			{
+				matView[0].copyTo(matView[2](Rect(0, 0, imageSize.width, imageSize.height)));
+				matView[1].copyTo(matView[2](Rect(0, imageSize.height, imageSize.width, imageSize.height)));
+			}
 		}
 	}
 	for (size_t k = 0; k < cameraNum; k++)
@@ -334,11 +344,14 @@ bool Calibration::main2(ofPixels ldPixels, ofImage hdImage)
 		IplImage* pLdTemp = &ldTemp;
 		calibrationView[k] = pLdTemp;
 	}
-	if (mode == CALIBRATED)
+	if (this->additionalViewNum > 0)
 	{
-		IplImage rectifyTemp = matView[2];
-		IplImage* pRectifyTemp = &rectifyTemp;
-		calibrationView[2] = pRectifyTemp;
+		if (mode == CALIBRATED)
+		{
+			IplImage rectifyTemp = matView[2];
+			IplImage* pRectifyTemp = &rectifyTemp;
+			calibrationView[2] = pRectifyTemp;
+		}
 	}
 	return true;
 }

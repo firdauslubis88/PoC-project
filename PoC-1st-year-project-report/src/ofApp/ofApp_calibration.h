@@ -59,7 +59,7 @@ public:
 	bool showROI;
 	bool combinedMode;
 	bool allowUpdatePTZ;
-	int cameraNum;
+	int cameraNum, additionalViewNum;
 
 	ofxPanel _panel;
 	ofxButton calibrationToggle;

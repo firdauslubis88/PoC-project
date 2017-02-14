@@ -56,10 +56,12 @@ void ofApp_calibration::setup()
 		ofLog(OF_LOG_ERROR, "NO PTZ CAMERA FOUND!!");
 	}
 
-//	calibration.init(VIDEO_WIDTH, VIDEO_HEIGHT, 9, 6, 0.0262, bLiveVideo);
-	this->cameraNum = 2;
+	/*********************************************************CALIBRATION PART BEGIN****************************************************************/
+	this->cameraNum = 1;
+	this->additionalViewNum = 0;
 	imagePixels = new ofPixels[this->cameraNum];
-	calibration.init(VIDEO_WIDTH, VIDEO_HEIGHT, 9, 6, 0.0262, bLiveVideo, this->cameraNum, 1);
+	calibration.init(VIDEO_WIDTH, VIDEO_HEIGHT, 9, 6, 0.0262, bLiveVideo, this->cameraNum, this->additionalViewNum);
+	/*********************************************************CALIBRATION PART END*****************************************************************/
 
 	_panel.setup();
 	calibrationToggle.setup("Single Calibration", false);
@@ -119,16 +121,24 @@ void ofApp_calibration::draw()
 			hdFbo.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
 		}
 	}
-	imagePixels[0] = ldPixels;
-	imagePixels[1] = hdPixels;
+	/*********************************************************CALIBRATION PART BEGIN****************************************************************/
+//	imagePixels[0] = ldPixels;
+	imagePixels[0] = hdPixels;
 	calibration.main(imagePixels);
-	calibration.calibrationView[0].draw(0, 0);
-	calibration.calibrationView[1].draw(0, VIDEO_HEIGHT);
 
-	if (calibration.mode == CALIBRATED && calibration.cameraNum > 1)
+	for (size_t i = 0; i < this->cameraNum; i++)
 	{
-		calibration.calibrationView[2].draw(640, 0);
+		calibration.calibrationView[i].draw(0, i*VIDEO_HEIGHT);
 	}
+
+	if (calibration.additionalViewNum > 0)
+	{
+		if (calibration.mode == CALIBRATED)
+		{
+			calibration.calibrationView[2].draw(640, 0);
+		}
+	}
+	/*********************************************************CALIBRATION PART END*****************************************************************/
 
 	_panel.draw();
 }
