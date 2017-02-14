@@ -25,6 +25,7 @@ Calibration::Calibration()
 	isVerticalStereo = true;
 	additionalViewNum = 0;
 	undistortImage = false;
+	trackImage = false;
 }
 
 
@@ -324,6 +325,10 @@ bool Calibration::main2(ofPixels ldPixels, ofImage hdImage)
 	}
 	else if (mode == CALIBRATED)
 	{
+		if (this->cameraNum == 2 && trackImage)
+		{
+			cout << "Distance:\t" << tracking(matView) << endl;
+		}
 		if (this->additionalViewNum > 0)
 		{
 			if (undistortImage)
@@ -521,4 +526,33 @@ Mat Calibration::postProcessing(const vector<Mat>& matView, const Mat* cameraMat
 			line(canvas, Point(j, 0), Point(j, canvas.rows), Scalar(0, 255, 0), 1, 8);
 
 	return canvas;
+}
+
+float Calibration::tracking(vector<Mat>& matView)
+{
+	vector<Point2f> ldPoint, hdPoint;
+	pair<Point2f, Point2f>trackedPair = alignment.track(matView[0], matView[1], 213, 160, 213, 160);
+	//			cout << trackedPair.first << endl;
+	circle(matView[0], trackedPair.first, 2, Scalar(255, 0, 0), -1);
+	circle(matView[1], trackedPair.second, 2, Scalar(255, 0, 0), -1);
+
+	ldPoint.push_back(trackedPair.first);
+	hdPoint.push_back(trackedPair.second);
+	//			cout << "BEFORE:\t" << ldPoint << endl;
+	undistortPoints(ldPoint, ldPoint, cameraMatrix[0], distCoeffs[0], Mat(), cameraMatrix[0]);
+	undistortPoints(hdPoint, hdPoint, cameraMatrix[1], distCoeffs[1], Mat(), cameraMatrix[1]);
+	//			cout << "AFTER:\t" << ldPoint << endl;
+	Mat triangulationResult = Mat(4, 1, CV_64FC1);
+	Mat cam0, cam1, RT0, RT1;
+	RT0 = Mat(3, 4, CV_64FC1);
+	RT1 = Mat(3, 4, CV_64FC1);
+	RT0(Rect(0, 0, 3, 3)) = Mat::eye(3, 3, CV_64FC1);
+	RT0(Rect(3, 0, 1, 3)) = Mat::zeros(3, 1, CV_64FC1);
+	R.copyTo(RT1(Rect(0, 0, 3, 3)));
+	T.copyTo(RT1(Rect(3, 0, 1, 3)));
+	//			cout << RT0 << endl;
+	//			cout << RT1 << endl;
+
+	triangulatePoints(P1, P2, ldPoint, hdPoint, triangulationResult);
+	return (triangulationResult.at<float>(2, 0) / triangulationResult.at<float>(3, 0));
 }

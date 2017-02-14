@@ -22,7 +22,7 @@ public:
 
 	ofxCvColorImage *cvImages, *calibrationView;
 	int mode, cameraNum, additionalViewNum;
-	bool bStartCapture, useCalibrated, undistortImage;
+	bool bStartCapture, useCalibrated, undistortImage, trackImage;
 	cv::Mat *cameraMatrix, *distCoeffs, *tempMatView;
 
 private:
@@ -35,6 +35,9 @@ private:
 		cv::Mat* distCoeffs, bool writeExtrinsics, bool writePoints, cv::Mat& R, cv::Mat& T, cv::Mat& E, cv::Mat& F, cv::Mat& R1, cv::Mat& R2, cv::Mat& P1, cv::Mat& P2, cv::Mat& Q, cv::Rect* validROI);
 //	float tracking(std::vector<cv::Mat>& matView);
 	cv::Mat postProcessing(const std::vector<cv::Mat>& matView, const cv::Mat* cameraMatrix, const cv::Mat* distCoeffs, cv::Size imageSize, const cv::Mat R1, const cv::Mat P1, const cv::Mat R2, const cv::Mat P2, cv::Rect* validRoi, bool isVerticalStereo, bool useCalibrated);
+	float tracking(std::vector<cv::Mat>& matView);
+	Alignment alignment;
+
 	cv::Rect validRoi[2];
 	cv::Mat R, T, E, F;
 	cv::Mat R1, R2, P1, P2, Q;

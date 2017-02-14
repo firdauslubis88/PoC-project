@@ -57,8 +57,8 @@ void ofApp_calibration::setup()
 	}
 
 	/*********************************************************CALIBRATION PART BEGIN****************************************************************/
-	this->cameraNum = 1;
-	this->additionalViewNum = 0;
+	this->cameraNum = 2;
+	this->additionalViewNum = 1;
 	imagePixels = new ofPixels[this->cameraNum];
 	calibration.init(VIDEO_WIDTH, VIDEO_HEIGHT, 9, 6, 0.0262, bLiveVideo, this->cameraNum, this->additionalViewNum);
 	/*********************************************************CALIBRATION PART END*****************************************************************/
@@ -122,8 +122,8 @@ void ofApp_calibration::draw()
 		}
 	}
 	/*********************************************************CALIBRATION PART BEGIN****************************************************************/
-//	imagePixels[0] = ldPixels;
-	imagePixels[0] = hdPixels;
+	imagePixels[0] = ldPixels;
+	imagePixels[1] = hdPixels;
 	calibration.main(imagePixels);
 
 	for (size_t i = 0; i < this->cameraNum; i++)
@@ -153,11 +153,9 @@ void ofApp_calibration::keyPressed(int key)
 	case 'u':
 		calibration.undistortImage = !calibration.undistortImage;
 		break;
-	/*
 	case 't':
 		calibration.trackImage = !calibration.trackImage;
 		break;
-	*/
 	default:
 		break;
 	}
