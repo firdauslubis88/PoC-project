@@ -148,3 +148,5 @@ filename.txt
 _gitkeep
 *.gitkeep
 *.opensdf
+*.db
+*.opendb

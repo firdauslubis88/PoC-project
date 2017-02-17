@@ -11,7 +11,6 @@
 #include <opencv2/reg/mappergradaffine.hpp>
 #include <opencv2/reg/mapperpyramid.hpp>
 #include <opencv2/highgui.hpp>
-#include <opencv2/calib3d.hpp>
 
 
 //using namespace std;

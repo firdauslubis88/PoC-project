@@ -12,7 +12,7 @@ Calibration::Calibration()
 	outputFilename = ofToDataPath("out_camera_data.yml");
 	writePoints = true;
 	writeExtrinsics = true;
-	flags = CALIB_FIX_ASPECT_RATIO;
+	flags = cv::CALIB_FIX_ASPECT_RATIO;
 	flipVertical = false;
 	videofile = false;
 	showUndistorted = false;
@@ -363,8 +363,8 @@ bool Calibration::main2(ofPixels ldPixels, ofImage hdImage)
 
 void Calibration::preUpdateCalibList(Mat& view, vector<Point2f>& pointBuf)
 {
-	bool localFound = findChessboardCorners(view, boardSize, pointBuf,
-		CALIB_CB_ADAPTIVE_THRESH | CALIB_CB_FAST_CHECK | CALIB_CB_NORMALIZE_IMAGE);
+	bool localFound = cv::findChessboardCorners(view, boardSize, pointBuf,
+		cv::CALIB_CB_ADAPTIVE_THRESH | cv::CALIB_CB_FAST_CHECK | cv::CALIB_CB_NORMALIZE_IMAGE);
 	// improve the found corners' coordinate accuracy
 	if (localFound)
 	{
@@ -372,7 +372,7 @@ void Calibration::preUpdateCalibList(Mat& view, vector<Point2f>& pointBuf)
 		cvtColor(view, viewGray, COLOR_BGR2GRAY);
 		cornerSubPix(viewGray, pointBuf, Size(11, 11),
 			Size(-1, -1), TermCriteria(TermCriteria::EPS + TermCriteria::COUNT, 30, 0.1));
-		drawChessboardCorners(view, boardSize, Mat(pointBuf), localFound);
+		cv::drawChessboardCorners(view, boardSize, Mat(pointBuf), localFound);
 	}
 	bPreUpdateResult &= localFound;
 }
@@ -407,15 +407,15 @@ bool Calibration::runAndSave2(const std::string& outputFilename,
 
 	std::cout << "Running stereo calibration ...\n";
 
-	cameraMatrix[0] = initCameraMatrix2D(objectPoints, imagePoints[0], imageSize, 0);
-	cameraMatrix[1] = initCameraMatrix2D(objectPoints, imagePoints[1], imageSize, 0);
+	cameraMatrix[0] = mycv::initCameraMatrix2D(objectPoints, imagePoints[0], imageSize, 0);
+	cameraMatrix[1] = mycv::initCameraMatrix2D(objectPoints, imagePoints[1], imageSize, 0);
 
-	double rms = stereoCalibrate(objectPoints, imagePoints[0], imagePoints[1],
+	double rms = mycv::stereoCalibrate(objectPoints, imagePoints[0], imagePoints[1],
 		cameraMatrix[0], distCoeffs[0],
 		cameraMatrix[1], distCoeffs[1],
 		imageSize, R, T, E, F,
-		CALIB_FIX_ASPECT_RATIO |
-		CALIB_FIX_K4 | CALIB_FIX_K5,
+		cv::CALIB_FIX_ASPECT_RATIO |
+		cv::CALIB_FIX_K4 | cv::CALIB_FIX_K5,
 		TermCriteria(TermCriteria::COUNT + TermCriteria::EPS, 100, 1e-5));
 	std::cout << "done with RMS error=" << rms << endl;
 
@@ -435,7 +435,7 @@ bool Calibration::runAndSave2(const std::string& outputFilename,
 		{
 			imgpt[k] = Mat(imagePoints[k][i]);
 			undistortPoints(imgpt[k], imgpt[k], cameraMatrix[k], distCoeffs[k], Mat(), cameraMatrix[k]);
-			computeCorrespondEpilines(imgpt[k], k + 1, F, lines[k]);
+			mycv::computeCorrespondEpilines(imgpt[k], k + 1, F, lines[k]);
 		}
 		for (int j = 0; j < npt; j++)
 		{
@@ -461,10 +461,10 @@ bool Calibration::runAndSave2(const std::string& outputFilename,
 		std::cout << "Error: can not save the intrinsic parameters\n";
 
 	//			Mat R1, R2, P1, P2, Q;
-	cv::stereoRectify(cameraMatrix[0], distCoeffs[0],
+	mycv::stereoRectify(cameraMatrix[0], distCoeffs[0],
 		cameraMatrix[1], distCoeffs[1],
 		imageSize, R, T, R1, R2, P1, P2, Q,
-		CALIB_ZERO_DISPARITY, -1, imageSize, &validRoi[0], &validRoi[1]);
+		cv::CALIB_ZERO_DISPARITY, -1, imageSize, &validRoi[0], &validRoi[1]);
 
 	fs.open("extrinsics.yml", FileStorage::WRITE);
 	if (fs.isOpened())
@@ -553,6 +553,7 @@ float Calibration::tracking(vector<Mat>& matView)
 	//			cout << RT0 << endl;
 	//			cout << RT1 << endl;
 
-	triangulatePoints(P1, P2, ldPoint, hdPoint, triangulationResult);
+	mycv::triangulatePoints(P1, P2, ldPoint, hdPoint, triangulationResult);
 	return (triangulationResult.at<float>(2, 0) / triangulationResult.at<float>(3, 0));
 }
+

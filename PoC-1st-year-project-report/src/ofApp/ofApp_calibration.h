@@ -4,7 +4,7 @@
 #include "PTZCamera.h"
 #include "Calibration.h"
 //#include "StereoCalibration.h"
-#include "SingleCalibration.h"
+//#include "SingleCalibration.h"
 
 class ofApp_calibration: public ofBaseApp
 {

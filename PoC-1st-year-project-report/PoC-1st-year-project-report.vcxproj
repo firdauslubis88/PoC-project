@@ -258,8 +258,7 @@ D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxVideoRecorder\src;%(Add
     <ClCompile Include="..\..\of_v0.9.8_vs_release\addons\ofxOpenVR\src\ofxOpenVR.cpp" />
     <ClCompile Include="..\..\of_v0.9.8_vs_release\addons\ofxVideoRecorder\src\ofxVideoRecorder.cpp" />
     <ClCompile Include="src\calibration\Calibration.cpp" />
-    <ClCompile Include="src\calibration\SingleCalibration.cpp" />
-    <ClCompile Include="src\calibration\StereoCalibration.cpp" />
+    <ClCompile Include="src\calibration\myCalibration.cpp" />
     <ClCompile Include="src\combined\Alignment.cpp" />
     <ClCompile Include="src\combined\Cloning.cpp" />
     <ClCompile Include="src\combined\CombinedCamera.cpp" />
@@ -732,9 +731,8 @@ D:\Visual_Studio_Projects\of_v0.9.8_vs_release\addons\ofxVideoRecorder\src;%(Add
     <ClInclude Include="..\..\of_v0.9.8_vs_release\addons\ofxVideoRecorder\src\ofxVideoRecorder.h" />
     <ClInclude Include="src\calibration\BaseCalibration.h" />
     <ClInclude Include="src\calibration\Calibration.h" />
+    <ClInclude Include="src\calibration\myCalibration.h" />
     <ClInclude Include="src\calibration\NSCalibration.h" />
-    <ClInclude Include="src\calibration\SingleCalibration.h" />
-    <ClInclude Include="src\calibration\StereoCalibration.h" />
     <ClInclude Include="src\combined\Alignment.h" />
     <ClInclude Include="src\combined\Cloning.h" />
     <ClInclude Include="src\combined\CombinedCamera.h" />

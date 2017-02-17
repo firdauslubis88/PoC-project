@@ -12,7 +12,7 @@ SingleCalibration::SingleCalibration()
 	outputFilename = ofToDataPath("out_camera_data.yml");
 	writePoints = true;
 	writeExtrinsics = true;
-	flags = CALIB_FIX_ASPECT_RATIO;
+	flags = mycv::CALIB_FIX_ASPECT_RATIO;
 	flipVertical = false;
 	videofile = false;
 	showUndistorted = false;

@@ -2,13 +2,15 @@
 #include "opencv2/core.hpp"
 #include <opencv2/core/utility.hpp>
 #include "opencv2/imgproc.hpp"
-#include "opencv2/calib3d.hpp"
+//#include "opencv2/calib3d.hpp"
 #include "opencv2/imgcodecs.hpp"
 #include "opencv2/videoio.hpp"
 #include "opencv2/highgui.hpp"
 
 #include <iostream>
 #include <ctime>
+
+#include "myCalibration.h"
 
 //using namespace std;
 //using namespace cv;
@@ -37,7 +39,7 @@ namespace {
 
 		for (i = 0; i < (int)objectPoints.size(); i++)
 		{
-			projectPoints(cv::Mat(objectPoints[i]), rvecs[i], tvecs[i],
+			mycv::projectPoints(cv::Mat(objectPoints[i]), rvecs[i], tvecs[i],
 				cameraMatrix, distCoeffs, imagePoints2);
 			err = norm(cv::Mat(imagePoints[i]), cv::Mat(imagePoints2), cv::NORM_L2);
 			int n = (int)objectPoints[i].size();
@@ -94,7 +96,7 @@ namespace {
 
 		objectPoints.resize(imagePoints.size(), objectPoints[0]);
 
-		double rms = calibrateCamera(objectPoints, imagePoints, imageSize, cameraMatrix,
+		double rms = cv::calibrateCamera(objectPoints, imagePoints, imageSize, cameraMatrix,
 			distCoeffs, rvecs, tvecs, flags | cv::CALIB_FIX_K4 | cv::CALIB_FIX_K5);
 		///*|CALIB_FIX_K3*/|CALIB_FIX_K4|CALIB_FIX_K5);
 		printf("RMS error reported by calibrateCamera: %g\n", rms);
