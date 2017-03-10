@@ -115,6 +115,15 @@
     <ClCompile Include="src\calibration\myCalibration.cpp">
       <Filter>src\calibration</Filter>
     </ClCompile>
+    <ClCompile Include="src\calibration\myOmnidir.cpp">
+      <Filter>src\calibration</Filter>
+    </ClCompile>
+    <ClCompile Include="src\calibration\myHybridcam.cpp">
+      <Filter>src\calibration</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ofApp\ofApp_webrtc.cpp">
+      <Filter>src\ofApp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -383,6 +392,9 @@
     </Filter>
     <Filter Include="src\calibration">
       <UniqueIdentifier>{389ba444-da9c-441f-85db-ebe6aa9495c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\webrtc">
+      <UniqueIdentifier>{aff95c68-760b-4fc0-a03f-2584f90b26e9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1813,6 +1825,15 @@
     </ClInclude>
     <ClInclude Include="src\calibration\myCalibration.h">
       <Filter>src\calibration</Filter>
+    </ClInclude>
+    <ClInclude Include="src\calibration\myOmnidir.h">
+      <Filter>src\calibration</Filter>
+    </ClInclude>
+    <ClInclude Include="src\calibration\myHybridcam.h">
+      <Filter>src\calibration</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ofApp\ofApp_webrtc.h">
+      <Filter>src\ofApp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

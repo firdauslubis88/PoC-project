@@ -77,7 +77,6 @@ void ofApp::setup() {
 		_panel.add(&combinedToggle);
 		combinedCameraQueue.setMaximumTasks(1);
 		combinedCameraQueue.registerTaskProgressEvents(this);
-		combinedCamera = CombinedCamera(VIDEO_WIDTH, VIDEO_HEIGHT);
 	}
 	_easyCam.setAutoDistance(false);
 	_easyCam.setDistance(0);
@@ -95,7 +94,7 @@ void ofApp::setup() {
 	maskWidth = 432;
 	maskHeight = 224;
 
-	combinedCamera.setSkipCloning(true);
+	CombinedCamera::setSkipCloning(true);
 
 	// Limit the maximum number of tasks for shared thread pools.
 	queue.setMaximumTasks(1);
@@ -181,7 +180,7 @@ void ofApp::draw() {
 	{
 		if (combinedMode)
 		{
-			combinedImage.setFromPixels(combinedCamera.combine_direct(ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight));
+			combinedImage.setFromPixels(CombinedCamera::combine_direct(ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight));
 			combinedImage.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
 		}
 		else
@@ -246,11 +245,11 @@ void ofApp::keyPressed(int key) {
 		videoRecorderStopRecord();
 		break;
 	case 'j':
-		combinedCamera.alignment.alreadyChanged = false;
+		Alignment::alreadyChanged = false;
 		combinedCameraQueue.start(new CombinedCameraTask("Combined Camera", ldPixels, hdImage, VIDEO_WIDTH, VIDEO_HEIGHT, 1 * VIDEO_WIDTH / 3, 1 * VIDEO_HEIGHT / 3, maskWidth, maskHeight));
 		break;
 	case 'n':
-		combinedCamera.alignment.alreadyChanged = true;
+		Alignment::alreadyChanged = true;
 		break;
 	case 'h':
 		showROI = !showROI;

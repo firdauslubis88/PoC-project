@@ -5,9 +5,20 @@ void ofApp_calibration::setup()
 	ofDisableArbTex();
 	VIDEO_WIDTH = 640;
 	VIDEO_HEIGHT = 480;
+	LD_VIDEO_WIDTH = 1280;
+	LD_VIDEO_HEIGHT = 640;
+	HD_VIDEO_WIDTH = 640;
+	HD_VIDEO_HEIGHT = 480;
+
 	bLdCameraShow = false;
 	bHdCameraShow = false;
-	
+	/*Begin Modify this to switch from/to fisheye mode (sorry, variable name is not correct yet (should be fisheyeMode instead of dualSphereMode))*/
+	this->dualSphereMode = false;
+	this->ptzSphereMode = true;
+	calibration.dualSphereMode = this->dualSphereMode;
+	calibration.ptzSphereMode = this->ptzSphereMode;
+	/*End Modify this to switch from/to fisheye mode (sorry, variable name is not correct yet (should be fisheyeMode instead of dualSphereMode))*/
+
 	listVideoDevice = ldVideoGrabber.listDevices();
 	for (size_t i = 0; i < listVideoDevice.size(); i++)
 	{
@@ -15,29 +26,41 @@ void ofApp_calibration::setup()
 		if (device.deviceName == "RICOH THETA S")
 		{
 			isldCameraConnected = true;
+			if (dualSphereMode)
+			{
+				LD_VIDEO_WIDTH = 1280;
+				LD_VIDEO_HEIGHT = 720;
+				ldVideoGrabber.setDeviceID(device.id);
+				ldVideoGrabber.setup(LD_VIDEO_WIDTH, LD_VIDEO_HEIGHT);
+				ldFbo.allocate(VIDEO_WIDTH, VIDEO_HEIGHT);
+				ldPixels.allocate(VIDEO_WIDTH, VIDEO_HEIGHT, OF_IMAGE_COLOR);
+			}
 		}
-		if (device.deviceName == "THETA UVC Blender")
+		if (!dualSphereMode)
 		{
-			ldVideoGrabber.setDeviceID(device.id);
-			ldVideoGrabber.setup(VIDEO_WIDTH, VIDEO_HEIGHT);
-			ldFbo.allocate(VIDEO_WIDTH, VIDEO_HEIGHT);
-			ldPixels.allocate(VIDEO_WIDTH, VIDEO_HEIGHT, OF_IMAGE_COLOR);
-			sphereVboMesh = ofSpherePrimitive(2000, 24).getMesh();
-			for (int i = 0; i<sphereVboMesh.getNumTexCoords(); i++) {
-				sphereVboMesh.setTexCoord(i, ofVec2f(1.0) - sphereVboMesh.getTexCoord(i));
+			if (device.deviceName == "THETA UVC Blender")
+			{
+				ldVideoGrabber.setDeviceID(device.id);
+				ldVideoGrabber.setup(LD_VIDEO_WIDTH, LD_VIDEO_HEIGHT);
+				ldFbo.allocate(VIDEO_WIDTH, VIDEO_HEIGHT);
+				ldPixels.allocate(VIDEO_WIDTH, VIDEO_HEIGHT, OF_IMAGE_COLOR);
+				sphereVboMesh = ofSpherePrimitive(2000, 24).getMesh();
+				for (int i = 0; i<sphereVboMesh.getNumTexCoords(); i++) {
+					sphereVboMesh.setTexCoord(i, ofVec2f(1.0) - sphereVboMesh.getTexCoord(i));
+				}
+				for (int i = 0; i<sphereVboMesh.getNumNormals(); i++) {
+					sphereVboMesh.setNormal(i, sphereVboMesh.getNormal(i) * ofVec3f(-1));
+				}
+				_easyCam.setAutoDistance(false);
+				_easyCam.setDistance(0);
+				_easyCam.rotate(-90, 0, 0, 1);
 			}
-			for (int i = 0; i<sphereVboMesh.getNumNormals(); i++) {
-				sphereVboMesh.setNormal(i, sphereVboMesh.getNormal(i) * ofVec3f(-1));
-			}
-			_easyCam.setAutoDistance(false);
-			_easyCam.setDistance(0);
-			_easyCam.rotate(-90, 0, 0, 1);
 		}
 		if (device.deviceName == "PTZ Pro Camera")
 		{
 			isHdCameraConnected = true;
 			hdVideoGrabber.setDeviceID(device.id);
-			hdVideoGrabber.setup(VIDEO_WIDTH, VIDEO_HEIGHT);
+			hdVideoGrabber.setup(HD_VIDEO_WIDTH, HD_VIDEO_HEIGHT);
 			hdFbo.allocate(VIDEO_WIDTH, VIDEO_HEIGHT);
 			hdPixels.allocate(VIDEO_WIDTH, VIDEO_HEIGHT, OF_IMAGE_COLOR);
 		}
@@ -57,8 +80,8 @@ void ofApp_calibration::setup()
 	}
 
 	/*********************************************************CALIBRATION PART BEGIN****************************************************************/
-	this->cameraNum = 2;
-	this->additionalViewNum = 1;
+	this->cameraNum = 1;
+	this->additionalViewNum = 0;
 	imagePixels = new ofPixels[this->cameraNum];
 	calibration.init(VIDEO_WIDTH, VIDEO_HEIGHT, 9, 6, 0.0262, bLiveVideo, this->cameraNum, this->additionalViewNum);
 	/*********************************************************CALIBRATION PART END*****************************************************************/
@@ -70,6 +93,7 @@ void ofApp_calibration::setup()
 	stereoCalibrationToggle.setup("Stereo Calibration", false);
 	stereoCalibrationToggle.addListener(this, &ofApp_calibration::onToggle);
 	_panel.add(&stereoCalibrationToggle);
+	ofSleepMillis(20000);
 }
 
 void ofApp_calibration::exit()
@@ -93,19 +117,32 @@ void ofApp_calibration::draw()
 {
 	if (isldCameraConnected)
 	{
-		ldFbo.begin();
-		_easyCam.begin();
-		ofClear(0);
-		ldVideoGrabber.getTextureReference().bind();
-		sphereVboMesh.draw();
-		ldVideoGrabber.getTextureReference().unbind();
-		_easyCam.end();
-		ldFbo.end();
+		if (!dualSphereMode)
+		{
+			ldFbo.begin();
+			_easyCam.begin();
+			ofClear(0);
+			ldVideoGrabber.getTextureReference().bind();
+			sphereVboMesh.draw();
+			ldVideoGrabber.getTextureReference().unbind();
+			_easyCam.end();
+			ldFbo.end();
+		}
+		else
+		{
+			ldFbo.begin();
+			ldVideoGrabber.getTexture().drawSubsection(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT, 0, 0, LD_VIDEO_WIDTH/2, LD_VIDEO_HEIGHT);
+//			ofSetColor(0, 0, 0);
+//			ofDrawRectangle(VIDEO_WIDTH / 2, 0, VIDEO_WIDTH / 2, VIDEO_HEIGHT);
+			ldFbo.end();
+		}
 		ldFbo.readToPixels(ldPixels);
+		/*
 		if (bLdCameraShow)
 		{
 			ldFbo.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
 		}
+		*/
 	}
 	if (isHdCameraConnected)
 	{
@@ -115,15 +152,16 @@ void ofApp_calibration::draw()
 		hdFbo.readToPixels(hdPixels);
 		hdImage.setFromPixels(hdPixels);
 		hdImage.setImageType(OF_IMAGE_COLOR);
-
+		/*
 		if (bHdCameraShow)
 		{
 			hdFbo.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
 		}
+		*/
 	}
 	/*********************************************************CALIBRATION PART BEGIN****************************************************************/
-	imagePixels[0] = ldPixels;
-	imagePixels[1] = hdPixels;
+//	imagePixels[0] = ldPixels;
+	imagePixels[0] = hdPixels;
 	calibration.main(imagePixels);
 
 	for (size_t i = 0; i < this->cameraNum; i++)

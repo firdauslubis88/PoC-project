@@ -23,7 +23,8 @@ public:
 	ofxCvColorImage *cvImages, *calibrationView;
 	int mode, cameraNum, additionalViewNum;
 	bool bStartCapture, useCalibrated, undistortImage, trackImage;
-	cv::Mat *cameraMatrix, *distCoeffs, *tempMatView;
+	bool dualSphereMode, ptzSphereMode;	
+	cv::Mat *cameraMatrix, *distCoeffs, *tempMatView, *matXi;
 
 private:
 	bool main2(ofPixels* imagePixels);
@@ -41,6 +42,7 @@ private:
 	cv::Rect validRoi[2];
 	cv::Mat R, T, E, F;
 	cv::Mat R1, R2, P1, P2, Q;
+
 	bool isVerticalStereo;
 
 	std::vector<std::vector<cv::Point2f> > *imagePoints;
@@ -54,6 +56,7 @@ private:
 	bool flipVertical;
 	bool showUndistorted;
 	bool videofile;
+
 
 	int delay;
 	clock_t prevTimestamp;

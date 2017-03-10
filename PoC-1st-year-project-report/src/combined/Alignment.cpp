@@ -5,7 +5,6 @@ using namespace cv;
 using namespace cv::xfeatures2d;
 using namespace cv::reg;
 
-/*
 bool Alignment::alreadyCreated = false;
 bool Alignment::alreadyChanged = false;
 bool Alignment::ptzAlreadyChanged = false;
@@ -17,34 +16,16 @@ int Alignment::xReturn = 0;
 int Alignment::yReturn = 0;
 Ptr<Map> Alignment::mapPtr;
 int Alignment::counter = 0;
-*/
+
 
 Alignment::Alignment()
 {
-	alreadyCreated = false;
-	alreadyChanged = false;
-	ptzAlreadyChanged = false;
-	detector = Ptr<SURF>();
-	minHessian = 200;
 	comparisonThreshold = 0.7;
-	hBig = Mat();
-	xReturn = 0;
-	yReturn = 0;
-	counter = 0;
 }
 
 Alignment::Alignment(int minHessian)
 {
-	alreadyCreated = false;
-	alreadyChanged = false;
-	ptzAlreadyChanged = false;
-	detector = Ptr<SURF>();
-	minHessian = 200;
 	comparisonThreshold = 0.7;
-	hBig = Mat();
-	xReturn = 0;
-	yReturn = 0;
-	counter = 0;
 }
 
 #ifdef USE_PTZ_ADJUSTMENT
@@ -172,89 +153,6 @@ void Alignment::ptzAlign(const Mat refImage, const Mat inputImage, const int x, 
 	}
 }
 #endif // USE_PTZ_ADJUSTMENT
-
-pair<Point2f,Point2f> Alignment::track(Mat refImage, Mat inputImage, int x, int y, int mask_width, int mask_height)
-{
-	if (!alreadyCreated)
-	{
-		detector = SURF::create(Alignment::minHessian);
-		alreadyCreated = true;
-	}
-	std::vector<KeyPoint> keypoints_ref, keypoints_input;
-	Mat descriptors_ref, descriptors_input;
-	Rect ROIRef = Rect(x, y, mask_width, mask_height);
-	Mat ROIRefMask = Mat(inputImage.size(), CV_8UC1, Scalar::all(0));
-	ROIRefMask(ROIRef).setTo(Scalar::all(255));
-
-	Mat refImg, inputImg, refImgs[3], inputImgs[3];
-	cv::cvtColor(refImage, refImg, CV_BGR2HSV);
-	cv::cvtColor(inputImage, inputImg, CV_BGR2HSV);
-	cv::split(refImg, refImgs);
-	cv::split(inputImg, inputImgs);
-
-	detector->detectAndCompute(refImage, ROIRefMask, keypoints_ref, descriptors_ref);
-	detector->detectAndCompute(inputImage, Mat(), keypoints_input, descriptors_input);
-
-	FlannBasedMatcher matcher;
-	vector<vector<DMatch>> kmatches;
-	DMatch good_matches;
-
-	matcher.knnMatch(descriptors_ref, descriptors_input, kmatches, 2);
-	std::sort(kmatches.begin(), kmatches.end());
-	int lenghtKMatches = kmatches.size();
-	double bestComp = -1;
-//	cout << "Matches Length:\t" << lenghtKMatches << endl;
-	for (int i = 0; i < lenghtKMatches; i++)
-	{
-		double dist1 = kmatches[i][0].distance;
-		double dist2 = kmatches[i][1].distance;
-		double localComp = dist1 / dist2;
-		if (i == 0)
-		{
-			bestComp = localComp;
-			good_matches = kmatches[0][0];
-		}
-		else if (localComp < bestComp)
-		{
-			bestComp = localComp;
-			good_matches = kmatches[i][0];
-		}
-	}
-//	cout << "Matches Length:\t" << lenghtKMatches << endl;
-
-	vector<Point2f> ptsTemp, ptsTemp2;
-	Point3f pnt;
-	//-- Get the keypoints from the good matches
-	ptsTemp.push_back(keypoints_ref[good_matches.queryIdx].pt);
-	ptsTemp2.push_back(keypoints_input[good_matches.trainIdx].pt);
-	vector<Point2f> ptsROI, ptsROI2;
-	ptsROI = ptsTemp;
-	ptsROI2 = ptsTemp2;
-
-	Mat h;
-	if (ptsROI.size() > 0)
-	{
-		bPair = true;
-		return pair<Point2f, Point2f>(ptsROI[0], ptsROI2[0]);
-		/*
-		vector<Mat> ptsxy(2), pts2xy(2);
-		Rect ROI, ROI2;
-		double smallestX, largestX, smallestY, largestY;
-		h = estimateRigidTransform(ptsROI2, ptsROI, false);
-		//			h = findHomography(ptsROI2, ptsROI, CV_RANSAC);
-		if (!h.empty())
-		{
-			h.copyTo(Alignment::hBig);
-			Alignment::alreadyChanged = true;
-		}
-		*/
-	}
-	else
-	{
-		bPair = false;
-		return pair<Point2f, Point2f>();
-	}
-}
 
 void Alignment::align(Mat refImage, Mat inputImage, int x, int y, int mask_width, int mask_height)
 {

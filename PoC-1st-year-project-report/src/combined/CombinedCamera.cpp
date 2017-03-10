@@ -3,6 +3,10 @@
 using namespace std;
 using namespace cv;
 
+ofxCvColorImage CombinedCamera::ldCvImage, CombinedCamera::hdCvImage, CombinedCamera::combinedCvImage, CombinedCamera::ldCvImage2, CombinedCamera::hdCvImage2, CombinedCamera::combinedCvImage2;
+bool CombinedCamera::skipCloning = false, CombinedCamera::skipAligning = false, CombinedCamera::alreadyInitialized = false;
+
+
 CombinedCamera::CombinedCamera(int image_width,int image_height)
 {
 	if (!CombinedCamera::alreadyInitialized)
@@ -13,9 +17,7 @@ CombinedCamera::CombinedCamera(int image_width,int image_height)
 		ldCvImage2.allocate(image_width, image_height);
 		hdCvImage2.allocate(image_width, image_height);
 		combinedCvImage2.allocate(image_width, image_height);
-		skipCloning = false;
-		skipAligning = false;
-		alreadyInitialized = true;
+		CombinedCamera::alreadyInitialized = true;
 	}
 }
 
@@ -107,6 +109,7 @@ ofPixels CombinedCamera::combine_direct(ofPixels ldPixel, ofImage hdImage, int i
 
 	ldImage.setFromPixels(ldPixel);
 	ldImage.setImageType(OF_IMAGE_COLOR);
+	hdImage.setImageType(OF_IMAGE_COLOR); //for LogitechPTZCamera??
 
 	ldCvImage2.setFromPixels(ldImage.getPixels());
 	hdCvImage2.setFromPixels(hdImage.getPixels());
@@ -119,7 +122,7 @@ ofPixels CombinedCamera::combine_direct(ofPixels ldPixel, ofImage hdImage, int i
 	target = tempMatLdCvImage;
 
 	//Aligning the images
-	Mat aligned = alignment.align_direct(tempMatLdCvImage, tempMatHdCvImage, x, y, width, height);
+	Mat aligned = Alignment::align_direct(tempMatLdCvImage, tempMatHdCvImage, x, y, width, height);
 	aligned.copyTo(source);
 
 	if (CombinedCamera::skipCloning)
@@ -230,6 +233,7 @@ void CombinedCamera::combine_align(ofPixels ldPixel, ofImage hdImage, int image_
 
 	ldImage.setFromPixels(ldPixel);
 	ldImage.setImageType(OF_IMAGE_COLOR);
+	hdImage.setImageType(OF_IMAGE_COLOR); //for LogitechPTZCamera??
 
 	ldCvImage.setFromPixels(ldImage.getPixels());
 	hdCvImage.setFromPixels(hdImage.getPixels());
@@ -240,7 +244,7 @@ void CombinedCamera::combine_align(ofPixels ldPixel, ofImage hdImage, int image_
 	Mat source, target;
 	Point cloneCenter;
 	target = tempMatLdCvImage;
-	alignment.align(tempMatLdCvImage, tempMatHdCvImage, x, y, width, height);
+	Alignment::align(tempMatLdCvImage, tempMatHdCvImage, x, y, width, height);
 
 	/*
 	if (skipCloning)

@@ -33,7 +33,7 @@ public:
 
 	bool bShowHelp, bHdCameraShow, bLdCameraShow;
 	std::ostringstream _strHelp;
-	int VIDEO_WIDTH, VIDEO_HEIGHT;
+	int VIDEO_WIDTH, VIDEO_HEIGHT, LD_VIDEO_WIDTH, LD_VIDEO_HEIGHT, HD_VIDEO_WIDTH, HD_VIDEO_HEIGHT;
 	ofFbo ldFbo;
 	ofFbo hdFbo;
 	ofVboMesh sphereVboMesh;
@@ -59,6 +59,8 @@ public:
 	bool showROI;
 	bool combinedMode;
 	bool allowUpdatePTZ;
+	bool dualSphereMode;
+	bool ptzSphereMode;
 	int cameraNum, additionalViewNum;
 
 	ofxPanel _panel;

@@ -1,6 +1,7 @@
 #pragma once
 #include "ofMain.h"
 #include "ofxGui.h"
+#include "PTZCamera.h"
 
 class ofApp_test: public ofBaseApp
 {
@@ -26,7 +27,7 @@ public:
 
 	bool bShowHelp, bHdCameraShow, bLdCameraShow;
 	std::ostringstream _strHelp;
-	int VIDEO_WIDTH, VIDEO_HEIGHT;
+	int VIDEO_WIDTH, VIDEO_HEIGHT, LD_VIDEO_WIDTH, LD_VIDEO_HEIGHT, HD_VIDEO_WIDTH, HD_VIDEO_HEIGHT;
 	ofFbo ldFbo;
 	ofFbo hdFbo;
 	ofVboMesh sphereVboMesh;
@@ -53,6 +54,8 @@ public:
 	bool allowUpdatePTZ;
 
 	ofxPanel _panel;
+	ofxButton ldToggle;
+	ofxButton hdToggle;
 	ofxButton calibrationToggle;
 	ofxButton stereoCalibrationToggle;
 
@@ -61,6 +64,16 @@ public:
 	ofParameterGroup ldParameterGroup;
 	ofImage tempLdImage;
 	ofFbo tempLdFbo;
+	PTZCamera hdVideoGrabber;
+
+	void audioIn(float * input, int bufferSize, int nChannels);
+	void audioOut(float * input, int bufferSize, int nChannels);
+	ofSoundStream soundStream;
+	vector <float> left;
+	vector <float> right;
+	vector <float> volHistory;
+	vector <float> lAudio;
+	vector <float> rAudio;
 
 };
 

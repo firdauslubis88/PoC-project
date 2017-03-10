@@ -7,9 +7,9 @@ Calibration::Calibration()
 {
 	aspectRatio = 1;
 	pattern = CHESSBOARD;
-	nframes = 10;
+	nframes =10;
 	delay = 1000;
-	outputFilename = ofToDataPath("out_camera_data.yml");
+	outputFilename = "out_camera_data.yml";//ofToDataPath("out_camera_data.yml");
 	writePoints = true;
 	writeExtrinsics = true;
 	flags = cv::CALIB_FIX_ASPECT_RATIO;
@@ -26,6 +26,7 @@ Calibration::Calibration()
 	additionalViewNum = 0;
 	undistortImage = false;
 	trackImage = false;
+	dualSphereMode = false;
 }
 
 
@@ -50,6 +51,10 @@ Calibration::~Calibration()
 	if (distCoeffs != nullptr)
 	{
 		delete[] distCoeffs;
+	}
+	if (matXi != nullptr)
+	{
+		delete[] matXi;
 	}
 	if (tempMatView != nullptr)
 	{
@@ -114,6 +119,7 @@ bool Calibration::init(int localImage_width, int localImage_height, int chess_wi
 	imagePoints = new std::vector<std::vector<cv::Point2f> >[this->cameraNum];
 	cameraMatrix = new Mat[this->cameraNum];
 	distCoeffs = new Mat[this->cameraNum];
+	matXi = new Mat[this->cameraNum];
 	tempMatView = new Mat[this->cameraNum];
 	for (size_t k = 0; k < this->cameraNum; k++)
 	{
@@ -197,6 +203,7 @@ bool Calibration::main(Mat tempMatCvImage)
 		{
 			if (clock() - prevTimestamp > delay*1e-3*CLOCKS_PER_SEC)
 			{
+				bPreUpdateResult = true;
 				for (size_t k = 0; k < cameraNum; k++)
 				{
 					preUpdateCalibList(view, imagePoints[k][j]);
@@ -217,11 +224,23 @@ bool Calibration::main(Mat tempMatCvImage)
 		{
 			if (this->cameraNum == 1)
 			{
-				if (runAndSave(outputFilename, imagePoints[0], imageSize,
-					boardSize, pattern, squareSize, aspectRatio,
-					flags, cameraMatrix[0], distCoeffs[0],
-					writeExtrinsics, writePoints))
-					mode = CALIBRATED;
+				if (!this->dualSphereMode)
+				{
+					if (runAndSave(outputFilename, imagePoints[0], imageSize,
+						boardSize, pattern, squareSize, aspectRatio,
+						flags, cameraMatrix[0], distCoeffs[0],
+						writeExtrinsics, writePoints))
+						mode = CALIBRATED;
+				}
+				else
+				{
+//					flags = cv::omnidir::CALIB_FIX_CENTER;
+					if (runAndSave(outputFilename, imagePoints[0], imageSize,
+						boardSize, pattern, squareSize, aspectRatio,
+						flags, cameraMatrix[0], distCoeffs[0],
+						writeExtrinsics, writePoints, matXi[0], this->dualSphereMode))
+						mode = CALIBRATED;
+				}
 			}
 		}
 	}
@@ -230,7 +249,30 @@ bool Calibration::main(Mat tempMatCvImage)
 		if (undistortImage)
 		{
 			Mat temp = view.clone();
-			undistort(temp, view, cameraMatrix[0], distCoeffs[0]);
+			if (!this->dualSphereMode)
+			{
+				if (!this->ptzSphereMode)
+				{
+					Mat _D1;
+					distCoeffs[0].convertTo(_D1, CV_64F);
+					cout << _D1.total() << endl;
+					cout << _D1.size() << endl;
+					undistort(temp, view, cameraMatrix[0], distCoeffs[0]);
+				}
+				else
+				{
+//					cout << distCoeffs[0].depth() << endl;
+					Mat _D1;
+					distCoeffs[0].convertTo(_D1, CV_64F);
+					cout << _D1.total() << endl;
+					cout << _D1.size() << endl;
+					mycv::omnidir::undistortImage(temp, view, cameraMatrix[0], _D1, 0, cv::omnidir::RECTIFY_PERSPECTIVE);
+				}
+			}
+			else
+			{
+				mycv::omnidir::undistortImage(temp,view,cameraMatrix[0],distCoeffs[0],matXi[0],cv::omnidir::RECTIFY_PERSPECTIVE);
+			}
 			msg = "Undistorted image. Press 'u' to distort";
 		}
 		else
@@ -530,8 +572,9 @@ Mat Calibration::postProcessing(const vector<Mat>& matView, const Mat* cameraMat
 
 float Calibration::tracking(vector<Mat>& matView)
 {
+	/*
 	vector<Point2f> ldPoint, hdPoint;
-	pair<Point2f, Point2f>trackedPair = alignment.track(matView[0], matView[1], 213, 160, 213, 160);
+	pair<Point2f, Point2f>trackedPair = Alignment::track(matView[0], matView[1], 213, 160, 213, 160);
 	//			cout << trackedPair.first << endl;
 	circle(matView[0], trackedPair.first, 2, Scalar(255, 0, 0), -1);
 	circle(matView[1], trackedPair.second, 2, Scalar(255, 0, 0), -1);
@@ -555,5 +598,7 @@ float Calibration::tracking(vector<Mat>& matView)
 
 	mycv::triangulatePoints(P1, P2, ldPoint, hdPoint, triangulationResult);
 	return (triangulationResult.at<float>(2, 0) / triangulationResult.at<float>(3, 0));
+	*/
+	return 0;
 }
 

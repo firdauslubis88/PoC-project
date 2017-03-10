@@ -1,11 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PoC-1st-year-project-report", "PoC-1st-year-project-report\PoC-1st-year-project-report.vcxproj", "{7FD42DF7-442E-479A-BA76-D0022F99702A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2B74D928-D520-4282-B8C3-0D705BDE8030} = {2B74D928-D520-4282-B8C3-0D705BDE8030}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "openFrameworksLib", "..\of_v0.9.8_vs_release\libs\openFrameworksCompiled\project\vs\openFrameworksLib.vcxproj", "{5837595D-ACA9-485C-8E76-729040CE4B0B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Webrtc_part", "Webrtc_part\Webrtc_part.vcxproj", "{2B74D928-D520-4282-B8C3-0D705BDE8030}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +36,14 @@ Global
 		{5837595D-ACA9-485C-8E76-729040CE4B0B}.Release|x64.Build.0 = Release|x64
 		{5837595D-ACA9-485C-8E76-729040CE4B0B}.Release|x86.ActiveCfg = Release|Win32
 		{5837595D-ACA9-485C-8E76-729040CE4B0B}.Release|x86.Build.0 = Release|Win32
+		{2B74D928-D520-4282-B8C3-0D705BDE8030}.Debug|x64.ActiveCfg = Debug|x64
+		{2B74D928-D520-4282-B8C3-0D705BDE8030}.Debug|x64.Build.0 = Debug|x64
+		{2B74D928-D520-4282-B8C3-0D705BDE8030}.Debug|x86.ActiveCfg = Debug|Win32
+		{2B74D928-D520-4282-B8C3-0D705BDE8030}.Debug|x86.Build.0 = Debug|Win32
+		{2B74D928-D520-4282-B8C3-0D705BDE8030}.Release|x64.ActiveCfg = Release|x64
+		{2B74D928-D520-4282-B8C3-0D705BDE8030}.Release|x64.Build.0 = Release|x64
+		{2B74D928-D520-4282-B8C3-0D705BDE8030}.Release|x86.ActiveCfg = Release|Win32
+		{2B74D928-D520-4282-B8C3-0D705BDE8030}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

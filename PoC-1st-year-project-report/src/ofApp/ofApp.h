@@ -92,7 +92,7 @@ public:
 	//OFAPP variables and functions
 	bool bShowHelp;
 	std::ostringstream _strHelp;
-	int VIDEO_WIDTH, VIDEO_HEIGHT;
+	int VIDEO_WIDTH = ofGetWidth(), VIDEO_HEIGHT = ofGetHeight();
 	ofFbo ldFbo;
 	ofFbo hdFbo;
 	ofVboMesh sphereVboMesh;
@@ -122,7 +122,7 @@ public:
 	bool allowUpdatePTZ;
 
 	//COMBINEDCAMERA variables and functions
-	CombinedCamera combinedCamera;
+	CombinedCamera combinedCamera = CombinedCamera(VIDEO_WIDTH, VIDEO_HEIGHT);
 	float maskXStart;
 	float maskYStart;
 	int maskWidth;
