@@ -94,7 +94,6 @@ void PeerConnectionClient::Connect(const std::string& server, int port,
                                    const std::string& client_name) {
   RTC_DCHECK(!server.empty());
   RTC_DCHECK(!client_name.empty());
-
   if (state_ != NOT_CONNECTED) {
     LOG(WARNING)
         << "The client must not be connected before you can call Connect()";
@@ -110,17 +109,18 @@ void PeerConnectionClient::Connect(const std::string& server, int port,
   if (port <= 0)
     port = kDefaultServerPort;
 
-  server_address_.SetIP(server);
+  server_address_.SetIP("161.122.38.93");
   server_address_.SetPort(port);
   client_name_ = client_name;
-
   if (server_address_.IsUnresolvedIP()) {
-    state_ = RESOLVING;
-    resolver_ = new rtc::AsyncResolver();
+	  /*
+	state_ = RESOLVING;
+	resolver_ = new rtc::AsyncResolver();
     resolver_->SignalDone.connect(this, &PeerConnectionClient::OnResolveResult);
     resolver_->Start(server_address_);
+	*/
   } else {
-    DoConnect();
+	  DoConnect();
   }
 }
 
@@ -207,7 +207,6 @@ bool PeerConnectionClient::SignOut() {
   } else {
     state_ = SIGNING_OUT_WAITING;
   }
-
   return true;
 }
 
@@ -369,7 +368,6 @@ void PeerConnectionClient::OnRead(rtc::AsyncSocket* socket) {
     }
 
     control_data_.clear();
-
     if (state_ == SIGNING_IN) {
       RTC_DCHECK(hanging_get_->GetState() == rtc::Socket::CS_CLOSED);
       state_ = CONNECTED;

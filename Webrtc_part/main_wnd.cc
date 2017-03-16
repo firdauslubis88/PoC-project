@@ -79,7 +79,7 @@ MainWnd::MainWnd(const char* server, int port, bool auto_connect,
 }
 
 MainWnd::~MainWnd() {
-  RTC_DCHECK(!IsWindow());
+//  RTC_DCHECK(!IsWindow());
 }
 
 bool MainWnd::Create() {
@@ -117,7 +117,7 @@ void MainWnd::RegisterObserver(MainWndCallback* callback) {
   callback_ = callback;
   if (auto_connect_) {
 //	  ::PostMessage(button_, BM_CLICK, 0, 0);
-	  customAutoConnectToServer();
+//	  customAutoConnectToServer();
   }
 }
 
@@ -126,7 +126,8 @@ bool MainWnd::IsWindow() {
 }
 
 bool MainWnd::PreTranslateMessage(MSG* msg) {
-  bool ret = false;
+//	MessageBoxA(wnd_, "ESCAPE", "Yeah", MB_OK);
+	bool ret = false;
   if (msg->message == WM_CHAR) {
     if (msg->wParam == VK_TAB) {
       HandleTabbing();
@@ -144,11 +145,48 @@ bool MainWnd::PreTranslateMessage(MSG* msg) {
       }
     }
   } else if (msg->hwnd == NULL && msg->message == UI_THREAD_CALLBACK) {
+//	  MessageBoxA(wnd_, "Calling UICallback!", "Yeah", MB_OK);
     callback_->UIThreadCallback(static_cast<int>(msg->wParam),
                                 reinterpret_cast<void*>(msg->lParam));
     ret = true;
   }
+  else if (msg->message == UI_THREAD_CALLBACK)
+  {
+	  MessageBoxA(wnd_, "Calling UICallback!", "Yeah", MB_OK);
+	  ret = true;
+  }
   return ret;
+}
+
+bool MainWnd::PreTranslateMessage(int msg) {
+	//	MessageBoxA(wnd_, "ESCAPE", "Yeah", MB_OK);
+	bool ret = false;
+	if (msg == 9) {
+		HandleTabbing();
+		MessageBoxA(wnd_, "TAB", "Yeah", MB_OK);
+//		ret = true;
+	}
+	else if(msg == 115)
+	{
+		customAutoConnectToServer();
+	}
+	/*
+	else if (msg->wParam == VK_RETURN) {
+		OnDefaultAction();
+		ret = true;
+	}
+	else if (msg->wParam == VK_ESCAPE) {
+		if (callback_) {
+			if (ui_ == STREAMING) {
+				callback_->DisconnectFromCurrentPeer();
+			}
+			else {
+				callback_->DisconnectFromServer();
+			}
+		}
+	}
+	*/
+	return ret;
 }
 
 void MainWnd::SwitchToConnectUI() {
@@ -188,6 +226,7 @@ void MainWnd::SwitchToPeerList(const Peers& peers) {
 }
 
 void MainWnd::SwitchToStreamingUI() {
+//	MessageBoxA(wnd_, "Switch To Streaming", "Yeah", MB_OK);
   LayoutConnectUI(false);
   LayoutPeerListUI(false);
   ui_ = STREAMING;
@@ -219,6 +258,7 @@ void MainWnd::StopRemoteRenderer() {
 }
 
 void MainWnd::QueueUIThreadCallback(int msg_id, void* data) {
+//	MessageBoxA(wnd_, "Calling UICallback from Queue!", "Yeah", MB_OK);
   ::PostThreadMessage(ui_thread_id_, UI_THREAD_CALLBACK,
       static_cast<WPARAM>(msg_id), reinterpret_cast<LPARAM>(data));
 }
@@ -232,8 +272,14 @@ void MainWnd::OnPaint() {
 
   VideoRenderer* local_renderer = local_renderer_.get();
   VideoRenderer* remote_renderer = remote_renderer_.get();
+
+  if (ui_ == STREAMING && remote_renderer)
+  {
+//	MessageBoxA(wnd_, "Switch To Streaming in OnPaint and get Local Renderer", "Yeah", MB_OK);
+  }
   if (ui_ == STREAMING && remote_renderer && local_renderer) {
-    AutoLock<VideoRenderer> local_lock(local_renderer);
+//	  MessageBoxA(wnd_, "Switch To Streaming in OnPaint and Found VideoRenderer", "Yeah", MB_OK);
+	AutoLock<VideoRenderer> local_lock(local_renderer);
     AutoLock<VideoRenderer> remote_lock(remote_renderer);
 
     const BITMAPINFO& bmi = remote_renderer->bmi();
@@ -241,6 +287,7 @@ void MainWnd::OnPaint() {
     int width = bmi.bmiHeader.biWidth;
 
     const uint8_t* image = remote_renderer->image();
+
     if (image != NULL) {
       HDC dc_mem = ::CreateCompatibleDC(ps.hdc);
       ::SetStretchBltMode(dc_mem, HALFTONE);
@@ -311,7 +358,7 @@ void MainWnd::OnPaint() {
       ::SelectObject(ps.hdc, old_font);
     }
   } else {
-    HBRUSH brush = ::CreateSolidBrush(::GetSysColor(COLOR_WINDOW));
+	  HBRUSH brush = ::CreateSolidBrush(::GetSysColor(COLOR_WINDOW));
     ::FillRect(ps.hdc, &rc, brush);
     ::DeleteObject(brush);
   }
@@ -330,7 +377,7 @@ void MainWnd::OnDefaultAction() {
     std::string server(GetWindowText(edit1_));
     std::string port_str(GetWindowText(edit2_));
     int port = port_str.length() ? atoi(port_str.c_str()) : 0;
-    callback_->StartLogin(server, port);
+	callback_->StartLogin(server, port);
   } else if (ui_ == LIST_PEERS) {
     LRESULT sel = ::SendMessage(listbox_, LB_GETCURSEL, 0, 0);
     if (sel != LB_ERR) {
@@ -349,6 +396,15 @@ void MainWnd::customAutoConnectToServer() {
 		return;
 //	std::string server("localhost");
 //	std::string port_str("8888");
+	int port = this->port_.length() ? atoi(this->port_.c_str()) : 0;
+	callback_->StartLogin(this->server_, port);
+}
+
+void MainWnd::customAutoConnectToServer2() {
+	if (!callback_)
+		return;
+	//	std::string server("localhost");
+	//	std::string port_str("8888");
 	int port = this->port_.length() ? atoi(this->port_.c_str()) : 0;
 	callback_->StartLogin(this->server_, port);
 }
@@ -395,8 +451,8 @@ bool MainWnd::OnMessage(UINT msg, WPARAM wp, LPARAM lp, LRESULT* result) {
       return true;
 
     case WM_CLOSE:
-      if (callback_)
-        callback_->Close();
+		if (callback_)
+	        callback_->Close();
       break;
   }
   return false;

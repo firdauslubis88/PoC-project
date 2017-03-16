@@ -1,4 +1,5 @@
 #include "ofApp_webrtc.h"
+
 /*
 #include "flagdefs.h"
 #include "webrtc/base/checks.h"
@@ -9,23 +10,32 @@
 
 void ofApp_webrtc::setup()
 {
-
+	shared_ptr<WebRTC> tempWebRTC(new WebRTC);
+	webRTC = tempWebRTC;
+	webRTC->InitWebRTC();
 }
 
 void ofApp_webrtc::exit()
 {
+	webRTC->CloseWebRTC();
 }
 
 void ofApp_webrtc::update()
 {
+	webRTC->UpdateWebRTC();
 }
 
 void ofApp_webrtc::draw()
 {
+	ofSetColor(0, 0, 255);    //set te color to blue
+	ofDrawRectangle(10, 10, 100, 100);
 }
 
 void ofApp_webrtc::keyPressed(int key)
 {
+//	std::cout << "This is the key in int:\t" << key << endl;
+	webRTC->ofMessage = key;
+
 }
 
 void ofApp_webrtc::keyReleased(int key)

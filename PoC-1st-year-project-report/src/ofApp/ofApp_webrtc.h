@@ -1,5 +1,6 @@
 #pragma once
 #include "ofMain.h"
+#include "Init.h"
 
 class ofApp_webrtc : public ofBaseApp
 {
@@ -22,5 +23,12 @@ public:
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
 	void onToggle(const void* sender);
+
+
+	MSG msg;
+	BOOL gm;
+
+private:
+	shared_ptr<WebRTC> webRTC;
 };
 

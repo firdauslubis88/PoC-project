@@ -9,8 +9,6 @@
 
 //========================================================================
 int main( ){
-	shared_ptr<WebRTC> webRTC(new WebRTC);
-
 	ofGLFWWindowSettings settings;
 	settings.setGLVersion(4, 1);
 	settings.width = 2560;

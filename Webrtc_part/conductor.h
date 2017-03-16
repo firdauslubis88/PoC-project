@@ -48,7 +48,7 @@ class Conductor
   Conductor(PeerConnectionClient* client, MainWindow* main_wnd);
 
   bool connection_active() const;
-
+  bool test();
   virtual void Close();
 
  protected:

@@ -31,6 +31,8 @@ class MainWndCallback {
   virtual void DisconnectFromCurrentPeer() = 0;
   virtual void UIThreadCallback(int msg_id, void* data) = 0;
   virtual void Close() = 0;
+  virtual bool test() = 0;
+
  protected:
   virtual ~MainWndCallback() {}
 };
@@ -74,7 +76,7 @@ class MainWnd : public MainWindow {
   static const wchar_t kClassName[];
 
   enum WindowMessages {
-    UI_THREAD_CALLBACK = WM_APP + 10,
+    UI_THREAD_CALLBACK = WM_APP + 1,
   };
 
   MainWnd(const char* server, int port, bool auto_connect, bool auto_call);
@@ -83,6 +85,7 @@ class MainWnd : public MainWindow {
   bool Create();
   bool Destroy();
   bool PreTranslateMessage(MSG* msg);
+  bool PreTranslateMessage(int msg);
 
   virtual void RegisterObserver(MainWndCallback* callback);
   virtual bool IsWindow();
@@ -147,6 +150,8 @@ class MainWnd : public MainWindow {
    protected:
     T* obj_;
   };
+  void customAutoConnectToServer2(); //my own created function, only to check my understanding on webrtc
+  DWORD ui_thread_id_;
 
  protected:
   enum ChildWindowID {
@@ -182,7 +187,6 @@ class MainWnd : public MainWindow {
   std::unique_ptr<VideoRenderer> remote_renderer_;
   UI ui_;
   HWND wnd_;
-  DWORD ui_thread_id_;
   HWND edit1_;
   HWND edit2_;
   HWND label1_;

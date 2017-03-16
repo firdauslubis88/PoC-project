@@ -70,10 +70,17 @@ bool Conductor::connection_active() const {
   return peer_connection_.get() != NULL;
 }
 
+
 void Conductor::Close() {
-  client_->SignOut();
-  DeletePeerConnection();
+	client_->SignOut();
+// DeletePeerConnection();
 }
+
+bool Conductor::test()
+{
+	return false;
+}
+
 
 bool Conductor::InitializePeerConnection() {
   RTC_DCHECK(peer_connection_factory_.get() == NULL);
@@ -161,17 +168,20 @@ void Conductor::EnsureStreamingUI() {
 void Conductor::OnAddStream(
     rtc::scoped_refptr<webrtc::MediaStreamInterface> stream) {
   LOG(INFO) << __FUNCTION__ << " " << stream->label();
+//  main_wnd_->MessageBox("Succeed", "Succeed to OnAddStream", true);
   main_wnd_->QueueUIThreadCallback(NEW_STREAM_ADDED, stream.release());
 }
 
 void Conductor::OnRemoveStream(
     rtc::scoped_refptr<webrtc::MediaStreamInterface> stream) {
   LOG(INFO) << __FUNCTION__ << " " << stream->label();
+//  main_wnd_->MessageBox("Succeed", "Succeed to RemoveAddStream", true);
   main_wnd_->QueueUIThreadCallback(STREAM_REMOVED, stream.release());
 }
 
 void Conductor::OnIceCandidate(const webrtc::IceCandidateInterface* candidate) {
   LOG(INFO) << __FUNCTION__ << " " << candidate->sdp_mline_index();
+//  main_wnd_->MessageBox("Succeed", "Succeed to OnIceCandidate", true);
   // For loopback test. To save some connecting delay.
   if (loopback_) {
     if (!peer_connection_->AddIceCandidate(candidate)) {
@@ -215,8 +225,10 @@ void Conductor::OnDisconnected() {
 void Conductor::OnPeerConnected(int id, const std::string& name) {
   LOG(INFO) << __FUNCTION__;
   // Refresh the list if we're showing it.
+//  main_wnd_->MessageBox("Success", ("Succeed to connect to " + server_).c_str(), true);
   if (main_wnd_->current_ui() == MainWindow::LIST_PEERS)
     main_wnd_->SwitchToPeerList(client_->peers());
+
 }
 
 void Conductor::OnPeerDisconnected(int id) {
@@ -361,11 +373,13 @@ void Conductor::ConnectToPeer(int peer_id) {
   }
 
   if (InitializePeerConnection()) {
-    peer_id_ = peer_id;
+	  peer_id_ = peer_id;
     peer_connection_->CreateOffer(this, NULL);
+//	main_wnd_->MessageBox("Succeed", ("with " + std::to_string(peer_id)).c_str(), true);
   } else {
     main_wnd_->MessageBox("Error", "Failed to initialize PeerConnection", true);
   }
+
 }
 
 std::unique_ptr<cricket::VideoCapturer> Conductor::OpenVideoCaptureDevice() {
@@ -392,8 +406,13 @@ std::unique_ptr<cricket::VideoCapturer> Conductor::OpenVideoCaptureDevice() {
   for (const auto& name : device_names) {
     capturer = factory.Create(cricket::Device(name, 0));
     if (capturer) {
-      break;
+//		main_wnd_->MessageBox("Success", "Succeed to create Capturer", true);
+		break;
     }
+	else
+	{
+//		main_wnd_->MessageBox("Error", "Failed to create Capturer", true);
+	}
   }
   return capturer;
 }
@@ -440,7 +459,9 @@ void Conductor::DisconnectFromCurrentPeer() {
 }
 
 void Conductor::UIThreadCallback(int msg_id, void* data) {
-  switch (msg_id) {
+//  main_wnd_->MessageBox("Succeed", "Call from UIThread Callback", true);
+
+	switch (msg_id) {
     case PEER_CONNECTION_CLOSED:
       LOG(INFO) << "PEER_CONNECTION_CLOSED";
       DeletePeerConnection();
@@ -486,13 +507,15 @@ void Conductor::UIThreadCallback(int msg_id, void* data) {
     }
 
     case NEW_STREAM_ADDED: {
-      webrtc::MediaStreamInterface* stream =
+//		  main_wnd_->MessageBox("Succeed", "Succeed to add remote stream", true);
+		webrtc::MediaStreamInterface* stream =
           reinterpret_cast<webrtc::MediaStreamInterface*>(
           data);
       webrtc::VideoTrackVector tracks = stream->GetVideoTracks();
       // Only render the first track.
       if (!tracks.empty()) {
-        webrtc::VideoTrackInterface* track = tracks[0];
+//		  main_wnd_->MessageBox("Succeed", "Succeed to add remote stream", true);
+		  webrtc::VideoTrackInterface* track = tracks[0];
         main_wnd_->StartRemoteRenderer(track);
       }
       stream->Release();
