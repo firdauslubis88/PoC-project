@@ -61,6 +61,12 @@ INIT_API int WebRTC::UpdateWebRTC()
 //		std::cout << "of thread id:\t" << ::GetCurrentThreadId() << std::endl;
 //		std::cout << "wnd thread id:\t" << wnd.ui_thread_id_ << std::endl;
 	}
+	this->public_image = wnd.public_image;
+	this->public_image_width = wnd.public_image_width;
+	this->public_image_height = wnd.public_image_height;
+	this->public_image_size = wnd.public_image_size;
+	this->public_bit_count = wnd.public_bit_count;
+	this->public_image_recording_indicator = wnd.public_image_recording_indicator;
 //	std::cout << "This is the key in int:\t" << ofMessage << std::endl;
 	/*
 	if (!wnd.PreTranslateMessage(ofMessage)) {

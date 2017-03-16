@@ -1,4 +1,5 @@
 #include "ofApp_webrtc.h"
+#include "opencv2/highgui.hpp"
 
 /*
 #include "flagdefs.h"
@@ -10,9 +11,15 @@
 
 void ofApp_webrtc::setup()
 {
+	VIDEO_WIDTH = ofGetWidth();
+	VIDEO_HEIGHT = ofGetHeight();
+
 	shared_ptr<WebRTC> tempWebRTC(new WebRTC);
 	webRTC = tempWebRTC;
 	webRTC->InitWebRTC();
+	tempCvImage.allocate(640, 480);
+	tempImage.allocate(640, 480, OF_IMAGE_COLOR);
+//	cv::namedWindow("test");
 }
 
 void ofApp_webrtc::exit()
@@ -27,8 +34,41 @@ void ofApp_webrtc::update()
 
 void ofApp_webrtc::draw()
 {
+	if (webRTC->public_image_recording_indicator)
+	{
+		/*
+		std::cout << "width:\t" << webRTC->public_image_width << endl;
+		std::cout << "height:\t" << webRTC->public_image_height << endl;
+		std::cout << "size:\t" << webRTC->public_image_size << endl;
+		std::cout << "bitcount:\t" << webRTC->public_bit_count << endl;
+		*/
+		cv::Mat tempMat = cv::Mat(webRTC->public_image_height, webRTC->public_image_width, CV_8UC4, (void*)webRTC->public_image);
+		cv::cvtColor(tempMat, tempMatDst, cv::COLOR_RGBA2BGR);
+//		cv::imshow("test", tempMatDst);
+		IplImage temp = tempMatDst;
+		IplImage* pTemp = &temp;
+		if (pTemp != NULL)
+		{
+			tempCvImage = pTemp;
+		}
+//		delete[] webRTC->public_image;
+//		tempCvImage.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
+		tempImage.setFromPixels(tempCvImage.getPixels());
+		tempImage.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
+	}
+	else
+	{
+		/*
+		ofSetColor(0, 0, 255);    //set te color to blue
+		ofDrawRectangle(10, 10, 100, 100);
+		ofSetColor(255, 255, 255);
+		*/
+	}
+	/*
 	ofSetColor(0, 0, 255);    //set te color to blue
 	ofDrawRectangle(10, 10, 100, 100);
+	*/
+
 }
 
 void ofApp_webrtc::keyPressed(int key)

@@ -76,10 +76,13 @@ MainWnd::MainWnd(const char* server, int port, bool auto_connect,
   char buffer[10] = {0};
   sprintfn(buffer, sizeof(buffer), "%i", port);
   port_ = buffer;
+  public_image_recording_indicator = false;
+  public_image = new uint8_t[1280*720 * 4];
 }
 
 MainWnd::~MainWnd() {
 //  RTC_DCHECK(!IsWindow());
+	delete[] public_image;
 }
 
 bool MainWnd::Create() {
@@ -285,11 +288,29 @@ void MainWnd::OnPaint() {
     const BITMAPINFO& bmi = remote_renderer->bmi();
     int height = abs(bmi.bmiHeader.biHeight);
     int width = bmi.bmiHeader.biWidth;
+	int imageSize = bmi.bmiHeader.biSizeImage;
 
     const uint8_t* image = remote_renderer->image();
+//	public_image = image;
+	public_image_width = width;
+	public_image_height = height;
+	public_image_size = imageSize;
+	public_bit_count = bmi.bmiHeader.biBitCount;
+
 
     if (image != NULL) {
-      HDC dc_mem = ::CreateCompatibleDC(ps.hdc);
+		public_image_recording_indicator = true;
+		for (size_t i = 0; i < height; i++)
+		{
+			for (size_t j = 0; j < width; j++)
+			{
+				for (size_t k = 0; k < 4; k++)
+				{
+					public_image[i*width * 4 + j * 4 + k] = image[i*width * 4 + j * 4 + k];
+				}
+			}
+		}
+		HDC dc_mem = ::CreateCompatibleDC(ps.hdc);
       ::SetStretchBltMode(dc_mem, HALFTONE);
 
       // Set the map mode so that the ratio will be maintained for us.
@@ -338,6 +359,8 @@ void MainWnd::OnPaint() {
       ::DeleteObject(bmp_mem);
       ::DeleteDC(dc_mem);
     } else {
+		public_image_recording_indicator = false;
+
       // We're still waiting for the video stream to be initialized.
       HBRUSH brush = ::CreateSolidBrush(RGB(0, 0, 0));
       ::FillRect(ps.hdc, &rc, brush);

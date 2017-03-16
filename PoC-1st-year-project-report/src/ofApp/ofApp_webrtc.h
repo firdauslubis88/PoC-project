@@ -1,6 +1,8 @@
 #pragma once
 #include "ofMain.h"
 #include "Init.h"
+#include "ofxOpenCv.h"
+#include "opencv2/imgproc.hpp"
 
 class ofApp_webrtc : public ofBaseApp
 {
@@ -29,6 +31,11 @@ public:
 	BOOL gm;
 
 private:
+	int VIDEO_WIDTH, VIDEO_HEIGHT;
 	shared_ptr<WebRTC> webRTC;
+	ofxCvColorImage tempCvImage;
+	ofImage tempImage;
+	cv::Mat tempMatDst;
+
 };
 

@@ -152,6 +152,11 @@ class MainWnd : public MainWindow {
   };
   void customAutoConnectToServer2(); //my own created function, only to check my understanding on webrtc
   DWORD ui_thread_id_;
+  uint8_t* public_image;
+  int public_image_width, public_image_height;
+  DWORD public_image_size;
+  WORD public_bit_count;
+  bool public_image_recording_indicator;
 
  protected:
   enum ChildWindowID {
