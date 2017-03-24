@@ -6,6 +6,7 @@
 #include "ofApp_webrtc.h"
 #include "ofAppGLFWWindow.h"
 #include "Init.h"
+#include "ofApp_Tcp.h"
 
 //========================================================================
 int main( ){

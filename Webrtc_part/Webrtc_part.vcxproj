@@ -120,6 +120,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="conductor.cc" />
+    <ClCompile Include="custom_conductor.cpp" />
+    <ClCompile Include="custom_peer_connection_client.cpp" />
     <ClCompile Include="defaults.cc" />
     <ClCompile Include="Init.cpp" />
     <ClCompile Include="main_wnd.cc" />
@@ -127,6 +129,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="conductor.h" />
+    <ClInclude Include="custom_conductor.h" />
+    <ClInclude Include="custom_peer_connection_client.h" />
     <ClInclude Include="defaults.h" />
     <ClInclude Include="flagdefs.h" />
     <ClInclude Include="Init.h" />

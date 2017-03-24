@@ -2,6 +2,7 @@
 #include "BasePTZCamera.h"
 //#ifdef OF_VIDEO_CAPTURE_DIRECTSHOW
 #include "LogitechPTZCamera.h"
+// #include "ViewrunPTZCamera.h"
 #define PTZ_CAMERA_TYPE LogitechPTZCamera
 //#endif
 

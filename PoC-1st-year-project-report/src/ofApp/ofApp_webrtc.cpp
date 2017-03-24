@@ -11,6 +11,10 @@
 
 void ofApp_webrtc::setup()
 {
+	shared_ptr<WebRTC> tempWebRTC(new WebRTC);
+	webRTC = tempWebRTC;
+	webRTC->InitWebRTC();
+	/*
 	VIDEO_WIDTH = ofGetWidth();
 	VIDEO_HEIGHT = ofGetHeight();
 
@@ -19,7 +23,15 @@ void ofApp_webrtc::setup()
 	webRTC->InitWebRTC();
 	tempCvImage.allocate(640, 480);
 	tempImage.allocate(640, 480, OF_IMAGE_COLOR);
-//	cv::namedWindow("test");
+	*/
+	panel.setup();
+	loginButton.setup("LOGIN");
+	logoutButton.setup("LOGOUT");
+	loginButton.addListener(this, &ofApp_webrtc::Login);
+	logoutButton.addListener(this, &ofApp_webrtc::Logout);
+	panel.add(&loginButton);
+
+	prevConnectedIndicator = false;
 }
 
 void ofApp_webrtc::exit()
@@ -30,50 +42,65 @@ void ofApp_webrtc::exit()
 void ofApp_webrtc::update()
 {
 	webRTC->UpdateWebRTC();
+	if (webRTC->connectedToServer != prevConnectedIndicator)
+	{
+		if (webRTC->connectedToServer)
+		{
+			//		webRTC->StartLogout();
+			panel.clear();
+			ofPeers = webRTC->GetPeersList();
+			peersNameToggle = new ofxButton[ofPeers.size()];
+//			std::cout << "UPDATE" << std::endl;
+			int i = 0;
+			for (Peers::iterator it = ofPeers.begin(); it != ofPeers.end(); ++it)
+			{
+//				std::cout << it->first << " " << it->second << std::endl;
+				peersNameToggle[i].setup(it->second);
+				peersNameToggle[i].addListener(this, &ofApp_webrtc::ConnectToPeerSelected);
+				ofPeersInt[&peersNameToggle[i]] = it->first;
+				panel.add(&peersNameToggle[i]);
+			}
+
+			panel.add(&logoutButton);
+			prevConnectedIndicator = true;
+		}
+		else
+		{
+			//		webRTC->StartLogin();
+			panel.clear();
+			panel.add(&loginButton);
+			ofPeersInt.clear();
+			delete[] peersNameToggle;
+		}
+		prevConnectedIndicator = webRTC->connectedToServer;
+	}
 }
 
 void ofApp_webrtc::draw()
 {
+	/*
 	if (webRTC->public_image_recording_indicator)
 	{
-		/*
-		std::cout << "width:\t" << webRTC->public_image_width << endl;
-		std::cout << "height:\t" << webRTC->public_image_height << endl;
-		std::cout << "size:\t" << webRTC->public_image_size << endl;
-		std::cout << "bitcount:\t" << webRTC->public_bit_count << endl;
-		*/
 		cv::Mat tempMat = cv::Mat(webRTC->public_image_height, webRTC->public_image_width, CV_8UC4, (void*)webRTC->public_image);
 		cv::cvtColor(tempMat, tempMatDst, cv::COLOR_RGBA2BGR);
-//		cv::imshow("test", tempMatDst);
 		IplImage temp = tempMatDst;
 		IplImage* pTemp = &temp;
 		if (pTemp != NULL)
 		{
 			tempCvImage = pTemp;
 		}
-//		delete[] webRTC->public_image;
-//		tempCvImage.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
 		tempImage.setFromPixels(tempCvImage.getPixels());
 		tempImage.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
 	}
 	else
 	{
-		/*
-		ofSetColor(0, 0, 255);    //set te color to blue
-		ofDrawRectangle(10, 10, 100, 100);
-		ofSetColor(255, 255, 255);
-		*/
 	}
-	/*
-	ofSetColor(0, 0, 255);    //set te color to blue
-	ofDrawRectangle(10, 10, 100, 100);
 	*/
-
+	panel.draw();
 }
 
 void ofApp_webrtc::keyPressed(int key)
 {
-//	std::cout << "This is the key in int:\t" << key << endl;
 	webRTC->ofMessage = key;
 
 }
@@ -124,6 +151,31 @@ void ofApp_webrtc::gotMessage(ofMessage msg)
 
 void ofApp_webrtc::onToggle(const void * sender)
 {
+}
+
+void ofApp_webrtc::Login()
+{
+	if (!webRTC->Is_Connected())
+	{
+		webRTC->StartLogin();
+	}
+}
+
+void ofApp_webrtc::Logout()
+{
+	if (webRTC->Is_Connected())
+	{
+		webRTC->StartLogout();
+	}
+}
+void ofApp_webrtc::ConnectToPeerSelected(const void * sender)
+{
+	ofxButton * p = (ofxButton *)sender;
+	PeersInt::iterator ofPeerIdIt = ofPeersInt.find(p);
+	int ofPeerId = ofPeerIdIt->second;
+	webRTC->ConnectToPeer(ofPeerId);
+
+//	std::cout << "You click peer number:\t" << ofPeerId << std::endl;
 }
 /*
 void ofApp_webrtc::RegisterObserver(MainWndCallback * callback)

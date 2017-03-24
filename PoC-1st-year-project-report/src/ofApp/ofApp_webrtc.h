@@ -1,8 +1,12 @@
 #pragma once
 #include "ofMain.h"
+#include "ofxGui.h"
 #include "Init.h"
 #include "ofxOpenCv.h"
 #include "opencv2/imgproc.hpp"
+
+typedef std::map<int, std::string> Peers;
+typedef std::map<ofxButton*, int> PeersInt;
 
 class ofApp_webrtc : public ofBaseApp
 {
@@ -25,7 +29,9 @@ public:
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
 	void onToggle(const void* sender);
-
+	void Login();
+	void Logout();
+	void ConnectToPeerSelected(const void * sender);
 
 	MSG msg;
 	BOOL gm;
@@ -37,5 +43,15 @@ private:
 	ofImage tempImage;
 	cv::Mat tempMatDst;
 
+	ofxPanel panel;
+	ofxButton loginButton;
+	ofxButton logoutButton;
+	ofxButton* peersNameToggle;
+	std::string buttonName;
+
+	bool prevConnectedIndicator;
+
+	Peers ofPeers;
+	PeersInt ofPeersInt;
 };
 

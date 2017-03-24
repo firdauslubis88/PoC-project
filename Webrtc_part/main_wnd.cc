@@ -18,6 +18,7 @@
 #include "webrtc/base/arraysize.h"
 #include "webrtc/base/checks.h"
 #include "webrtc/base/logging.h"
+#include "custom_conductor.h"
 
 ATOM MainWnd::wnd_class_ = 0;
 const wchar_t MainWnd::kClassName[] = L"WebRTC_MainWnd";
@@ -670,6 +671,10 @@ MainWnd::VideoRenderer::VideoRenderer(
   bmi_.bmiHeader.biSizeImage = width * height *
                               (bmi_.bmiHeader.biBitCount >> 3);
   rendered_track_->AddOrUpdateSink(this, rtc::VideoSinkWants());
+}
+
+custom_conductor::VideoRenderer::VideoRenderer(int width, int height, webrtc::VideoTrackInterface * track_to_render)
+{
 }
 
 MainWnd::VideoRenderer::~VideoRenderer() {

@@ -65,7 +65,7 @@ public:
 	ofImage tempLdImage;
 	ofFbo tempLdFbo;
 	PTZCamera hdVideoGrabber;
-
+	/*
 	void audioIn(float * input, int bufferSize, int nChannels);
 	void audioOut(float * input, int bufferSize, int nChannels);
 	ofSoundStream soundStream;
@@ -74,6 +74,7 @@ public:
 	vector <float> volHistory;
 	vector <float> lAudio;
 	vector <float> rAudio;
+	*/
 
 };
 

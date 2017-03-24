@@ -10,7 +10,7 @@ void ofApp_test::setup()
 	HD_VIDEO_WIDTH = 640;
 	HD_VIDEO_HEIGHT = 480;
 
-	bLdCameraShow = true;
+	bLdCameraShow = false;
 	bHdCameraShow = false;
 
 	_panel.setup();
@@ -76,12 +76,13 @@ void ofApp_test::setup()
 		ofLog(OF_LOG_ERROR, "NO PTZ CAMERA FOUND!!");
 		ofExit();
 	}
-
+	/*
 	soundStream.printDeviceList();
 	int bufferSize = 256;
 	left.assign(bufferSize, 0.0);
 	right.assign(bufferSize, 0.0);
 	soundStream.setup(this, 2, 2, 44100, bufferSize, 4);
+	*/
 }
 
 void ofApp_test::exit()
@@ -143,7 +144,8 @@ void ofApp_test::draw()
 	{
 //		hdVideoGrabber.draw(VIDEO_WIDTH, VIDEO_HEIGHT, -VIDEO_WIDTH, -VIDEO_HEIGHT);
 		hdFbo.begin();
-		hdVideoGrabber.draw(VIDEO_WIDTH, VIDEO_HEIGHT, -VIDEO_WIDTH, -VIDEO_HEIGHT);
+//		hdVideoGrabber.draw(VIDEO_WIDTH, VIDEO_HEIGHT, -VIDEO_WIDTH, -VIDEO_HEIGHT);
+		hdVideoGrabber.draw(0, 0, VIDEO_WIDTH, VIDEO_HEIGHT);
 		hdFbo.end();
 		hdFbo.readToPixels(hdPixels);
 	}
@@ -213,14 +215,16 @@ void ofApp_test::onToggle(const void * sender)
 	cameraSelected = p->getName();
 }
 
+/*
 void ofApp_test::audioIn(float * input, int bufferSize, int nChannels) {
-
 	for (int i = 0; i < bufferSize; i++) {
 		left[i] = input[i * 2] * 0.5;
 		right[i] = input[i * 2 + 1] * 0.5;
 	}
 }
+*/
 
+/*
 //--------------------------------------------------------------
 void ofApp_test::audioOut(float * output, int bufferSize, int nChannels) {
 	for (int i = 0; i < bufferSize; i++) {
@@ -228,3 +232,4 @@ void ofApp_test::audioOut(float * output, int bufferSize, int nChannels) {
 		output[i*nChannels + 1] = right[i];
 	}
 }
+*/
